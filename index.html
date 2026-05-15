@@ -580,10 +580,67 @@
 
   </div>
 
-  <div style="margin-top:40px;">
-    <h3>Libro de Reclamaciones</h3>
-    <p>Si deseas registrar una queja o reclamo, puedes escribirnos directamente por WhatsApp indicando el detalle del caso.</p>
-  </div>
+  <div style="margin-top:40px; padding:24px; border:1px solid #e6e8ee; border-radius:18px; background:#ffffff;">
+  <h3>Libro de Reclamaciones</h3>
+  <p style="color:#5d6673;">
+    Puedes registrar una queja o reclamo completando la información solicitada. 
+    El detalle tiene un máximo de 1000 caracteres.
+  </p>
+
+  <form onsubmit="enviarReclamo(event)" style="display:grid; gap:14px; margin-top:20px;">
+    <input id="nombre" required placeholder="Nombre completo" style="padding:12px; border:1px solid #ccc; border-radius:10px;">
+    <input id="dni" required placeholder="DNI / CE" style="padding:12px; border:1px solid #ccc; border-radius:10px;">
+    <input id="telefono" required placeholder="Teléfono" style="padding:12px; border:1px solid #ccc; border-radius:10px;">
+    <input id="correo" required type="email" placeholder="Correo electrónico" style="padding:12px; border:1px solid #ccc; border-radius:10px;">
+
+    <select id="tipo" required style="padding:12px; border:1px solid #ccc; border-radius:10px;">
+      <option value="">Selecciona tipo</option>
+      <option value="Queja">Queja</option>
+      <option value="Reclamo">Reclamo</option>
+    </select>
+
+    <input id="servicio" required placeholder="Bien o servicio relacionado" style="padding:12px; border:1px solid #ccc; border-radius:10px;">
+
+    <textarea id="detalle" required maxlength="1000" oninput="contadorCaracteres()" onpaste="return false" placeholder="Describe tu queja o reclamo. No se permite copiar y pegar." style="height:150px; padding:12px; border:1px solid #ccc; border-radius:10px;"></textarea>
+
+    <small id="contador" style="color:#5d6673;">0 / 1000 caracteres</small>
+
+    <button type="submit" style="padding:14px; background:#25D366; color:white; border:none; border-radius:999px; font-weight:bold; cursor:pointer;">
+      Enviar reclamo por WhatsApp
+    </button>
+  </form>
+</div>
+
+<script>
+function contadorCaracteres() {
+  const detalle = document.getElementById("detalle");
+  document.getElementById("contador").innerText = detalle.value.length + " / 1000 caracteres";
+}
+
+function enviarReclamo(event) {
+  event.preventDefault();
+
+  const nombre = document.getElementById("nombre").value;
+  const dni = document.getElementById("dni").value;
+  const telefono = document.getElementById("telefono").value;
+  const correo = document.getElementById("correo").value;
+  const tipo = document.getElementById("tipo").value;
+  const servicio = document.getElementById("servicio").value;
+  const detalle = document.getElementById("detalle").value;
+
+  const mensaje =
+    "LIBRO DE RECLAMACIONES - NETINHO XPERIENCE%0A%0A" +
+    "Nombre: " + encodeURIComponent(nombre) + "%0A" +
+    "DNI/CE: " + encodeURIComponent(dni) + "%0A" +
+    "Teléfono: " + encodeURIComponent(telefono) + "%0A" +
+    "Correo: " + encodeURIComponent(correo) + "%0A" +
+    "Tipo: " + encodeURIComponent(tipo) + "%0A" +
+    "Bien o servicio: " + encodeURIComponent(servicio) + "%0A%0A" +
+    "Detalle:%0A" + encodeURIComponent(detalle);
+
+  window.open("https://wa.me/51973669004?text=" + mensaje, "_blank");
+}
+</script>
 
   <div style="margin-top:30px;">
     <h3>Pagos</h3>
