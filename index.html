@@ -539,24 +539,24 @@
     </div>
   </div>
 </section>
-    <section id="espacio-nx" style="margin-top:40px;">
+  <section id="videos-nx">
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow">Contenido NX</div>
-      <h2>Antes de decidir, entiende el activo.</h2>
-      <p class="lead">Contenido seleccionado para ayudarte a analizar mejor vehículos, inmuebles y decisiones de compra.</p>
+      <div class="eyebrow">Videos recomendados</div>
+      <h2>Vehículos: análisis, lanzamientos y pruebas.</h2>
+      <p class="lead">Contenido seleccionado para quienes están evaluando comprar, comparar o entender mejor un vehículo antes de decidir.</p>
     </div>
 
-    <div style="margin-top:20px;">
-      <iframe 
-        width="100%" 
-        height="400" 
-        src="https://www.youtube.com/embed/bXlS1DEftnM" 
-        title="Contenido recomendado" 
-        frameborder="0" 
-        allowfullscreen>
-      </iframe>
-    </div>
+    <div id="video-rotador" style="margin-top:20px;">
+  <iframe 
+    id="videoFrame"
+    width="100%" 
+    height="420"
+    src="https://www.youtube.com/embed/bXlS1DEftnM"
+    frameborder="0"
+    allowfullscreen>
+  </iframe>
+</div>
   </div>
 </section>
     <section id="proceso">
@@ -692,6 +692,18 @@ Completa los datos solicitados y describe el caso de forma clara. El detalle tie
 </div>
 
 <script>
+  const videosNX = [
+  "bXlS1DEftnM",
+  "gxEkxRszHkU",
+  "qqqTTEtQmPQ"
+];
+
+let videoActualNX = 0;
+
+setInterval(() => {
+  videoActualNX = (videoActualNX + 1) % videosNX.length;
+  document.getElementById("videoFrame").src = "https://www.youtube.com/embed/" + videosNX[videoActualNX];
+}, 10000);
 function contadorCaracteres() {
   const detalle = document.getElementById("detalle");
   document.getElementById("contador").innerText = detalle.value.length + " / 1000 caracteres";
