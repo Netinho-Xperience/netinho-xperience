@@ -641,13 +641,28 @@ function enviarReclamo(event) {
   event.preventDefault();
 
   const nombre = document.getElementById("nombre").value;
-  const dni = document.getElementById("dni").value;
+  const tipoDocumento = document.getElementById("tipoDocumento").value;
+const numeroDocumento = document.getElementById("numeroDocumento").value;
   const telefono = document.getElementById("telefono").value;
   const correo = document.getElementById("correo").value;
   const tipo = document.getElementById("tipo").value;
   const servicio = document.getElementById("servicio").value;
   const detalle = document.getElementById("detalle").value;
+// VALIDACIÓN DE DOCUMENTO
+if (tipoDocumento === "DNI" && numeroDocumento.length !== 8) {
+  alert("El DNI debe tener 8 dígitos.");
+  return;
+}
 
+if (tipoDocumento === "CE" && numeroDocumento.length < 8) {
+  alert("El Carné de Extranjería debe tener al menos 8 caracteres.");
+  return;
+}
+
+if (tipoDocumento === "PAS" && numeroDocumento.length < 6) {
+  alert("El Pasaporte debe tener al menos 6 caracteres.");
+  return;
+}
   const mensaje =
     "LIBRO DE RECLAMACIONES - NETINHO XPERIENCE%0A%0A" +
     "Nombre: " + encodeURIComponent(nombre) + "%0A" +
