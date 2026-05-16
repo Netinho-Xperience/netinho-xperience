@@ -694,15 +694,27 @@ if (tipoDocumento === "PAS" && numeroDocumento.length < 6) {
   alert("El Pasaporte debe tener al menos 6 caracteres.");
   return;
 }
-  const mensaje =
-    "LIBRO DE RECLAMACIONES - NETINHO XPERIENCE%0A%0A" +
-    "Nombre: " + encodeURIComponent(nombre) + "%0A" +
-    "DNI/CE: " + encodeURIComponent(dni) + "%0A" +
-    "Teléfono: " + encodeURIComponent(telefono) + "%0A" +
-    "Correo: " + encodeURIComponent(correo) + "%0A" +
-    "Tipo: " + encodeURIComponent(tipo) + "%0A" +
-    "Bien o servicio: " + encodeURIComponent(servicio) + "%0A%0A" +
-    "Detalle:%0A" + encodeURIComponent(detalle);
+  const fechaRegistro = new Date().toLocaleString("es-PE");
+
+const mensaje =
+  "REGISTRO DE QUEJAS Y RECLAMOS - LIBRO DE RECLAMACIONES%0A" +
+"NETINHO XPERIENCE%0A" +
+  "Fecha de registro: " + encodeURIComponent(fechaRegistro) + "%0A%0A" +
+
+  "DATOS DEL CONSUMIDOR%0A" +
+  "Nombre completo: " + encodeURIComponent(nombre) + "%0A" +
+  "Tipo de documento: " + encodeURIComponent(tipoDocumento) + "%0A" +
+  "Número de documento: " + encodeURIComponent(numeroDocumento) + "%0A" +
+  "Teléfono: " + encodeURIComponent(telefono) + "%0A" +
+  "Correo electrónico: " + encodeURIComponent(correo) + "%0A%0A" +
+
+  "DETALLE DEL REGISTRO%0A" +
+  "Tipo de registro: " + encodeURIComponent(tipo) + "%0A" +
+  "Bien o servicio relacionado: " + encodeURIComponent(servicio) + "%0A" +
+  "Detalle:%0A" + encodeURIComponent(detalle) + "%0A%0A" +
+
+  "DECLARACIÓN%0A" +
+  encodeURIComponent("El consumidor declara que la información proporcionada es verídica.");
 
   window.open("https://wa.me/51973669004?text=" + mensaje, "_blank");
 }
