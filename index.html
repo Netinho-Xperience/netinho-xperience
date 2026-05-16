@@ -695,10 +695,11 @@ if (tipoDocumento === "PAS" && numeroDocumento.length < 6) {
   return;
 }
   const fechaRegistro = new Date().toLocaleString("es-PE");
-
+const idReclamo = "LR-" + Date.now();
 const mensaje =
   "REGISTRO DE QUEJAS Y RECLAMOS - LIBRO DE RECLAMACIONES%0A" +
-"NETINHO XPERIENCE%0A" +
+  "NETINHO XPERIENCE%0A" +
+  "N° de reclamo: " + idReclamo + "%0A" +
   "Fecha de registro: " + encodeURIComponent(fechaRegistro) + "%0A%0A" +
 
   "DATOS DEL CONSUMIDOR%0A" +
