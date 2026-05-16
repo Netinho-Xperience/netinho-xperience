@@ -589,7 +589,14 @@
 
   <form onsubmit="enviarReclamo(event)" style="display:grid; gap:14px; margin-top:20px;">
     <input id="nombre" required placeholder="Nombre completo" style="padding:12px; border:1px solid #ccc; border-radius:10px;">
-    <input id="dni" required placeholder="DNI / CE" style="padding:12px; border:1px solid #ccc; border-radius:10px;">
+    <select id="tipoDocumento" required style="padding:12px; border:1px solid #ccc; border-radius:10px;">
+  <option value="">Tipo de documento</option>
+  <option value="DNI">DNI</option>
+  <option value="CE">Carné de Extranjería</option>
+  <option value="PAS">Pasaporte</option>
+</select>
+
+<input id="numeroDocumento" required placeholder="Número de documento" style="padding:12px; border:1px solid #ccc; border-radius:10px;"> style="padding:12px; border:1px solid #ccc; border-radius:10px;">
     <input id="telefono" required placeholder="Teléfono" style="padding:12px; border:1px solid #ccc; border-radius:10px;">
     <input id="correo" required type="email" placeholder="Correo electrónico" style="padding:12px; border:1px solid #ccc; border-radius:10px;">
 
