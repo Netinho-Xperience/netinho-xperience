@@ -722,6 +722,7 @@ const mensaje =
 + "%0A%0A" +
 "PLAZO DE ATENCIÓN%0A" +
 encodeURIComponent("Este registro será atendido en un plazo máximo de 15 días hábiles.");
+// RESPALDO LOCAL DEL RECLAMO
 
 const confirmar = confirm(
   "¿Deseas enviar este registro de reclamo?\n\nVerifica que la información sea correcta antes de continuar."
@@ -730,6 +731,23 @@ const confirmar = confirm(
 if (!confirmar) {
   return;
 }
+    const reclamo = {
+  id: idReclamo,
+  fecha: fechaRegistro,
+  nombre,
+  tipoDocumento,
+  numeroDocumento,
+  telefono,
+  correo,
+  tipo,
+  servicio,
+detalle,
+estado: "Registrado"
+};
+
+let historial = JSON.parse(localStorage.getItem("reclamos")) || [];
+historial.push(reclamo);
+localStorage.setItem("reclamos", JSON.stringify(historial));
     window.open("https://wa.me/51973669004?text=" + mensaje, "_blank");
 }
 </script>
