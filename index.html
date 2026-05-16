@@ -699,7 +699,10 @@ const idReclamo = "LR-" + Date.now();
 const mensaje =
   "REGISTRO DE QUEJAS Y RECLAMOS - LIBRO DE RECLAMACIONES%0A" +
   "NETINHO XPERIENCE%0A" +
-  "N° de reclamo: " + idReclamo + "%0A" +
+  "Proveedor: Netinho Xperience%0A" +
+"RUC: [10414303701]%0A" +
+"Ubicación: Lima, Perú%0A%0A" +
+  "Código de registro:" + idReclamo + "%0A" +
   "Fecha de registro: " + encodeURIComponent(fechaRegistro) + "%0A%0A" +
 
   "DATOS DEL CONSUMIDOR%0A" +
@@ -710,14 +713,24 @@ const mensaje =
   "Correo electrónico: " + encodeURIComponent(correo) + "%0A%0A" +
 
   "DETALLE DEL REGISTRO%0A" +
-  "Tipo de registro: " + encodeURIComponent(tipo) + "%0A" +
+  "Tipo de registro: " + encodeURIComponent(tipo === "Reclamo" ? "Reclamo (relacionado a producto o servicio)" : "Queja (no relacionada directamente a producto o servicio)") + "%0A" +
   "Bien o servicio relacionado: " + encodeURIComponent(servicio) + "%0A" +
   "Detalle:%0A" + encodeURIComponent(detalle) + "%0A%0A" +
 
   "DECLARACIÓN%0A" +
   encodeURIComponent("El consumidor declara que la información proporcionada es verídica.");
++ "%0A%0A" +
+"PLAZO DE ATENCIÓN%0A" +
+encodeURIComponent("Este registro será atendido en un plazo máximo de 15 días hábiles.");
 
-  window.open("https://wa.me/51973669004?text=" + mensaje, "_blank");
+const confirmar = confirm(
+  "¿Deseas enviar este registro de reclamo?\n\nVerifica que la información sea correcta antes de continuar."
+);
+
+if (!confirmar) {
+  return;
+}
+    window.open("https://wa.me/51973669004?text=" + mensaje, "_blank");
 }
 </script>
 
