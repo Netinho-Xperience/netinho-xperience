@@ -713,9 +713,19 @@ Completa los datos solicitados y describe el caso de forma clara. El detalle tie
 
 let videoActualNX = 0;
 
+function cargarVideoNX(index) {
+  const videoId = videosNX[index];
+
+  document.getElementById("videoFrame").src =
+    "https://www.youtube.com/embed/" + videoId + "?rel=0&modestbranding=1";
+
+  document.getElementById("youtubeBtn").href =
+    "https://www.youtube.com/watch?v=" + videoId;
+}
+
 setInterval(() => {
   videoActualNX = (videoActualNX + 1) % videosNX.length;
-  document.getElementById("videoFrame").src = "https://www.youtube.com/embed/" + videosNX[videoActualNX];
+  cargarVideoNX(videoActualNX);
 }, 10000);
 function contadorCaracteres() {
   const detalle = document.getElementById("detalle");
