@@ -353,6 +353,68 @@
       .brand span:last-child{font-size:14px}
       .brand small{font-size:10px}
     }
+    .video-showcase-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:24px;
+  margin-top:32px;
+}
+
+.video-card{
+  background:#ffffff;
+  border-radius:22px;
+  overflow:hidden;
+  border:1px solid rgba(0,0,0,.06);
+  transition:.35s ease;
+  box-shadow:0 10px 30px rgba(0,0,0,.04);
+}
+
+.video-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 18px 40px rgba(0,0,0,.10);
+}
+
+.video-card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  display:block;
+}
+
+.video-card-body{
+  padding:24px;
+}
+
+.video-tag{
+  display:inline-block;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  background:#f3efe4;
+  color:#b68b2d;
+  padding:8px 12px;
+  border-radius:999px;
+  margin-bottom:14px;
+}
+
+.video-card h3{
+  font-size:28px;
+  line-height:1.1;
+  margin-bottom:14px;
+  color:#07162d;
+}
+
+.video-card p{
+  color:#5f6b7a;
+  line-height:1.7;
+  margin-bottom:24px;
+}
+
+.video-card .btn{
+  width:100%;
+  justify-content:center;
+}
   </style>
 </head>
 
@@ -545,6 +607,51 @@
       <div class="eyebrow">Videos recomendados</div>
       <h2>Vehículos: análisis, lanzamientos y pruebas.</h2>
       <p class="lead">Contenido seleccionado para quienes están evaluando comprar, comparar o entender mejor un vehículo antes de decidir.</p>
+      <div class="video-showcase-grid">
+
+  <article class="video-card">
+    <img src="https://img.youtube.com/vi/BdIdSoBb8pA/maxresdefault.jpg" alt="Ford Territory Hybrid">
+
+    <div class="video-card-body">
+      <span class="video-tag">Análisis</span>
+      <h3>Ford Territory Hybrid</h3>
+      <p>Evaluación visual, propuesta híbrida y percepción real de manejo para ciudad.</p>
+
+      <a href="https://www.youtube.com/watch?v=BdIdSoBb8pA" target="_blank" class="btn btn-gold">
+        Ver análisis
+      </a>
+    </div>
+  </article>
+
+  <article class="video-card">
+    <img src="https://img.youtube.com/vi/gxEkxRsZhKU/maxresdefault.jpg" alt="RAM TRX Bloodshot">
+
+    <div class="video-card-body">
+      <span class="video-tag">Review</span>
+      <h3>RAM TRX Bloodshot</h3>
+      <p>Potencia, presencia y enfoque extremo en una edición de alto desempeño.</p>
+
+      <a href="https://www.youtube.com/watch?v=gxEkxRsZhKU" target="_blank" class="btn btn-gold">
+        Ver review
+      </a>
+    </div>
+  </article>
+
+  <article class="video-card">
+    <img src="https://img.youtube.com/vi/qqqTTEtQmPQ/maxresdefault.jpg" alt="Consejo de compra">
+
+    <div class="video-card-body">
+      <span class="video-tag">Consejo NX</span>
+      <h3>Cómo evaluar antes de comprar</h3>
+      <p>Riesgos, señales y criterios básicos antes de tomar una decisión de compra.</p>
+
+      <a href="https://www.youtube.com/watch?v=qqqTTEtQmPQ" target="_blank" class="btn btn-gold">
+        Ver contenido
+      </a>
+    </div>
+  </article>
+
+</div>
     </div>
 <div class="video-showcase-grid">
 
