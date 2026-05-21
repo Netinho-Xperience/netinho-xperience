@@ -12,6 +12,12 @@ const activosNX = [
       "Activo vehicular con buena presentación, uso particular y condiciones atractivas para un comprador que busca orden, respaldo y mejor criterio antes de decidir.",
     criterio:
       "Validar mantenimiento, caja, neumáticos, pintura, desgaste interior, documentación y coherencia entre kilometraje, estado y precio publicado.",
+    indicadores:[
+  "Uso particular",
+  "Equipamiento superior",
+  "Evaluación recomendada",
+  "Potencial de reventa"
+],
     imagenClase: "img-car",
     cta: "Solicitar evaluación del vehículo",
     whatsapp:
@@ -30,6 +36,12 @@ const activosNX = [
       "Activo inmobiliario que requiere ordenar información clave antes de publicar, negociar o tomar una decisión de compra o inversión.",
     criterio:
       "Revisar ubicación, metraje real, distribución, mantenimiento, acabados, iluminación, ventilación, ruido, documentación y costo total de ocupación.",
+    indicadores:[
+  "Ubicación por validar",
+  "Metraje por confirmar",
+  "Revisión documental",
+  "Costo total de ocupación"
+],
     imagenClase: "img-house",
     cta: "Solicitar evaluación del inmueble",
     whatsapp:
@@ -48,6 +60,12 @@ const activosNX = [
       "Antes de comprar, vender o invertir, ordenamos la información relevante para ayudarte a ver riesgos, oportunidades y puntos de negociación.",
     criterio:
       "El objetivo no es presionarte a cerrar rápido. El objetivo es darte claridad para avanzar, negociar o descartar con mayor seguridad.",
+    indicadores:[
+  "Reducción de riesgo",
+  "Comparación objetiva",
+  "Mejor negociación",
+  "Decisión informada"
+],
     imagenClase: "img-decision",
     cta: "Quiero decidir con criterio NX",
     whatsapp:
@@ -77,7 +95,9 @@ function renderActivosNX() {
         <p class="asset-subtitle">${activo.subtitulo}</p>
 
         <p>${activo.descripcion}</p>
-
+<div class="nx-indicators">
+  ${activo.indicadores.map(item => `<span>✓ ${item}</span>`).join("")}
+</div>
         <div class="nx-evaluation-box">
   <div class="nx-label">CRITERIO NX</div>
 
