@@ -116,3 +116,4 @@ function renderActivosNX() {
 }
 
 document.addEventListener("DOMContentLoaded", renderActivosNX);
+console.log("NX activos dinámicos cargados");
