@@ -79,26 +79,33 @@ function renderActivosNX() {
         <p>${activo.descripcion}</p>
 
         <div class="nx-evaluation-box">
-          <div class="nx-label">Criterio NX</div>
-          <p>${activo.criterio}</p>
-        </div>
+  <div class="nx-label">CRITERIO NX</div>
 
-        <div class="nx-asset-meta">
-          <div>
-            <span>Estado</span>
-            <strong>${activo.estado}</strong>
-          </div>
+  <div class="nx-evaluation-box p">
+    ${activo.criterio}
+  </div>
+</div>
 
-          <div>
-            <span>Nivel NX</span>
-            <strong>${activo.nivel}</strong>
-          </div>
-        </div>
+       <div class="nx-asset-meta">
+  <div class="nx-meta-pill">
+    ${activo.estado}
+  </div>
+
+  <div class="nx-meta-pill">
+    ${activo.nivel}
+  </div>
+</div>
 
         <div class="nx-price-row">
-          <span>Referencia</span>
-          <strong>${activo.precio}</strong>
-        </div>
+  <div>
+    <div class="nx-price-label">Referencia</div>
+    <div class="nx-price-value">${activo.precio}</div>
+  </div>
+
+  <div class="nx-trust">
+    Evaluación estratégica NX
+  </div>
+</div>
 
         <a
           class="btn btn-gold"
