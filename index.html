@@ -352,7 +352,109 @@
       letter-spacing:-.03em;
       margin-bottom:14px;
     }
+/* ===== EXPERIENCIA PREMIUM NX ===== */
 
+.nx-asset-card{
+  position:relative;
+  overflow:hidden;
+}
+
+.nx-asset-card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:5px;
+  background:linear-gradient(90deg,#D4A84F,#F2D17B,#C8922E);
+}
+
+.asset-subtitle{
+  font-size:13px;
+  color:#5E6A7D;
+  margin-top:10px;
+  line-height:1.5;
+}
+
+.nx-price-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:18px;
+  padding-top:14px;
+  border-top:1px solid rgba(6,24,44,.08);
+}
+
+.nx-price-label{
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:#7C8798;
+}
+
+.nx-price-value{
+  font-size:22px;
+  font-weight:800;
+  color:#06182C;
+}
+
+.nx-asset-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:18px;
+}
+
+.nx-meta-pill{
+  background:#F4F6F9;
+  border:1px solid rgba(6,24,44,.06);
+  padding:8px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:700;
+  color:#314056;
+}
+
+.nx-evaluation-box{
+  margin-top:18px;
+  background:linear-gradient(180deg,#FFF8E7,#FFFDF8);
+  border:1px solid rgba(212,168,79,.28);
+  border-radius:18px;
+  padding:16px;
+}
+
+.nx-evaluation-title{
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#A36D11;
+  margin-bottom:10px;
+}
+
+.nx-evaluation-text{
+  font-size:14px;
+  line-height:1.7;
+  color:#314056;
+}
+
+.nx-card-footer{
+  margin-top:22px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.nx-trust{
+  font-size:12px;
+  color:#7C8798;
+  font-weight:600;
+}
+
+.nx-asset-card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 30px 60px rgba(6,24,44,.18);
+}
     .card p{
       color:var(--muted);
       font-size:17px;
