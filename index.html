@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>Netinho Xperience | Gestión estratégica de activos</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="description" content="Vehículos, inmuebles y decisiones inteligentes. Netinho Xperience te ayuda a evaluar activos con criterio técnico, visión estratégica y acompañamiento directo en Perú."/>
+<title>Netinho Xperience | Decide mejor antes de invertir</title>
+
+<meta name="description" content="Vehículos, inmuebles y decisiones inteligentes. Netinho Xperience te ayuda a evaluar activos con claridad, criterio y acompañamiento estratégico en Perú.">
+
+<meta name="theme-color" content="#041a33">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <style>
+
 *{
 margin:0;
 padding:0;
@@ -22,14 +29,34 @@ scroll-behavior:smooth;
 body{
 font-family:Arial, Helvetica, sans-serif;
 background:#f5f7fa;
-color:#0b1730;
+color:#0a1730;
 line-height:1.6;
+overflow-x:hidden;
+}
+
+img{
+max-width:100%;
+display:block;
+}
+
+a{
+text-decoration:none;
 }
 
 .container{
 width:90%;
-max-width:1250px;
+max-width:1280px;
 margin:auto;
+}
+
+:root{
+--navy:#041a33;
+--gold:#d4a84f;
+--soft:#f5f7fa;
+--text:#0a1730;
+--muted:#5f6a7a;
+--white:#ffffff;
+--shadow:0 10px 30px rgba(0,0,0,0.08);
 }
 
 header{
@@ -37,7 +64,8 @@ position:fixed;
 top:0;
 width:100%;
 z-index:999;
-background:#041a33;
+background:rgba(4,26,51,0.96);
+backdrop-filter:blur(10px);
 border-bottom:1px solid rgba(255,255,255,0.08);
 }
 
@@ -45,7 +73,7 @@ border-bottom:1px solid rgba(255,255,255,0.08);
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:18px 0;
+padding:16px 0;
 }
 
 .logo{
@@ -55,10 +83,10 @@ gap:14px;
 }
 
 .logo img{
-width:58px;
-height:58px;
-object-fit:contain;
+width:60px;
+height:60px;
 border-radius:14px;
+object-fit:cover;
 }
 
 .logo-text h1{
@@ -69,43 +97,45 @@ font-weight:700;
 
 .logo-text p{
 font-size:13px;
-color:#d7dce3;
+color:#d9dee7;
 }
 
 .nav-links{
 display:flex;
-gap:30px;
 align-items:center;
+gap:28px;
 }
 
 .nav-links a{
-text-decoration:none;
 color:#fff;
 font-size:15px;
 transition:0.3s;
 }
 
 .nav-links a:hover{
-color:#d4a84f;
+color:var(--gold);
 }
 
-.whatsapp-btn{
-background:#d4a84f;
-color:#041a33 !important;
+.btn-whatsapp{
+background:#25D366;
 padding:14px 24px;
 border-radius:999px;
 font-weight:700;
-text-decoration:none;
+color:#fff !important;
+box-shadow:0 10px 25px rgba(37,211,102,0.28);
 }
 
 .hero{
-padding-top:140px;
-padding-bottom:100px;
+padding-top:150px;
+padding-bottom:110px;
+
 background:
-linear-gradient(rgba(2,18,37,0.82), rgba(2,18,37,0.86)),
+linear-gradient(rgba(3,16,33,0.82), rgba(3,16,33,0.86)),
 url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1600&auto=format&fit=crop');
+
 background-size:cover;
 background-position:center;
+
 color:#fff;
 }
 
@@ -117,62 +147,68 @@ align-items:center;
 }
 
 .hero small{
-color:#d4a84f;
-font-weight:700;
+font-size:13px;
 letter-spacing:2px;
 text-transform:uppercase;
+color:var(--gold);
+font-weight:700;
 }
 
 .hero h2{
-font-size:72px;
-line-height:1;
-margin-top:20px;
-margin-bottom:30px;
+font-size:78px;
+line-height:0.95;
+margin-top:24px;
+margin-bottom:28px;
 }
 
 .hero p{
-font-size:22px;
+font-size:23px;
 max-width:720px;
-color:#e6e9ef;
+color:#e7ebf1;
 }
 
 .hero-buttons{
-margin-top:35px;
+margin-top:36px;
 display:flex;
 gap:18px;
 flex-wrap:wrap;
 }
 
 .btn-primary{
-background:#25D366;
+background:var(--gold);
 padding:18px 30px;
 border-radius:999px;
-color:#fff;
-text-decoration:none;
 font-weight:700;
+color:var(--navy);
 display:inline-block;
+transition:0.3s;
+}
+
+.btn-primary:hover{
+transform:translateY(-3px);
 }
 
 .btn-secondary{
 border:1px solid rgba(255,255,255,0.25);
 padding:18px 30px;
 border-radius:999px;
-color:#fff;
-text-decoration:none;
 font-weight:700;
+color:#fff;
+display:inline-block;
 }
 
 .hero-card{
-background:rgba(0,0,0,0.35);
+background:rgba(255,255,255,0.05);
 border:1px solid rgba(255,255,255,0.08);
-padding:40px;
-border-radius:28px;
-backdrop-filter:blur(10px);
+padding:42px;
+border-radius:32px;
+backdrop-filter:blur(12px);
 }
 
 .hero-card h3{
-font-size:28px;
-margin-bottom:20px;
+font-size:34px;
+margin-bottom:22px;
+line-height:1.2;
 }
 
 .hero-card ul{
@@ -183,188 +219,235 @@ gap:16px;
 
 .hero-card li{
 list-style:none;
-font-size:17px;
-color:#e5e7eb;
+font-size:18px;
+color:#e9edf3;
 }
 
 .section{
-padding:90px 0;
+padding:100px 0;
 }
 
 .section-title{
-font-size:56px;
+font-size:58px;
 line-height:1.1;
 margin-bottom:20px;
 }
 
 .section-subtitle{
 font-size:22px;
-max-width:920px;
-color:#495466;
+color:var(--muted);
+max-width:900px;
 margin-bottom:55px;
 }
 
 .cards{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:28px;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:30px;
 }
 
 .card{
 background:#fff;
-border-radius:28px;
+border-radius:30px;
 overflow:hidden;
-box-shadow:0 8px 30px rgba(0,0,0,0.06);
-transition:0.3s;
+box-shadow:var(--shadow);
+transition:0.35s;
 }
 
 .card:hover{
-transform:translateY(-6px);
+transform:translateY(-8px);
 }
 
 .card img{
+height:260px;
 width:100%;
-height:250px;
 object-fit:cover;
 }
 
 .card-body{
-padding:30px;
+padding:32px;
 }
 
 .badge{
 display:inline-block;
 padding:8px 14px;
 border-radius:999px;
-background:#f2ead9;
-color:#9b6c16;
+background:#f3ead6;
+color:#8a6317;
 font-size:13px;
 font-weight:700;
 margin-bottom:18px;
 }
 
 .card h3{
-font-size:34px;
-line-height:1.15;
+font-size:38px;
+line-height:1.1;
 margin-bottom:18px;
 }
 
 .card p{
 font-size:18px;
-color:#5c6777;
+color:#5f6a7a;
 margin-bottom:24px;
 }
 
 .card-button{
 display:inline-block;
-background:#d4a84f;
-color:#041a33;
 padding:16px 24px;
+background:var(--gold);
+color:var(--navy);
 border-radius:999px;
 font-weight:700;
-text-decoration:none;
 }
 
-.tip-grid{
+.dual-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(420px,1fr));
-gap:30px;
+grid-template-columns:1fr 1fr;
+gap:34px;
 }
 
 .tip-box{
 background:#fff;
-border-radius:28px;
+border-radius:30px;
 overflow:hidden;
-box-shadow:0 8px 25px rgba(0,0,0,0.05);
+box-shadow:var(--shadow);
 }
 
 .tip-box img{
+height:290px;
 width:100%;
-height:260px;
 object-fit:cover;
 }
 
 .tip-content{
-padding:32px;
+padding:34px;
 }
 
 .tip-content h3{
-font-size:36px;
-margin-bottom:18px;
-}
-
-.tip-content p{
-font-size:18px;
-color:#596273;
+font-size:40px;
+line-height:1.1;
 margin-bottom:20px;
 }
 
+.tip-content p{
+font-size:19px;
+color:#5f6a7a;
+margin-bottom:24px;
+}
+
 .tip-content ul{
-padding-left:22px;
+padding-left:24px;
 display:flex;
 flex-direction:column;
 gap:14px;
-margin-bottom:24px;
+margin-bottom:26px;
 }
 
 .tip-content li{
 font-size:17px;
-color:#374151;
+color:#364152;
 }
 
 .reference{
 background:#f4f6fa;
-padding:18px;
+padding:20px;
 border-radius:18px;
 font-size:15px;
-color:#4d5766;
+color:#536070;
 }
 
 .process-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:24px;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:26px;
 }
 
 .process-card{
 background:#fff;
-padding:35px;
-border-radius:24px;
-box-shadow:0 5px 20px rgba(0,0,0,0.05);
+padding:36px;
+border-radius:28px;
+box-shadow:var(--shadow);
 }
 
 .process-card span{
-font-size:52px;
+font-size:56px;
 font-weight:700;
-color:#d4a84f;
+color:var(--gold);
 }
 
 .process-card h4{
-font-size:28px;
+font-size:30px;
 margin:18px 0;
 }
 
 .process-card p{
 font-size:17px;
-color:#5c6777;
+color:#5f6a7a;
+}
+
+.social-box{
+margin-top:50px;
+background:#fff;
+padding:42px;
+border-radius:30px;
+box-shadow:var(--shadow);
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:30px;
+flex-wrap:wrap;
+}
+
+.social-box h3{
+font-size:38px;
+margin-bottom:14px;
+}
+
+.social-box p{
+font-size:18px;
+color:#5f6a7a;
+max-width:700px;
+}
+
+.social-links{
+display:flex;
+gap:18px;
+flex-wrap:wrap;
+}
+
+.social-links a{
+padding:16px 24px;
+border-radius:999px;
+font-weight:700;
+display:inline-block;
+}
+
+.instagram{
+background:#E1306C;
+color:#fff;
+}
+
+.linkedin{
+background:#0A66C2;
+color:#fff;
 }
 
 .claim-box{
 background:#fff;
-padding:45px;
-border-radius:28px;
-box-shadow:0 10px 35px rgba(0,0,0,0.05);
+padding:50px;
+border-radius:30px;
+box-shadow:var(--shadow);
 }
 
 .claim-box h3{
-font-size:42px;
+font-size:48px;
 margin-bottom:18px;
 }
 
 .claim-box p{
 font-size:18px;
-color:#5c6777;
-margin-bottom:30px;
+color:#5f6a7a;
+margin-bottom:28px;
 }
 
 .form-grid{
@@ -373,11 +456,13 @@ grid-template-columns:1fr 1fr;
 gap:20px;
 }
 
-input, select, textarea{
+input,
+select,
+textarea{
 width:100%;
 padding:18px;
 border-radius:16px;
-border:1px solid #d6dbe3;
+border:1px solid #d6dde6;
 font-size:16px;
 font-family:Arial;
 }
@@ -391,11 +476,11 @@ resize:vertical;
 grid-column:1/-1;
 }
 
-footer{
-background:#021425;
-color:#fff;
+.footer{
+background:#021323;
 padding:90px 0 50px;
-margin-top:90px;
+color:#fff;
+margin-top:100px;
 }
 
 .footer-box{
@@ -403,76 +488,106 @@ text-align:center;
 }
 
 .footer-box h3{
-font-size:58px;
+font-size:60px;
 line-height:1.1;
 margin-bottom:20px;
 }
 
 .footer-box p{
 font-size:22px;
-color:#d7dce3;
-margin-bottom:35px;
+color:#dce2eb;
+max-width:860px;
+margin:auto;
+margin-bottom:34px;
 }
 
 .footer-small{
-margin-top:50px;
+margin-top:55px;
 font-size:15px;
-color:#b6bfca;
+color:#b7c0cc;
+line-height:1.8;
+}
+
+.floating{
+position:fixed;
+right:22px;
+bottom:22px;
+width:68px;
+height:68px;
+background:#25D366;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:30px;
+color:#fff;
+box-shadow:0 12px 25px rgba(37,211,102,0.35);
+z-index:999;
 }
 
 @media(max-width:980px){
 
-.hero-grid{
+.nav-links{
+display:none;
+}
+
+.hero-grid,
+.dual-grid{
 grid-template-columns:1fr;
 }
 
 .hero h2{
-font-size:52px;
+font-size:56px;
 }
 
 .section-title{
-font-size:44px;
+font-size:46px;
 }
 
 .form-grid{
 grid-template-columns:1fr;
 }
 
-.nav-links{
-display:none;
 }
 
-}
 </style>
+
 </head>
 
 <body>
 
 <header>
+
 <div class="container navbar">
 
 <div class="logo">
+
 <img src="https://i.imgur.com/yJ0Y4pS.png" alt="Netinho Xperience">
+
 <div class="logo-text">
 <h1>Netinho Xperience</h1>
 <p>Gestión estratégica de activos</p>
 </div>
+
 </div>
 
 <div class="nav-links">
+
 <a href="#activos">Activos</a>
-<a href="#tips">Tips inteligentes</a>
+<a href="#decisiones">Decisiones inteligentes</a>
 <a href="#proceso">Proceso</a>
 <a href="#reclamos">Libro de reclamaciones</a>
 
-<a class="whatsapp-btn"
+<a class="btn-whatsapp"
 href="https://wa.me/51973669004?text=Hola%20Netinho%20Xperience%2C%20quiero%20más%20información."
 target="_blank">
 WhatsApp
 </a>
+
 </div>
 
 </div>
+
 </header>
 
 <section class="hero">
@@ -481,16 +596,17 @@ WhatsApp
 
 <div>
 
-<small>LIMA · PERÚ · VEHÍCULOS · INMUEBLES · DECISIONES INTELIGENTES</small>
+<small>
+LIMA · PERÚ · VEHÍCULOS · INMUEBLES · ACTIVOS
+</small>
 
 <h2>
-Activos,<br>
-criterio y<br>
-decisiones mejor tomadas.
+No se trata solo de comprar.<br>
+Se trata de decidir bien.
 </h2>
 
 <p>
-Netinho Xperience combina análisis técnico, mirada estratégica y contenido útil para ayudarte a evaluar vehículos, inmuebles y activos con mayor claridad antes de invertir.
+Netinho Xperience te ayuda a evaluar vehículos, inmuebles y activos con más claridad antes de invertir. Menos improvisación. Más criterio para decidir.
 </p>
 
 <div class="hero-buttons">
@@ -498,11 +614,11 @@ Netinho Xperience combina análisis técnico, mirada estratégica y contenido ú
 <a class="btn-primary"
 href="https://wa.me/51973669004?text=Hola%20Netinho%20Xperience%2C%20quiero%20evaluar%20un%20activo."
 target="_blank">
-Escríbeme por WhatsApp
+Evaluar un activo
 </a>
 
-<a class="btn-secondary" href="#tips">
-Ver contenido
+<a class="btn-secondary" href="#decisiones">
+Ver decisiones inteligentes
 </a>
 
 </div>
@@ -511,15 +627,36 @@ Ver contenido
 
 <div class="hero-card">
 
-<h3>¿Qué hace diferente a Netinho Xperience?</h3>
+<h3>
+Decidir bien también es proteger tu dinero.
+</h3>
 
 <ul>
-<li>✔ Evaluación estratégica antes de decidir.</li>
-<li>✔ Información clara y verificable.</li>
-<li>✔ Enfoque técnico y comercial.</li>
-<li>✔ Neurociencias aplicadas a presentación de activos.</li>
-<li>✔ Visión estructurada tipo Project Manager.</li>
-<li>✔ Lenguaje claro, sin humo ni improvisación.</li>
+
+<li>
+✔ Información clara antes de comprometer tu inversión.
+</li>
+
+<li>
+✔ Evaluaciones estratégicas para reducir riesgos y malas decisiones.
+</li>
+
+<li>
+✔ Comparativas que ayudan a entender mejor el valor real de un activo.
+</li>
+
+<li>
+✔ Contacto directo y respuestas rápidas, sin vueltas innecesarias.
+</li>
+
+<li>
+✔ Contenido útil basado en experiencia real del mercado peruano.
+</li>
+
+<li>
+✔ Acompañamiento con criterio, claridad y enfoque práctico.
+</li>
+
 </ul>
 
 </div>
@@ -537,7 +674,7 @@ Activos seleccionados para evaluar.
 </h2>
 
 <p class="section-subtitle">
-Una vitrina estratégica para vehículos, inmuebles y oportunidades presentadas con criterio comercial, claridad y percepción premium.
+Vehículos, inmuebles y oportunidades presentadas con enfoque estratégico, claridad comercial y percepción premium.
 </p>
 
 <div class="cards">
@@ -548,21 +685,26 @@ Una vitrina estratégica para vehículos, inmuebles y oportunidades presentadas 
 
 <div class="card-body">
 
-<div class="badge">Vehículo evaluado</div>
+<div class="badge">
+Vehículo estratégico
+</div>
 
-<h3>Activo 1</h3>
+<h3>
+Oportunidad seleccionada
+</h3>
 
 <p>
-Vehículo disponible con presentación estratégica, validación visual y acompañamiento directo.
+Vehículo presentado con información validada, percepción premium y contacto directo.
 </p>
 
 <a class="card-button"
-href="https://wa.me/51973669004?text=Hola%20Netinho%20Xperience%2C%20quiero%20información%20del%20Activo%201."
+href="https://wa.me/51973669004?text=Hola%20Netinho%20Xperience%2C%20quiero%20información%20del%20vehículo."
 target="_blank">
 Solicitar información
 </a>
 
 </div>
+
 </div>
 
 <div class="card">
@@ -571,21 +713,26 @@ Solicitar información
 
 <div class="card-body">
 
-<div class="badge">Inmueble estratégico</div>
+<div class="badge">
+Activo patrimonial
+</div>
 
-<h3>Activo 2</h3>
+<h3>
+Inmueble recomendado
+</h3>
 
 <p>
-Propiedad presentada con enfoque técnico, percepción de valor y lectura comercial.
+Propiedad presentada con enfoque técnico, lectura comercial y percepción de valor.
 </p>
 
 <a class="card-button"
-href="https://wa.me/51973669004?text=Hola%20Netinho%20Xperience%2C%20quiero%20información%20del%20Activo%202."
+href="https://wa.me/51973669004?text=Hola%20Netinho%20Xperience%2C%20quiero%20información%20del%20inmueble."
 target="_blank">
 Ver detalles
 </a>
 
 </div>
+
 </div>
 
 <div class="card">
@@ -594,21 +741,25 @@ Ver detalles
 
 <div class="card-body">
 
-<div class="badge">Contenido recomendado</div>
+<div class="badge">
+Contenido estratégico
+</div>
 
-<h3>Activo 3</h3>
+<h3>
+Decisión inteligente
+</h3>
 
 <p>
-Activo o contenido estratégico seleccionado según disponibilidad y evaluación.
+Comparativas, criterios y señales que ayudan a reducir errores antes de invertir.
 </p>
 
 <a class="card-button"
-href="https://wa.me/51973669004?text=Hola%20Netinho%20Xperience%2C%20quiero%20más%20información."
-target="_blank">
-Consultar activo
+href="#decisiones">
+Ver contenido
 </a>
 
 </div>
+
 </div>
 
 </div>
@@ -617,19 +768,19 @@ Consultar activo
 
 </section>
 
-<section class="section" id="tips">
+<section class="section" id="decisiones">
 
 <div class="container">
 
 <h2 class="section-title">
-Tips inteligentes que cambian decisiones.
+Detalles que cambian una decisión.
 </h2>
 
 <p class="section-subtitle">
-Contenido diseñado para generar confianza, criterio y percepción de valor antes de comprar un vehículo o inmueble.
+Contenido pensado para ayudar a comparar mejor, reducir riesgos y entender detalles que muchas veces pasan desapercibidos.
 </p>
 
-<div class="tip-grid">
+<div class="dual-grid">
 
 <div class="tip-box">
 
@@ -637,7 +788,9 @@ Contenido diseñado para generar confianza, criterio y percepción de valor ante
 
 <div class="tip-content">
 
-<div class="badge">Vehículos</div>
+<div class="badge">
+Vehículos
+</div>
 
 <h3>
 ¿Por qué algunas llantas frenan mejor aunque parezcan iguales?
@@ -648,13 +801,23 @@ El compuesto, la disipación térmica y la deformación estructural influyen dir
 </p>
 
 <ul>
-<li>Las llantas premium suelen mantener mejor adherencia en lluvia.</li>
-<li>Una mala composición puede aumentar distancia de frenado.</li>
-<li>El desgaste irregular afecta seguridad y percepción del manejo.</li>
+
+<li>
+Las llantas premium suelen mantener mejor adherencia en lluvia.
+</li>
+
+<li>
+Una mala composición puede aumentar distancia de frenado.
+</li>
+
+<li>
+El desgaste irregular afecta seguridad y percepción del manejo.
+</li>
+
 </ul>
 
 <div class="reference">
-Referencia: pruebas comparativas de seguridad vial, mantenimiento preventivo y comportamiento dinámico de neumáticos.
+Referencia: comparativas de seguridad vial, mantenimiento preventivo y comportamiento dinámico de neumáticos.
 </div>
 
 </div>
@@ -667,20 +830,32 @@ Referencia: pruebas comparativas de seguridad vial, mantenimiento preventivo y c
 
 <div class="tip-content">
 
-<div class="badge">Inmuebles</div>
+<div class="badge">
+Inmuebles
+</div>
 
 <h3>
 ¿Qué hace que un piso se perciba realmente premium?
 </h3>
 
 <p>
-No solo importa el diseño. La dilatación, resistencia, sensación térmica y mantenimiento cambian totalmente la experiencia.
+No solo importa el diseño. La dilatación, resistencia, sensación térmica y mantenimiento cambian completamente la experiencia.
 </p>
 
 <ul>
-<li>Algunos porcelanatos resisten mejor humedad y tránsito.</li>
-<li>El parquetón suele ofrecer sensación térmica más elegante.</li>
-<li>La instalación define gran parte de la durabilidad.</li>
+
+<li>
+Algunos porcelanatos resisten mejor humedad y tránsito.
+</li>
+
+<li>
+El parquetón suele ofrecer sensación térmica más elegante.
+</li>
+
+<li>
+La instalación define gran parte de la durabilidad.
+</li>
+
 </ul>
 
 <div class="reference">
@@ -688,6 +863,38 @@ Referencia: buenas prácticas de acabados, habitabilidad y mantenimiento residen
 </div>
 
 </div>
+
+</div>
+
+</div>
+
+<div class="social-box">
+
+<div>
+
+<h3>
+Más análisis y oportunidades en tiempo real.
+</h3>
+
+<p>
+Contenido útil, activos seleccionados y decisiones mejor explicadas desde nuestras plataformas oficiales.
+</p>
+
+</div>
+
+<div class="social-links">
+
+<a class="instagram"
+href="https://www.instagram.com/netinhoxperience/"
+target="_blank">
+Instagram
+</a>
+
+<a class="linkedin"
+href="https://www.linkedin.com/company/netinhoxperience"
+target="_blank">
+LinkedIn
+</a>
 
 </div>
 
@@ -706,41 +913,65 @@ La confianza se construye con método.
 </h2>
 
 <p class="section-subtitle">
-Netinho Xperience aplica una lógica de gestión estructurada para reducir riesgos y mejorar decisiones.
+Cada evaluación debe responder qué es, cuánto vale, qué riesgos tiene y qué conviene hacer antes de invertir.
 </p>
 
 <div class="process-grid">
 
 <div class="process-card">
+
 <span>01</span>
-<h4>Analizar</h4>
+
+<h4>
+Analizar
+</h4>
+
 <p>
 Leemos contexto, mercado, percepción y posibles riesgos del activo.
 </p>
+
 </div>
 
 <div class="process-card">
+
 <span>02</span>
-<h4>Validar</h4>
+
+<h4>
+Validar
+</h4>
+
 <p>
 Checklist, documentación, señales visuales y coherencia comercial.
 </p>
+
 </div>
 
 <div class="process-card">
+
 <span>03</span>
-<h4>Presentar</h4>
+
+<h4>
+Comparar
+</h4>
+
 <p>
-Información clara, premium y estratégicamente estructurada.
+Referencias reales para entender mejor el valor y evitar sobrepagos.
 </p>
+
 </div>
 
 <div class="process-card">
+
 <span>04</span>
-<h4>Conectar</h4>
+
+<h4>
+Decidir
+</h4>
+
 <p>
-Comunicación directa vía WhatsApp Business y seguimiento ordenado.
+Acompañamiento estratégico para tomar decisiones con más tranquilidad.
 </p>
+
 </div>
 
 </div>
@@ -755,10 +986,12 @@ Comunicación directa vía WhatsApp Business y seguimiento ordenado.
 
 <div class="claim-box">
 
-<h3>Libro de Reclamaciones</h3>
+<h3>
+Libro de Reclamaciones
+</h3>
 
 <p>
-Este espacio permite registrar reclamos o quejas vinculadas a la atención brindada por Netinho Xperience. La información será revisada y respondida dentro de los plazos establecidos según normativa peruana.
+Este espacio permite registrar reclamos o quejas vinculadas a la atención brindada por Netinho Xperience. La información será revisada dentro de los plazos establecidos según normativa peruana.
 </p>
 
 <form>
@@ -768,10 +1001,23 @@ Este espacio permite registrar reclamos o quejas vinculadas a la atención brind
 <input type="text" placeholder="Nombre completo">
 
 <select>
-<option>Tipo de documento</option>
-<option>DNI</option>
-<option>CE</option>
-<option>Pasaporte</option>
+
+<option>
+Tipo de documento
+</option>
+
+<option>
+DNI
+</option>
+
+<option>
+Carné de extranjería
+</option>
+
+<option>
+Pasaporte
+</option>
+
 </select>
 
 <input type="text" placeholder="Número de documento">
@@ -781,9 +1027,19 @@ Este espacio permite registrar reclamos o quejas vinculadas a la atención brind
 <input class="full" type="email" placeholder="Correo electrónico">
 
 <select class="full">
-<option>Selecciona tipo</option>
-<option>Reclamo</option>
-<option>Queja</option>
+
+<option>
+Selecciona tipo
+</option>
+
+<option>
+Reclamo
+</option>
+
+<option>
+Queja
+</option>
+
 </select>
 
 <input class="full" type="text" placeholder="Bien o servicio relacionado">
@@ -792,12 +1048,14 @@ Este espacio permite registrar reclamos o quejas vinculadas a la atención brind
 
 </div>
 
-<div style="margin-top:25px;">
+<div style="margin-top:28px;">
 
 <a class="btn-primary"
 href="https://wa.me/51973669004?text=Hola%20Netinho%20Xperience%2C%20quiero%20registrar%20un%20reclamo."
 target="_blank">
+
 Enviar por WhatsApp
+
 </a>
 
 </div>
@@ -810,7 +1068,7 @@ Enviar por WhatsApp
 
 </section>
 
-<footer>
+<footer class="footer">
 
 <div class="container footer-box">
 
@@ -819,25 +1077,49 @@ Enviar por WhatsApp
 </h3>
 
 <p>
-Escríbeme y revisamos el caso con claridad, criterio y enfoque estratégico.
+Escríbenos y revisamos el caso con claridad, criterio y enfoque estratégico.
 </p>
 
 <a class="btn-primary"
 href="https://wa.me/51973669004?text=Hola%20Netinho%20Xperience%2C%20quiero%20más%20información."
 target="_blank">
+
 Contactar por WhatsApp
+
 </a>
 
 <div class="footer-small">
-Netinho Xperience · Gestión estratégica de activos · Lima, Perú<br><br>
-WhatsApp Business: +51 973 669 004<br>
-Correo: netinhoxperience@gmail.com<br><br>
+
+Netinho Xperience · Gestión estratégica de activos · Lima, Perú
+<br><br>
+
+WhatsApp Business: +51 973 669 004
+<br>
+
+Correo: netinhoxperience@gmail.com
+<br><br>
+
+Instagram:
+:contentReference[oaicite:0]{index=0}
+<br>
+
+LinkedIn:
+:contentReference[oaicite:1]{index=1}
+<br><br>
+
 © 2026 Netinho Xperience · Contenido y diseño protegidos.
+
 </div>
 
 </div>
 
 </footer>
+
+<a class="floating"
+href="https://wa.me/51973669004?text=Hola%20Netinho%20Xperience%2C%20quiero%20más%20información."
+target="_blank">
+💬
+</a>
 
 </body>
 </html>
