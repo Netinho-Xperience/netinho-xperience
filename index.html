@@ -83,10 +83,11 @@ gap:14px;
 }
 
 .logo img{
-width:60px;
-height:60px;
-border-radius:14px;
+width:82px;
+height:82px;
+border-radius:18px;
 object-fit:cover;
+display:block;
 }
 
 .logo-text h1{
@@ -501,31 +502,34 @@ margin:auto;
 margin-bottom:34px;
 }
 .footer-social{
-margin-top:28px;
+margin-top:40px;
+margin-bottom:34px;
 display:flex;
 justify-content:center;
-gap:14px;
+gap:18px;
 flex-wrap:wrap;
 }
 
 .footer-social a{
-padding:12px 20px;
+padding:14px 24px;
 border-radius:999px;
-background:rgba(255,255,255,0.08);
+background:rgba(255,255,255,0.06);
 color:#ffffff;
 font-weight:700;
-border:1px solid rgba(255,255,255,0.16);
-transition:0.3s;
+border:1px solid rgba(255,255,255,0.12);
+transition:0.3s ease;
+backdrop-filter:blur(8px);
 }
-
 .footer-social a:hover{
 background:#d4a84f;
 color:#041a33;
+transform:translateY(-2px);
+box-shadow:0 10px 25px rgba(212,168,79,0.28);
 }
 .footer-small{
-margin-top:55px;
-font-size:15px;
-color:#b7c0cc;
+margin-top:24px;
+font-size:14px;
+opacity:0.72;
 line-height:1.8;
 }
 
