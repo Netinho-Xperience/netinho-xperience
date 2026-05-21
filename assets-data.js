@@ -2,60 +2,60 @@ const activosNX = [
   {
     id: "vw-golf-2017",
     tipo: "vehiculo",
-    etiqueta: "Vehículo seleccionado",
+    etiqueta: "Vehículo evaluable",
     titulo: "Volkswagen Golf 2017",
     subtitulo: "Uso particular · 66,500 km · Equipamiento superior",
     precio: "US$ 14,900",
     estado: "Disponible",
-    nivel: "Oportunidad con evaluación recomendada",
+    nivel: "Evaluación recomendada antes de negociar",
     descripcion:
-      "Vehículo con buena presentación, documentación ordenada y potencial de negociación según resultado técnico y estado general.",
+      "Activo vehicular con buena presentación, uso particular y condiciones atractivas para un comprador que busca orden, respaldo y mejor criterio antes de decidir.",
     criterio:
-      "Conviene validar mantenimiento, neumáticos, caja, pintura, interior y coherencia entre kilometraje y desgaste.",
+      "Validar mantenimiento, caja, neumáticos, pintura, desgaste interior, documentación y coherencia entre kilometraje, estado y precio publicado.",
     imagenClase: "img-car",
+    cta: "Solicitar evaluación del vehículo",
     whatsapp:
-      "https://wa.me/51973669004?text=Hola,%20quiero%20información%20sobre%20el%20Volkswagen%20Golf%202017"
+      "https://wa.me/51973669004?text=Hola,%20quiero%20evaluar%20el%20Volkswagen%20Golf%202017%20con%20criterio%20NX"
   },
-
   {
-    id: "inmueble-prime",
+    id: "inmueble-evaluacion",
     tipo: "inmueble",
     etiqueta: "Activo patrimonial",
     titulo: "Inmueble en evaluación",
-    subtitulo: "Ubicación estratégica · Información en revisión",
+    subtitulo: "Ubicación, metraje y condiciones por validar",
     precio: "Consultar",
-    estado: "En evaluación",
-    nivel: "Revisión recomendada",
+    estado: "En revisión",
+    nivel: "Revisión recomendada antes de separar",
     descripcion:
-      "Activo inmobiliario con variables importantes por validar antes de negociar o separar.",
+      "Activo inmobiliario que requiere ordenar información clave antes de publicar, negociar o tomar una decisión de compra o inversión.",
     criterio:
-      "Conviene revisar ubicación, iluminación, ventilación, mantenimiento, ruido, documentación y estado general.",
+      "Revisar ubicación, metraje real, distribución, mantenimiento, acabados, iluminación, ventilación, ruido, documentación y costo total de ocupación.",
     imagenClase: "img-house",
+    cta: "Solicitar evaluación del inmueble",
     whatsapp:
-      "https://wa.me/51973669004?text=Hola,%20quiero%20evaluar%20un%20inmueble"
+      "https://wa.me/51973669004?text=Hola,%20quiero%20evaluar%20un%20inmueble%20con%20criterio%20NX"
   },
-
   {
     id: "decision-nx",
     tipo: "criterio",
-    etiqueta: "Decisión NX",
+    etiqueta: "Criterio NX",
     titulo: "Comparar antes de decidir",
-    subtitulo: "Información clara antes de avanzar",
-    precio: "Criterio estratégico",
+    subtitulo: "Menos improvisación. Más claridad para avanzar.",
+    precio: "Evaluación estratégica",
     estado: "Disponible",
-    nivel: "Prevención de riesgo",
+    nivel: "Prevención de decisiones costosas",
     descripcion:
-      "Evaluamos señales que normalmente se pasan por alto antes de comprar, vender o invertir.",
+      "Antes de comprar, vender o invertir, ordenamos la información relevante para ayudarte a ver riesgos, oportunidades y puntos de negociación.",
     criterio:
-      "El objetivo no es vender rápido. El objetivo es ayudarte a decidir mejor.",
+      "El objetivo no es presionarte a cerrar rápido. El objetivo es darte claridad para avanzar, negociar o descartar con mayor seguridad.",
     imagenClase: "img-decision",
+    cta: "Quiero decidir con criterio NX",
     whatsapp:
-      "https://wa.me/51973669004?text=Hola,%20quiero%20más%20información%20sobre%20Netinho%20Xperience"
+      "https://wa.me/51973669004?text=Hola,%20quiero%20decidir%20mejor%20antes%20de%20comprar,%20vender%20o%20invertir"
   }
 ];
 
 function renderActivosNX() {
-
   const container = document.getElementById("activos-grid");
 
   if (!container) return;
@@ -63,88 +63,41 @@ function renderActivosNX() {
   container.innerHTML = "";
 
   activosNX.forEach((activo) => {
-
     const card = document.createElement("article");
-
-    card.className = "card";
+    card.className = "card nx-asset-card";
 
     card.innerHTML = `
       <div class="card-img ${activo.imagenClase}"></div>
 
       <div class="card-body">
-
         <span class="badge">${activo.etiqueta}</span>
 
         <h3>${activo.titulo}</h3>
 
-        <p style="margin-bottom:10px;opacity:.85;">
-          ${activo.subtitulo}
-        </p>
+        <p class="asset-subtitle">${activo.subtitulo}</p>
 
-        <p>
-          ${activo.descripcion}
-        </p>
+        <p>${activo.descripcion}</p>
 
-        <div style="
-          margin-top:18px;
-          padding:14px;
-          border:1px solid rgba(255,255,255,.08);
-          border-radius:14px;
-          background:rgba(255,255,255,.02);
-          font-size:14px;
-          line-height:1.6;
-          color:#d7e2f0;
-        ">
-          <strong style="color:#e7bf63;">Criterio NX:</strong><br>
-          ${activo.criterio}
+        <div class="nx-evaluation-box">
+          <div class="nx-label">Criterio NX</div>
+          <p>${activo.criterio}</p>
         </div>
 
-        <div style="
-          margin-top:18px;
-          display:flex;
-          justify-content:space-between;
-          align-items:center;
-          gap:12px;
-          flex-wrap:wrap;
-        ">
+        <div class="nx-asset-meta">
+          <div>
+            <span>Estado</span>
+            <strong>${activo.estado}</strong>
+          </div>
 
           <div>
-            <div style="
-              font-size:12px;
-              color:#8ea3bc;
-              margin-bottom:4px;
-            ">
-              Estado
-            </div>
-
-            <div style="
-              font-weight:700;
-              color:#ffffff;
-            ">
-              ${activo.estado}
-            </div>
+            <span>Nivel NX</span>
+            <strong>${activo.nivel}</strong>
           </div>
+        </div>
 
-          <div style="text-align:right;">
-
-            <div style="
-              font-size:12px;
-              color:#8ea3bc;
-              margin-bottom:4px;
-            ">
-              Referencia
-            </div>
-
-            <div style="
-              font-weight:800;
-              color:#e7bf63;
-              font-size:18px;
-            ">
-              ${activo.precio}
-            </div>
-
-          </div>
-
+        <div class="nx-price-row">
+          <span>Referencia</span>
+          <strong>${activo.precio}</strong>
         </div>
 
         <a
@@ -152,18 +105,14 @@ function renderActivosNX() {
           href="${activo.whatsapp}"
           target="_blank"
           rel="noopener"
-          style="margin-top:22px;"
         >
-          Solicitar información
+          ${activo.cta}
         </a>
-
       </div>
     `;
 
     container.appendChild(card);
-
   });
-
 }
 
 document.addEventListener("DOMContentLoaded", renderActivosNX);
