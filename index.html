@@ -1,200 +1,843 @@
-Netinho Xperience
-Netinho Xperience
-Gestión estratégica de activos
-Activos
-Decisiones NX
-Servicios
-Contacto
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Netinho Xperience | Gestión estratégica de activos</title>
+
+<meta name="description" content="Vehículos, inmuebles y decisiones inteligentes. Netinho Xperience te ayuda a evaluar activos con criterio técnico, visión estratégica y acompañamiento directo en Perú."/>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:Arial, Helvetica, sans-serif;
+background:#f5f7fa;
+color:#0b1730;
+line-height:1.6;
+}
+
+.container{
+width:90%;
+max-width:1250px;
+margin:auto;
+}
+
+header{
+position:fixed;
+top:0;
+width:100%;
+z-index:999;
+background:#041a33;
+border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 0;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:14px;
+}
+
+.logo img{
+width:58px;
+height:58px;
+object-fit:contain;
+border-radius:14px;
+}
+
+.logo-text h1{
+font-size:24px;
+color:#fff;
+font-weight:700;
+}
+
+.logo-text p{
+font-size:13px;
+color:#d7dce3;
+}
+
+.nav-links{
+display:flex;
+gap:30px;
+align-items:center;
+}
+
+.nav-links a{
+text-decoration:none;
+color:#fff;
+font-size:15px;
+transition:0.3s;
+}
+
+.nav-links a:hover{
+color:#d4a84f;
+}
+
+.whatsapp-btn{
+background:#d4a84f;
+color:#041a33 !important;
+padding:14px 24px;
+border-radius:999px;
+font-weight:700;
+text-decoration:none;
+}
+
+.hero{
+padding-top:140px;
+padding-bottom:100px;
+background:
+linear-gradient(rgba(2,18,37,0.82), rgba(2,18,37,0.86)),
+url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1600&auto=format&fit=crop');
+background-size:cover;
+background-position:center;
+color:#fff;
+}
+
+.hero-grid{
+display:grid;
+grid-template-columns:1.1fr 0.9fr;
+gap:60px;
+align-items:center;
+}
+
+.hero small{
+color:#d4a84f;
+font-weight:700;
+letter-spacing:2px;
+text-transform:uppercase;
+}
+
+.hero h2{
+font-size:72px;
+line-height:1;
+margin-top:20px;
+margin-bottom:30px;
+}
+
+.hero p{
+font-size:22px;
+max-width:720px;
+color:#e6e9ef;
+}
+
+.hero-buttons{
+margin-top:35px;
+display:flex;
+gap:18px;
+flex-wrap:wrap;
+}
+
+.btn-primary{
+background:#25D366;
+padding:18px 30px;
+border-radius:999px;
+color:#fff;
+text-decoration:none;
+font-weight:700;
+display:inline-block;
+}
+
+.btn-secondary{
+border:1px solid rgba(255,255,255,0.25);
+padding:18px 30px;
+border-radius:999px;
+color:#fff;
+text-decoration:none;
+font-weight:700;
+}
+
+.hero-card{
+background:rgba(0,0,0,0.35);
+border:1px solid rgba(255,255,255,0.08);
+padding:40px;
+border-radius:28px;
+backdrop-filter:blur(10px);
+}
+
+.hero-card h3{
+font-size:28px;
+margin-bottom:20px;
+}
+
+.hero-card ul{
+display:flex;
+flex-direction:column;
+gap:16px;
+}
+
+.hero-card li{
+list-style:none;
+font-size:17px;
+color:#e5e7eb;
+}
+
+.section{
+padding:90px 0;
+}
+
+.section-title{
+font-size:56px;
+line-height:1.1;
+margin-bottom:20px;
+}
+
+.section-subtitle{
+font-size:22px;
+max-width:920px;
+color:#495466;
+margin-bottom:55px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:28px;
+}
+
+.card{
+background:#fff;
+border-radius:28px;
+overflow:hidden;
+box-shadow:0 8px 30px rgba(0,0,0,0.06);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-6px);
+}
+
+.card img{
+width:100%;
+height:250px;
+object-fit:cover;
+}
+
+.card-body{
+padding:30px;
+}
+
+.badge{
+display:inline-block;
+padding:8px 14px;
+border-radius:999px;
+background:#f2ead9;
+color:#9b6c16;
+font-size:13px;
+font-weight:700;
+margin-bottom:18px;
+}
+
+.card h3{
+font-size:34px;
+line-height:1.15;
+margin-bottom:18px;
+}
+
+.card p{
+font-size:18px;
+color:#5c6777;
+margin-bottom:24px;
+}
+
+.card-button{
+display:inline-block;
+background:#d4a84f;
+color:#041a33;
+padding:16px 24px;
+border-radius:999px;
+font-weight:700;
+text-decoration:none;
+}
+
+.tip-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(420px,1fr));
+gap:30px;
+}
+
+.tip-box{
+background:#fff;
+border-radius:28px;
+overflow:hidden;
+box-shadow:0 8px 25px rgba(0,0,0,0.05);
+}
+
+.tip-box img{
+width:100%;
+height:260px;
+object-fit:cover;
+}
+
+.tip-content{
+padding:32px;
+}
+
+.tip-content h3{
+font-size:36px;
+margin-bottom:18px;
+}
+
+.tip-content p{
+font-size:18px;
+color:#596273;
+margin-bottom:20px;
+}
+
+.tip-content ul{
+padding-left:22px;
+display:flex;
+flex-direction:column;
+gap:14px;
+margin-bottom:24px;
+}
+
+.tip-content li{
+font-size:17px;
+color:#374151;
+}
+
+.reference{
+background:#f4f6fa;
+padding:18px;
+border-radius:18px;
+font-size:15px;
+color:#4d5766;
+}
+
+.process-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:24px;
+}
+
+.process-card{
+background:#fff;
+padding:35px;
+border-radius:24px;
+box-shadow:0 5px 20px rgba(0,0,0,0.05);
+}
+
+.process-card span{
+font-size:52px;
+font-weight:700;
+color:#d4a84f;
+}
+
+.process-card h4{
+font-size:28px;
+margin:18px 0;
+}
+
+.process-card p{
+font-size:17px;
+color:#5c6777;
+}
+
+.claim-box{
+background:#fff;
+padding:45px;
+border-radius:28px;
+box-shadow:0 10px 35px rgba(0,0,0,0.05);
+}
+
+.claim-box h3{
+font-size:42px;
+margin-bottom:18px;
+}
+
+.claim-box p{
+font-size:18px;
+color:#5c6777;
+margin-bottom:30px;
+}
+
+.form-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+
+input, select, textarea{
+width:100%;
+padding:18px;
+border-radius:16px;
+border:1px solid #d6dbe3;
+font-size:16px;
+font-family:Arial;
+}
+
+textarea{
+min-height:180px;
+resize:vertical;
+}
+
+.full{
+grid-column:1/-1;
+}
+
+footer{
+background:#021425;
+color:#fff;
+padding:90px 0 50px;
+margin-top:90px;
+}
+
+.footer-box{
+text-align:center;
+}
+
+.footer-box h3{
+font-size:58px;
+line-height:1.1;
+margin-bottom:20px;
+}
+
+.footer-box p{
+font-size:22px;
+color:#d7dce3;
+margin-bottom:35px;
+}
+
+.footer-small{
+margin-top:50px;
+font-size:15px;
+color:#b6bfca;
+}
+
+@media(max-width:980px){
+
+.hero-grid{
+grid-template-columns:1fr;
+}
+
+.hero h2{
+font-size:52px;
+}
+
+.section-title{
+font-size:44px;
+}
+
+.form-grid{
+grid-template-columns:1fr;
+}
+
+.nav-links{
+display:none;
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="container navbar">
+
+<div class="logo">
+<img src="https://i.imgur.com/yJ0Y4pS.png" alt="Netinho Xperience">
+<div class="logo-text">
+<h1>Netinho Xperience</h1>
+<p>Gestión estratégica de activos</p>
+</div>
+</div>
+
+<div class="nav-links">
+<a href="#activos">Activos</a>
+<a href="#tips">Tips inteligentes</a>
+<a href="#proceso">Proceso</a>
+<a href="#reclamos">Libro de reclamaciones</a>
+
+<a class="whatsapp-btn"
+href="https://wa.me/51973669004?text=Hola%20Netinho%20Xperience%2C%20quiero%20más%20información."
+target="_blank">
 WhatsApp
-Lima · Perú · Vehículos · Inmuebles · Activos
-Antes de comprar o vender, decide con criterio.
-Te ayudamos a evaluar activos con información clara, mirada estratégica y acompañamiento directo para reducir riesgos antes de tomar una decisión importante.
+</a>
+</div>
 
-💬 Evaluar un activo
-Ver criterios NX
-Vehículos
-Casas y departamentos
-Criterio técnico
-Acompañamiento estratégico
-Decidir bien también es proteger tu dinero
-Evaluación previa antes de comprar o vender.
-Checklist, comparativas y lectura del mercado peruano.
-Contacto directo por WhatsApp Business.
-Gestión con orden, claridad y criterio.
-Qué hacemos
-No solo mostramos activos. Ayudamos a interpretarlos.
-Netinho Xperience combina criterio comercial, lectura de mercado y enfoque de gestión para acompañarte antes de una compra, venta o evaluación patrimonial.
+</div>
+</header>
 
-🚗
-Vehículos
-Evaluamos estado, precio, desgaste, mantenimiento y señales que pueden afectar valor futuro.
+<section class="hero">
 
-🏡
-Inmuebles
-Revisamos criterios de habitabilidad, materiales, entorno, documentación y percepción de valor.
+<div class="container hero-grid">
 
-📊
-Gestión estratégica
-Ordenamos la información para que puedas decidir con más calma, claridad y respaldo.
+<div>
 
-Activos destacados
+<small>LIMA · PERÚ · VEHÍCULOS · INMUEBLES · DECISIONES INTELIGENTES</small>
+
+<h2>
+Activos,<br>
+criterio y<br>
+decisiones mejor tomadas.
+</h2>
+
+<p>
+Netinho Xperience combina análisis técnico, mirada estratégica y contenido útil para ayudarte a evaluar vehículos, inmuebles y activos con mayor claridad antes de invertir.
+</p>
+
+<div class="hero-buttons">
+
+<a class="btn-primary"
+href="https://wa.me/51973669004?text=Hola%20Netinho%20Xperience%2C%20quiero%20evaluar%20un%20activo."
+target="_blank">
+Escríbeme por WhatsApp
+</a>
+
+<a class="btn-secondary" href="#tips">
+Ver contenido
+</a>
+
+</div>
+
+</div>
+
+<div class="hero-card">
+
+<h3>¿Qué hace diferente a Netinho Xperience?</h3>
+
+<ul>
+<li>✔ Evaluación estratégica antes de decidir.</li>
+<li>✔ Información clara y verificable.</li>
+<li>✔ Enfoque técnico y comercial.</li>
+<li>✔ Neurociencias aplicadas a presentación de activos.</li>
+<li>✔ Visión estructurada tipo Project Manager.</li>
+<li>✔ Lenguaje claro, sin humo ni improvisación.</li>
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section" id="activos">
+
+<div class="container">
+
+<h2 class="section-title">
 Activos seleccionados para evaluar.
-Una vitrina flexible para presentar activos disponibles o en evaluación: vehículos, inmuebles, terrenos, embarcaciones u otras oportunidades.
+</h2>
 
-Activo 1
-Oportunidad seleccionada
-Vehículo disponible con información validada, presentación estratégica y contacto directo.
+<p class="section-subtitle">
+Una vitrina estratégica para vehículos, inmuebles y oportunidades presentadas con criterio comercial, claridad y percepción premium.
+</p>
 
-Disponible para evaluación
-Vehículo
-Surco
-Evaluación NX
+<div class="cards">
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?q=80&w=1200&auto=format&fit=crop">
+
+<div class="card-body">
+
+<div class="badge">Vehículo evaluado</div>
+
+<h3>Activo 1</h3>
+
+<p>
+Vehículo disponible con presentación estratégica, validación visual y acompañamiento directo.
+</p>
+
+<a class="card-button"
+href="https://wa.me/51973669004?text=Hola%20Netinho%20Xperience%2C%20quiero%20información%20del%20Activo%201."
+target="_blank">
 Solicitar información
-Activo 2
-Activo patrimonial
-Activo inmobiliario o patrimonial presentado con información clara y validada.
+</a>
 
-Disponible para evaluación
-Inmueble
-Datos clave
-Contacto directo
+</div>
+</div>
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=1200&auto=format&fit=crop">
+
+<div class="card-body">
+
+<div class="badge">Inmueble estratégico</div>
+
+<h3>Activo 2</h3>
+
+<p>
+Propiedad presentada con enfoque técnico, percepción de valor y lectura comercial.
+</p>
+
+<a class="card-button"
+href="https://wa.me/51973669004?text=Hola%20Netinho%20Xperience%2C%20quiero%20información%20del%20Activo%202."
+target="_blank">
 Ver detalles
-Activo 3
-Activo especial
-Activo especial o contenido estratégico seleccionado según disponibilidad y evaluación.
+</a>
 
-Disponible para análisis
-Especial
-Curaduría
-Criterio NX
+</div>
+</div>
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200&auto=format&fit=crop">
+
+<div class="card-body">
+
+<div class="badge">Contenido recomendado</div>
+
+<h3>Activo 3</h3>
+
+<p>
+Activo o contenido estratégico seleccionado según disponibilidad y evaluación.
+</p>
+
+<a class="card-button"
+href="https://wa.me/51973669004?text=Hola%20Netinho%20Xperience%2C%20quiero%20más%20información."
+target="_blank">
 Consultar activo
-Decisiones Inteligentes NX
-Detalles que cambian una compra.
-Criterios, señales y comparativas que ayudan a reducir errores antes de comprar, vender o invertir en un activo.
+</a>
 
-Vehículos
-Criterio técnico
+</div>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section" id="tips">
+
+<div class="container">
+
+<h2 class="section-title">
+Tips inteligentes que cambian decisiones.
+</h2>
+
+<p class="section-subtitle">
+Contenido diseñado para generar confianza, criterio y percepción de valor antes de comprar un vehículo o inmueble.
+</p>
+
+<div class="tip-grid">
+
+<div class="tip-box">
+
+<img src="https://images.unsplash.com/photo-1489824904134-891ab64532f1?q=80&w=1200&auto=format&fit=crop">
+
+<div class="tip-content">
+
+<div class="badge">Vehículos</div>
+
+<h3>
 ¿Por qué algunas llantas frenan mejor aunque parezcan iguales?
-El compuesto, la disipación térmica y la deformación estructural influyen más de lo que parece en frenado y estabilidad.
+</h3>
 
-Referencia: buenas prácticas de seguridad vial y pruebas de desempeño de neumáticos.
-Ver criterio NX
-Compra inteligente
-DSG: cuándo realmente vale la pena
-El tipo de manejo, el tráfico urbano y el mantenimiento afectan directamente la experiencia y durabilidad de la caja.
+<p>
+El compuesto, la disipación térmica y la deformación estructural influyen directamente en frenado, estabilidad y confort.
+</p>
 
-Referencia: mantenimiento preventivo, uso urbano y comportamiento de transmisiones automáticas.
-Ver análisis
-Uso en Lima
-¿Híbrido para Lima realmente conviene?
-Dependiendo del tráfico, recorridos y mantenimiento, un híbrido puede ahorrar más… o no marcar tanta diferencia.
+<ul>
+<li>Las llantas premium suelen mantener mejor adherencia en lluvia.</li>
+<li>Una mala composición puede aumentar distancia de frenado.</li>
+<li>El desgaste irregular afecta seguridad y percepción del manejo.</li>
+</ul>
 
-Referencia: patrones de conducción urbana, consumo y costo total de propiedad.
-Ver evaluación
-Inmuebles
-Acabados
-¿Por qué algunos porcelanatos se levantan?
-Muchas fallas vienen de instalación, dilatación y adhesivos incorrectos, no necesariamente del material.
+<div class="reference">
+Referencia: pruebas comparativas de seguridad vial, mantenimiento preventivo y comportamiento dinámico de neumáticos.
+</div>
 
-Referencia: buenas prácticas de instalación, dilatación, nivelación y adhesivos.
-Ver criterio técnico
-Pisos
-Vinílico vs parquetón: qué conviene según uso
-El vinílico resiste mejor humedad y mantenimiento diario. El parquetón suele transmitir mayor sensación térmica y premium.
+</div>
 
-Referencia: durabilidad, mantenimiento residencial, humedad y percepción de valor.
-Comparar opciones
-Checklist
-Lo que un comprador inteligente revisa antes de firmar
-Presión de agua, orientación solar, ventilación y ruido exterior pueden impactar más que los acabados visibles.
+</div>
 
-Referencia: habitabilidad, experiencia diaria y factores de decisión inmobiliaria.
-Ver checklist
-Servicios NX
-Validamos el activo antes que tomes una decisión importante.
-Comprar un activo sin revisar detalles puede costarte mucho más de lo que imaginas. Evaluamos con checklist, referencias de mercado y criterio práctico.
+<div class="tip-box">
 
-🔎
-Evaluación remota
-Revisión estructurada del activo con comparación de mercado y detección de riesgos antes de decidir.
+<img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop">
 
-Desde S/ 80
+<div class="tip-content">
 
-🧭
-Acompañamiento de compra
-Evaluación previa, orientación para negociar y soporte para tomar una decisión más segura.
+<div class="badge">Inmuebles</div>
 
-Desde S/ 150
+<h3>
+¿Qué hace que un piso se perciba realmente premium?
+</h3>
 
-📍
-Evaluación presencial
-Visita al activo, aplicación de checklist y observaciones directas para validar estado real.
+<p>
+No solo importa el diseño. La dilatación, resistencia, sensación térmica y mantenimiento cambian totalmente la experiencia.
+</p>
 
-Desde S/ 250 + movilidad
+<ul>
+<li>Algunos porcelanatos resisten mejor humedad y tránsito.</li>
+<li>El parquetón suele ofrecer sensación térmica más elegante.</li>
+<li>La instalación define gran parte de la durabilidad.</li>
+</ul>
 
-Solicitar evaluación ahora por WhatsApp
-Respuesta directa y evaluación con criterio. Sin compromiso inicial.
+<div class="reference">
+Referencia: buenas prácticas de acabados, habitabilidad y mantenimiento residencial.
+</div>
 
-Proceso
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section" id="proceso">
+
+<div class="container">
+
+<h2 class="section-title">
 La confianza se construye con método.
-Cada evaluación debe responder: qué es, cuánto vale, qué riesgos tiene y qué conviene hacer.
+</h2>
 
-01
-Recibimos información
-Fotos, videos, enlaces, ficha técnica, ubicación o datos disponibles.
+<p class="section-subtitle">
+Netinho Xperience aplica una lógica de gestión estructurada para reducir riesgos y mejorar decisiones.
+</p>
 
-02
-Aplicamos checklist
-Ordenamos señales visibles, riesgos y puntos que deben validarse.
+<div class="process-grid">
 
-03
-Comparamos mercado
-Revisamos referencias, rangos, contexto y coherencia del valor.
+<div class="process-card">
+<span>01</span>
+<h4>Analizar</h4>
+<p>
+Leemos contexto, mercado, percepción y posibles riesgos del activo.
+</p>
+</div>
 
-04
-Recomendamos acción
-Comprar, negociar, revisar más o descartar según el caso.
+<div class="process-card">
+<span>02</span>
+<h4>Validar</h4>
+<p>
+Checklist, documentación, señales visuales y coherencia comercial.
+</p>
+</div>
 
-Confianza y transparencia
-Información clara para decisiones responsables.
-Netinho Xperience es un espacio enfocado en brindar información clara, verificable y contacto directo para la gestión de activos.
+<div class="process-card">
+<span>03</span>
+<h4>Presentar</h4>
+<p>
+Información clara, premium y estratégicamente estructurada.
+</p>
+</div>
 
-✔ Información clara
-Contenido validado antes de ser publicado, evitando información engañosa o incompleta.
+<div class="process-card">
+<span>04</span>
+<h4>Conectar</h4>
+<p>
+Comunicación directa vía WhatsApp Business y seguimiento ordenado.
+</p>
+</div>
 
-✔ Atención directa
-Comunicación directa vía WhatsApp Business, sin intermediarios innecesarios.
+</div>
 
-✔ Decisiones informadas
-Enfoque en ayudarte a tomar decisiones con criterio comercial y claridad.
+</div>
 
-Libro de Reclamaciones
-Este espacio permite registrar una queja o reclamo relacionado con la atención, información o servicio brindado por Netinho Xperience. Completa los datos solicitados y describe el caso de forma clara. El detalle tiene un máximo de 1000 caracteres.
+</section>
 
-Nombre completo
+<section class="section" id="reclamos">
 
-Selecciona tipo de documento
-Número de documento
-Teléfono
-Correo electrónico
+<div class="container">
 
-Selecciona tipo
-Reclamo: disconformidad relacionada con productos o servicios.
-Queja: disconformidad no relacionada directamente con productos o servicios.
-La respuesta será brindada en un plazo máximo de 15 días hábiles.
-Bien o servicio relacionado
-Describe tu queja o reclamo de forma clara (máx. 1000 caracteres).
-0 / 1000 caracteres
-Declaro que la información proporcionada es verídica y acepto los términos del libro de reclamaciones.
-Enviar reclamo por WhatsApp
-Contacto directo
+<div class="claim-box">
+
+<h3>Libro de Reclamaciones</h3>
+
+<p>
+Este espacio permite registrar reclamos o quejas vinculadas a la atención brindada por Netinho Xperience. La información será revisada y respondida dentro de los plazos establecidos según normativa peruana.
+</p>
+
+<form>
+
+<div class="form-grid">
+
+<input type="text" placeholder="Nombre completo">
+
+<select>
+<option>Tipo de documento</option>
+<option>DNI</option>
+<option>CE</option>
+<option>Pasaporte</option>
+</select>
+
+<input type="text" placeholder="Número de documento">
+
+<input type="text" placeholder="Teléfono">
+
+<input class="full" type="email" placeholder="Correo electrónico">
+
+<select class="full">
+<option>Selecciona tipo</option>
+<option>Reclamo</option>
+<option>Queja</option>
+</select>
+
+<input class="full" type="text" placeholder="Bien o servicio relacionado">
+
+<textarea class="full" placeholder="Describe el caso con claridad."></textarea>
+
+</div>
+
+<div style="margin-top:25px;">
+
+<a class="btn-primary"
+href="https://wa.me/51973669004?text=Hola%20Netinho%20Xperience%2C%20quiero%20registrar%20un%20reclamo."
+target="_blank">
+Enviar por WhatsApp
+</a>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<div class="container footer-box">
+
+<h3>
 ¿Quieres comprar, vender o evaluar un activo?
-Escríbenos y revisamos tu caso con claridad, criterio y próximos pasos concretos.
+</h3>
 
-💬 Contactar por WhatsApp
-Enviar correo
-☘
-Netinho Xperience · Gestión estratégica de activos · Lima, Perú
-WhatsApp Business: +51 973 669 004
-Correo: netinhoxperience@gmail.com
+<p>
+Escríbeme y revisamos el caso con claridad, criterio y enfoque estratégico.
+</p>
+
+<a class="btn-primary"
+href="https://wa.me/51973669004?text=Hola%20Netinho%20Xperience%2C%20quiero%20más%20información."
+target="_blank">
+Contactar por WhatsApp
+</a>
+
+<div class="footer-small">
+Netinho Xperience · Gestión estratégica de activos · Lima, Perú<br><br>
+WhatsApp Business: +51 973 669 004<br>
+Correo: netinhoxperience@gmail.com<br><br>
 © 2026 Netinho Xperience · Contenido y diseño protegidos.
+</div>
+
+</div>
+
+</footer>
+
+</body>
+</html>
