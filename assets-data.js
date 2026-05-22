@@ -19,7 +19,7 @@ const activosNX = [
   "Potencial de reventa"
 ],
     imagenClase: "img-golf-frontal",
-    imagen: "NX-golf-frontal.png",
+    imagen: "./NX-golf-frontal.png",
     cta: "Solicitar evaluación del vehículo",
     whatsapp:
       "https://wa.me/51973669004?text=Hola,%20quiero%20evaluar%20el%20Volkswagen%20Golf%202017%20con%20criterio%20NX"
