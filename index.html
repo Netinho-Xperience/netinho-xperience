@@ -344,7 +344,12 @@
       background-image:linear-gradient(rgba(6,24,44,.08),rgba(6,24,44,.12)),url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1200&auto=format&fit=crop');
     }
 
-    .card-body{padding:30px}
+    .card-body{
+    display:flex;
+    flex-direction:column;
+    flex:1;
+    padding:30px 26px;
+}
 
     .badge{
       display:inline-flex;
@@ -405,6 +410,8 @@
   border:1px solid rgba(201,146,46,.18);
 }
 .nx-price-row{
+    margin-top:auto;
+}
   display:flex;
   justify-content:space-between;
   align-items:center;
