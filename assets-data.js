@@ -109,15 +109,19 @@ function renderActivosNX() {
 </div>
 -->
 
-       <div class="nx-asset-meta">
-  <div class="nx-meta-pill">
-    ${activo.estado}
-  </div>
+       <!--
+<div class="nx-asset-meta">
 
-  <div class="nx-meta-pill">
-    ${activo.nivel}
-  </div>
+<div class="nx-meta-pill">
+${activo.estado}
 </div>
+
+<div class="nx-meta-pill">
+${activo.nivel}
+</div>
+
+</div>
+-->
 
         <div class="nx-price-row">
   <div>
