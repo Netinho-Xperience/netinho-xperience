@@ -5,7 +5,7 @@ const activosNX = [
     etiqueta: "Vehículo evaluable",
     titulo: "Volkswagen Golf 2017",
     subtitulo: "Uso particular · 66,500 km · Equipamiento superior",
-    precio: "US$ 14,900",
+    precio: "US$ 14,500",
     estado: "Disponible",
     nivel: "Evaluación recomendada antes de negociar",
     descripcion:
@@ -18,7 +18,7 @@ const activosNX = [
   "Evaluación recomendada",
   "Potencial de reventa"
 ],
-    imagenClase: "img-car",
+    imagenClase: "img-golf-frontal",
     imagen: "NX-golf-frontal.png",
     cta: "Solicitar evaluación del vehículo",
     whatsapp:
