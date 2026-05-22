@@ -99,13 +99,15 @@ function renderActivosNX() {
 <div class="nx-indicators">
   ${activo.indicadores.map(item => `<span>✓ ${item}</span>`).join("")}
 </div>
-        <div class="nx-evaluation-box">
-  <div class="nx-label">CRITERIO NX</div>
+<!--
+<div class="nx-evaluation-box">
+    <div class="nx-label">CRITERIO NX</div>
 
-  <div class="nx-evaluation-box p">
-    ${activo.criterio}
-  </div>
+    <div class="nx-evaluation-box p">
+        ${activo.criterio}
+    </div>
 </div>
+-->
 
        <div class="nx-asset-meta">
   <div class="nx-meta-pill">
