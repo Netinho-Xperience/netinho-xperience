@@ -9,7 +9,7 @@ const activosNX = [
     estado: "Disponible",
     nivel: "Evaluación recomendada antes de negociar",
     descripcion:
-      "Activo vehicular con buena presentación, uso particular y condiciones atractivas para un comprador que busca orden, respaldo y mejor criterio antes de decidir.",
+      "Hatchback europeo bien conservado, uso particular y equipamiento superior.",
     criterio:
       "Validar mantenimiento, caja, neumáticos, pintura, desgaste interior, documentación y coherencia entre kilometraje, estado y precio publicado.",
     indicadores:[
