@@ -875,29 +875,44 @@
                 <small class="error">Selecciona reclamo o queja.</small>
               </div>
 
-              <div class="field">
-                <label for="goodType">Bien contratado</label>
-                <select id="goodType" required>
-                  <option value="">Seleccionar</option>
-                  <option value="Producto">Producto</option>
-                  <option value="Servicio">Servicio</option>
-                </select>
-                <small class="error">Selecciona producto o servicio.</small>
-              </div>
-
               <div class="field full">
-                <label for="detail">Detalle del reclamo o queja</label>
-                <textarea id="detail" maxlength="900" required></textarea>
-                <div class="counter"><span id="detailCount">0</span>/900</div>
-                <small class="error">Describe el detalle del caso.</small>
-              </div>
 
-              <div class="field full">
-                <label for="request">Pedido concreto del consumidor</label>
-                <textarea id="request" maxlength="600" required></textarea>
-                <div class="counter"><span id="requestCount">0</span>/600</div>
-                <small class="error">Indica el pedido concreto.</small>
-              </div>
+  <label for="detail">
+    Detalle del reclamo o queja
+  </label>
+
+  <div class="hint" style="margin-bottom:10px;">
+
+    <strong>Reclamo:</strong>
+    disconformidad relacionada al servicio recibido.
+
+    <br><br>
+
+    <strong>Queja:</strong>
+    malestar o descontento respecto a la atención brindada.
+
+    <br><br>
+
+    Tu caso será evaluado y respondido dentro del plazo legal correspondiente.
+
+  </div>
+
+  <textarea
+    id="detail"
+    maxlength="1000"
+    required
+    placeholder="Describe lo ocurrido con el mayor detalle posible."
+  ></textarea>
+
+  <div class="counter">
+    <span id="detailCount">0</span>/1000
+  </div>
+
+  <small class="error">
+    Describe el detalle del caso.
+  </small>
+
+</div>
             </div>
 
             <div class="legal-box">
@@ -963,9 +978,7 @@
     const docType = document.getElementById("docType");
     const docNumber = document.getElementById("docNumber");
     const detail = document.getElementById("detail");
-    const request = document.getElementById("request");
     const detailCount = document.getElementById("detailCount");
-    const requestCount = document.getElementById("requestCount");
     const formStatus = document.getElementById("formStatus");
 
     const criticalFields = ["docNumber", "email", "phone"];
@@ -978,13 +991,22 @@
     });
 
     detail.addEventListener("input", () => {
-      detailCount.textContent = detail.value.length;
-    });
+  detailCount.textContent = detail.value.length;
+});
 
-    request.addEventListener("input", () => {
-      requestCount.textContent = request.value.length;
-    });
+detail.addEventListener("paste", (e) => {
+  e.preventDefault();
+  formStatus.textContent = "Por seguridad, este campo debe ser escrito manualmente.";
+});
 
+detail.addEventListener("copy", (e) => {
+  e.preventDefault();
+});
+
+detail.addEventListener("cut", (e) => {
+  e.preventDefault();
+});
+    
     docType.addEventListener("change", () => {
       docNumber.value = "";
       docNumber.focus();
@@ -1044,7 +1066,6 @@
         phone: document.getElementById("phone"),
         address: document.getElementById("address"),
         claimType: document.getElementById("claimType"),
-        goodType: document.getElementById("goodType"),
         acceptance: document.getElementById("acceptance")
       };
 
@@ -1080,22 +1101,12 @@
         valid = false;
       } else showError(fields.claimType, false);
 
-      if (!fields.goodType.value) {
-        showError(fields.goodType, true);
-        valid = false;
-      } else showError(fields.goodType, false);
-
       if (detail.value.trim().length < 15) {
         showError(detail, true);
         valid = false;
       } else showError(detail, false);
 
-      if (request.value.trim().length < 10) {
-        showError(request, true);
-        valid = false;
-      } else showError(request, false);
-
-      if (!fields.acceptance.checked) {
+       if (!fields.acceptance.checked) {
         formStatus.textContent = "Debes aceptar la declaración para enviar el registro.";
         valid = false;
       }
@@ -1124,13 +1135,9 @@ Dirección: ${fields.address.value.trim()}
 
 *Información del caso*
 Tipo: ${fields.claimType.value}
-Bien contratado: ${fields.goodType.value}
 
 *Detalle*
 ${detail.value.trim()}
-
-*Pedido concreto del consumidor*
-${request.value.trim()}
 
 Declaración aceptada: Sí
       `.trim();
@@ -1139,7 +1146,6 @@ Declaración aceptada: Sí
       window.open(whatsappUrl, "_blank", "noopener");
       form.reset();
 detailCount.textContent = "0";
-requestCount.textContent = "0";
 formStatus.textContent = "Registro enviado correctamente.";
     });
   </script>
