@@ -1,1 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <title>Libro de Reclamaciones | Netinho Xperience</title>
+  <meta name="description" content="Libro de Reclamaciones de Netinho Xperience. Registra tu reclamo o queja sobre nuestros servicios." />
+
+  <style>
+    :root{
+      --navy:#06182c;
+      --navy-2:#0b223c;
+      --gold:#c9a24d;
+      --white:#f7f4ed;
+      --muted:#b8c0cc;
+      --dark:#030b14;
+      --card:rgba(255,255,255,.06);
+      --border:rgba(255,255,255,.14);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+
+    body{
+      font-family:Inter,Segoe UI,Arial,sans-serif;
+      background:linear-gradient(180deg,var(--dark),var(--navy));
+      color:var(--white);
+      line-height:1.6;
+      min-height:100vh;
+    }
+
+    a{text-decoration:none;color:inherit}
+
+    .navbar{
+      border-bottom:1px solid var(--border);
+      background:rgba(3,11,20,.85);
+      backdrop-filter:blur(14px);
+    }
+
+    .nav-inner{
+      max-width:1080px;
+      margin:auto;
+      padding:18px 24px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:700;
+    }
+
+    .brand img{
+      width:40px;
+      height:40px;
+      object-fit:contain;
+    }
+
+    .back{
+      color:var(--muted);
+      font-size:.95rem;
+    }
+
+    .back:hover{color:var(--gold)}
+
+    main{
+      max-width:1080px;
+      margin:auto;
+      padding:80px 24px;
+    }
+
+    .eyebrow{
+      color:var(--gold);
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      font-size:.75rem;
+      margin-bottom:18px;
+    }
+
+    h1{
+      font-size:clamp(2.4rem,5vw,4.8rem);
+      line-height:1;
+      letter-spacing:-.055em;
+      max-width:760px;
+      margin-bottom:22px;
+    }
+
+    .intro{
+      color:var(--muted);
+      max-width:780px;
+      font-size:1.05rem;
+      margin-bottom:42px;
+    }
+
+    .notice{
+      background:rgba(201,162,77,.10);
+      border:1px solid rgba(201,162,77,.30);
+      border-radius:22px;
+      padding:24px;
+      margin-bottom:32px;
+      color:var(--white);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:24px;
+      align-items:start;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:26px;
+      padding:30px;
+    }
+
+    .card h2{
+      font-size:1.45rem;
+      margin-bottom:14px;
+    }
+
+    .card p,
+    .card li{
+      color:var(--muted);
+      font-size:.96rem;
+    }
+
+    ul{
+      padding-left:20px;
+      margin-top:12px;
+    }
+
+    .form{
+      display:grid;
+      gap:14px;
+      margin-top:18px;
+    }
+
+    label{
+      font-size:.9rem;
+      color:var(--white);
+      font-weight:600;
+    }
+
+    input,
+    select,
+    textarea{
+      width:100%;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.06);
+      color:var(--white);
+      border-radius:14px;
+      padding:13px 14px;
+      font:inherit;
+      outline:none;
+    }
+
+    option{
+      color:#111;
+    }
+
+    textarea{
+      min-height:130px;
+      resize:vertical;
+    }
+
+    .btn{
+      display:inline-block;
+      text-align:center;
+      padding:15px 22px;
+      border-radius:999px;
+      font-weight:700;
+      background:var(--gold);
+      color:#101010;
+      border:none;
+      cursor:pointer;
+      transition:.25s ease;
+    }
+
+    .btn:hover{
+      transform:translateY(-2px);
+    }
+
+    .secondary{
+      background:transparent;
+      color:var(--white);
+      border:1px solid var(--border);
+    }
+
+    .actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:8px;
+    }
+
+    .small{
+      font-size:.85rem;
+      color:var(--muted);
+      margin-top:14px;
+    }
+
+    footer{
+      max-width:1080px;
+      margin:auto;
+      padding:36px 24px;
+      border-top:1px solid var(--border);
+      color:var(--muted);
+      display:flex;
+      justify-content:space-between;
+      gap:24px;
+      flex-wrap:wrap;
+      font-size:.9rem;
+    }
+
+    @media(max-width:850px){
+      .grid{grid-template-columns:1fr}
+      main{padding:58px 22px}
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="navbar">
+    <div class="nav-inner">
+      <a class="brand" href="index.html">
+        <img src="nx-isotipo.png" alt="Netinho Xperience">
+        <span>Netinho Xperience</span>
+      </a>
+
+      <a class="back" href="index.html">Volver a la web</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="eyebrow">Atención al consumidor</div>
+
+    <h1>Libro de Reclamaciones</h1>
+
+    <p class="intro">
+      Este espacio permite registrar una queja o reclamo relacionado con los servicios brindados por Netinho Xperience.
+      La información será revisada para brindar una respuesta dentro del plazo correspondiente.
+    </p>
+
+    <div class="notice">
+      <strong>Importante:</strong> este canal no limita el derecho del consumidor a acudir a Indecopi u otras autoridades competentes. Indecopi cuenta con canales de orientación y reclamo para consumidores en el Perú.
+    </div>
+
+    <div class="grid">
+      <section class="card">
+        <h2>Registrar queja o reclamo</h2>
+
+        <p>
+          Completa la información y usa el botón para enviarla por WhatsApp Business. Este formulario no almacena información en la web; prepara el mensaje para remitirlo directamente a Netinho Xperience.
+        </p>
+
+        <form class="form" onsubmit="enviarReclamo(event)">
+          <div>
+            <label>Tipo de solicitud</label>
+            <select id="tipo" required>
+              <option value="">Selecciona una opción</option>
+              <option value="Queja">Queja</option>
+              <option value="Reclamo">Reclamo</option>
+            </select>
+          </div>
+
+          <div>
+            <label>Nombre completo</label>
+            <input id="nombre" type="text" required placeholder="Nombre y apellidos" />
+          </div>
+
+          <div>
+            <label>DNI / CE</label>
+            <input id="documento" type="text" required placeholder="Documento de identidad" />
+          </div>
+
+          <div>
+            <label>Correo electrónico</label>
+            <input id="correo" type="email" required placeholder="correo@ejemplo.com" />
+          </div>
+
+          <div>
+            <label>Teléfono</label>
+            <input id="telefono" type="text" required placeholder="+51..." />
+          </div>
+
+          <div>
+            <label>Servicio relacionado</label>
+            <select id="servicio" required>
+              <option value="">Selecciona una opción</option>
+              <option value="Evaluación estratégica de vehículos">Evaluación estratégica de vehículos</option>
+              <option value="Evaluación estratégica de inmuebles">Evaluación estratégica de inmuebles</option>
+              <option value="Segunda opinión patrimonial">Segunda opinión patrimonial</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
+
+          <div>
+            <label>Detalle de la queja o reclamo</label>
+            <textarea id="detalle" required placeholder="Describe claramente lo ocurrido."></textarea>
+          </div>
+
+          <div>
+            <label>Pedido del consumidor</label>
+            <textarea id="pedido" required placeholder="Indica qué solución solicitas."></textarea>
+          </div>
+
+          <div class="actions">
+            <button class="btn" type="submit">Enviar por WhatsApp</button>
+            <a class="btn secondary" href="mailto:netinhoxperience@gmail.com?subject=Libro%20de%20Reclamaciones%20-%20Netinho%20Xperience">Enviar por correo</a>
+          </div>
+
+          <p class="small">
+            Al enviar la información, declaras que los datos proporcionados son correctos y autorizas su uso para atender la solicitud.
+          </p>
+        </form>
+      </section>
+
+      <aside class="card">
+        <h2>Datos de contacto</h2>
+
+        <p><strong>Razón comercial:</strong><br>Netinho Xperience</p>
+        <br>
+        <p><strong>Correo:</strong><br>netinhoxperience@gmail.com</p>
+        <br>
+        <p><strong>WhatsApp Business:</strong><br>+51 973 669 004</p>
+        <br>
+        <p><strong>Ubicación referencial:</strong><br>Santiago de Surco, Lima, Perú</p>
+
+        <ul>
+          <li>Queja: disconformidad no relacionada directamente con el servicio contratado.</li>
+          <li>Reclamo: disconformidad relacionada con el servicio brindado.</li>
+          <li>La atención será realizada por los canales declarados por Netinho Xperience.</li>
+        </ul>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    <div>
+      <strong>Netinho Xperience</strong><br>
+      Gestión estratégica de activos · Lima, Perú
+    </div>
+
+    <div>
+      netinhoxperience@gmail.com<br>
+      +51 973 669 004
+    </div>
+  </footer>
+
+  <script>
+    function enviarReclamo(event){
+      event.preventDefault();
+
+      const tipo = document.getElementById("tipo").value;
+      const nombre = document.getElementById("nombre").value;
+      const documento = document.getElementById("documento").value;
+      const correo = document.getElementById("correo").value;
+      const telefono = document.getElementById("telefono").value;
+      const servicio = document.getElementById("servicio").value;
+      const detalle = document.getElementById("detalle").value;
+      const pedido = document.getElementById("pedido").value;
+
+      const mensaje =
+`LIBRO DE RECLAMACIONES - NETINHO XPERIENCE
+
+Tipo de solicitud: ${tipo}
+
+DATOS DEL CONSUMIDOR
+Nombre: ${nombre}
+Documento: ${documento}
+Correo: ${correo}
+Teléfono: ${telefono}
+
+SERVICIO RELACIONADO
+${servicio}
+
+DETALLE
+${detalle}
+
+PEDIDO DEL CONSUMIDOR
+${pedido}
+
+Declaro que la información proporcionada es correcta.`;
+
+      const url = "https://wa.me/51973669004?text=" + encodeURIComponent(mensaje);
+      window.open(url, "_blank");
+    }
+  </script>
+
+</body>
+</html>
