@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Libro de Reclamaciones | Netinho Xperience</title>
-  <meta name="description" content="Libro de Reclamaciones de Netinho Xperience. Registra tu reclamo o queja sobre nuestros servicios." />
+  <meta name="description" content="Libro de Reclamaciones de Netinho Xperience. Registra tu queja o reclamo sobre nuestros servicios." />
 
   <style>
     :root{
@@ -17,6 +17,8 @@
       --dark:#030b14;
       --card:rgba(255,255,255,.06);
       --border:rgba(255,255,255,.14);
+      --danger:#ff6b6b;
+      --ok:#75d99c;
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
@@ -136,7 +138,7 @@
 
     .form{
       display:grid;
-      gap:14px;
+      gap:15px;
       margin-top:18px;
     }
 
@@ -144,6 +146,8 @@
       font-size:.9rem;
       color:var(--white);
       font-weight:600;
+      display:block;
+      margin-bottom:6px;
     }
 
     input,
@@ -159,6 +163,12 @@
       outline:none;
     }
 
+    input:focus,
+    select:focus,
+    textarea:focus{
+      border-color:rgba(201,162,77,.65);
+    }
+
     option{
       color:#111;
     }
@@ -166,6 +176,43 @@
     textarea{
       min-height:130px;
       resize:vertical;
+    }
+
+    .counter{
+      display:flex;
+      justify-content:space-between;
+      color:var(--muted);
+      font-size:.82rem;
+      margin-top:5px;
+    }
+
+    .error{
+      color:var(--danger);
+      font-size:.82rem;
+      display:none;
+      margin-top:5px;
+    }
+
+    .hint{
+      color:var(--muted);
+      font-size:.82rem;
+      margin-top:5px;
+    }
+
+    .checkbox-row{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      color:var(--muted);
+      font-size:.9rem;
+      line-height:1.45;
+      margin-top:4px;
+    }
+
+    .checkbox-row input{
+      width:auto;
+      margin-top:4px;
+      accent-color:var(--gold);
     }
 
     .btn{
@@ -202,6 +249,13 @@
       font-size:.85rem;
       color:var(--muted);
       margin-top:14px;
+    }
+
+    .status{
+      display:none;
+      margin-top:12px;
+      color:var(--ok);
+      font-size:.9rem;
     }
 
     footer{
@@ -244,11 +298,11 @@
 
     <p class="intro">
       Este espacio permite registrar una queja o reclamo relacionado con los servicios brindados por Netinho Xperience.
-      La información será revisada para brindar una respuesta dentro del plazo correspondiente.
+      Todos los campos son obligatorios. Por seguridad y trazabilidad, la información debe ser escrita directamente en el formulario.
     </p>
 
     <div class="notice">
-      <strong>Importante:</strong> este canal no limita el derecho del consumidor a acudir a Indecopi u otras autoridades competentes. Indecopi cuenta con canales de orientación y reclamo para consumidores en el Perú.
+      <strong>Plazo de atención:</strong> Netinho Xperience dará respuesta a la queja o reclamo en un plazo máximo de 15 días hábiles desde su recepción.
     </div>
 
     <div class="grid">
@@ -256,12 +310,13 @@
         <h2>Registrar queja o reclamo</h2>
 
         <p>
-          Completa la información y usa el botón para enviarla por WhatsApp Business. Este formulario no almacena información en la web; prepara el mensaje para remitirlo directamente a Netinho Xperience.
+          Completa la información y elige si deseas enviarla por WhatsApp Business o por correo electrónico.
+          Este formulario no almacena información en la web.
         </p>
 
-        <form class="form" onsubmit="enviarReclamo(event)">
+        <form id="reclamoForm" class="form" autocomplete="off">
           <div>
-            <label>Tipo de solicitud</label>
+            <label for="tipo">Tipo de solicitud</label>
             <select id="tipo" required>
               <option value="">Selecciona una opción</option>
               <option value="Queja">Queja</option>
@@ -270,27 +325,39 @@
           </div>
 
           <div>
-            <label>Nombre completo</label>
-            <input id="nombre" type="text" required placeholder="Nombre y apellidos" />
+            <label for="nombre">Nombre completo</label>
+            <input id="nombre" type="text" required minlength="5" maxlength="80" placeholder="Nombre y apellidos" />
           </div>
 
           <div>
-            <label>DNI / CE</label>
-            <input id="documento" type="text" required placeholder="Documento de identidad" />
+            <label for="documentoTipo">Tipo de documento</label>
+            <select id="documentoTipo" required onchange="actualizarDocumento()">
+              <option value="">Selecciona una opción</option>
+              <option value="DNI">DNI</option>
+              <option value="CE">Carné de extranjería</option>
+              <option value="PASAPORTE">Pasaporte</option>
+            </select>
           </div>
 
           <div>
-            <label>Correo electrónico</label>
-            <input id="correo" type="email" required placeholder="correo@ejemplo.com" />
+            <label for="documento">Número de documento</label>
+            <input id="documento" type="text" required placeholder="Selecciona primero el tipo de documento" />
+            <p id="documentoHint" class="hint">DNI: 8 dígitos. CE/Pasaporte: hasta 12 caracteres.</p>
+            <p id="documentoError" class="error">Revisa el número de documento ingresado.</p>
           </div>
 
           <div>
-            <label>Teléfono</label>
-            <input id="telefono" type="text" required placeholder="+51..." />
+            <label for="correo">Correo electrónico</label>
+            <input id="correo" type="email" required maxlength="90" placeholder="correo@ejemplo.com" />
           </div>
 
           <div>
-            <label>Servicio relacionado</label>
+            <label for="telefono">Teléfono</label>
+            <input id="telefono" type="tel" required maxlength="18" placeholder="+51..." />
+          </div>
+
+          <div>
+            <label for="servicio">Servicio relacionado</label>
             <select id="servicio" required>
               <option value="">Selecciona una opción</option>
               <option value="Evaluación estratégica de vehículos">Evaluación estratégica de vehículos</option>
@@ -301,27 +368,68 @@
           </div>
 
           <div>
-            <label>Detalle de la queja o reclamo</label>
-            <textarea id="detalle" required placeholder="Describe claramente lo ocurrido."></textarea>
+            <label for="detalle">Detalle de la queja o reclamo</label>
+            <textarea id="detalle" required maxlength="1000" placeholder="Describe claramente lo ocurrido. Máximo 1000 caracteres."></textarea>
+            <div class="counter">
+              <span>No se permite copiar ni pegar texto en este campo.</span>
+              <span id="detalleCounter">0 / 1000</span>
+            </div>
           </div>
 
           <div>
-            <label>Pedido del consumidor</label>
-            <textarea id="pedido" required placeholder="Indica qué solución solicitas."></textarea>
+            <label for="pedido">Pedido del consumidor</label>
+            <textarea id="pedido" required maxlength="1000" placeholder="Indica qué solución solicitas. Máximo 1000 caracteres."></textarea>
+            <div class="counter">
+              <span>No se permite copiar ni pegar texto en este campo.</span>
+              <span id="pedidoCounter">0 / 1000</span>
+            </div>
           </div>
+
+          <label class="checkbox-row">
+            <input id="declaracion" type="checkbox" required />
+            <span>
+              Declaro que la información proporcionada es real, verídica y corresponde a los hechos descritos.
+              Acepto que Netinho Xperience utilice estos datos únicamente para atender la presente queja o reclamo.
+            </span>
+          </label>
 
           <div class="actions">
-            <button class="btn" type="submit">Enviar por WhatsApp</button>
-            <a class="btn secondary" href="mailto:netinhoxperience@gmail.com?subject=Libro%20de%20Reclamaciones%20-%20Netinho%20Xperience">Enviar por correo</a>
+            <button class="btn" type="button" onclick="enviarWhatsApp()">Enviar por WhatsApp</button>
+            <button class="btn secondary" type="button" onclick="enviarCorreo()">Enviar por correo</button>
           </div>
 
+          <p id="status" class="status">Formulario validado correctamente.</p>
+
           <p class="small">
-            Al enviar la información, declaras que los datos proporcionados son correctos y autorizas su uso para atender la solicitud.
+            Al salir de esta página, la información escrita se eliminará del formulario.
           </p>
         </form>
       </section>
 
       <aside class="card">
+        <h2>Información importante</h2>
+
+        <p><strong>Queja:</strong></p>
+        <p>
+          Disconformidad relacionada con la atención recibida, sin estar directamente vinculada al servicio contratado.
+        </p>
+
+        <br>
+
+        <p><strong>Reclamo:</strong></p>
+        <p>
+          Disconformidad directamente relacionada con el servicio recibido o con las condiciones ofrecidas.
+        </p>
+
+        <br>
+
+        <p><strong>Plazo de respuesta:</strong></p>
+        <p>
+          15 días hábiles desde la recepción de la solicitud.
+        </p>
+
+        <br>
+
         <h2>Datos de contacto</h2>
 
         <p><strong>Razón comercial:</strong><br>Netinho Xperience</p>
@@ -331,12 +439,6 @@
         <p><strong>WhatsApp Business:</strong><br>+51 973 669 004</p>
         <br>
         <p><strong>Ubicación referencial:</strong><br>Santiago de Surco, Lima, Perú</p>
-
-        <ul>
-          <li>Queja: disconformidad no relacionada directamente con el servicio contratado.</li>
-          <li>Reclamo: disconformidad relacionada con el servicio brindado.</li>
-          <li>La atención será realizada por los canales declarados por Netinho Xperience.</li>
-        </ul>
       </aside>
     </div>
   </main>
@@ -354,43 +456,182 @@
   </footer>
 
   <script>
-    function enviarReclamo(event){
-      event.preventDefault();
+    const camposBloqueados = ["nombre", "documento", "correo", "telefono", "detalle", "pedido"];
 
-      const tipo = document.getElementById("tipo").value;
-      const nombre = document.getElementById("nombre").value;
-      const documento = document.getElementById("documento").value;
-      const correo = document.getElementById("correo").value;
-      const telefono = document.getElementById("telefono").value;
-      const servicio = document.getElementById("servicio").value;
-      const detalle = document.getElementById("detalle").value;
-      const pedido = document.getElementById("pedido").value;
+    camposBloqueados.forEach(id => {
+      const campo = document.getElementById(id);
 
-      const mensaje =
-`LIBRO DE RECLAMACIONES - NETINHO XPERIENCE
+      campo.addEventListener("paste", e => e.preventDefault());
+      campo.addEventListener("copy", e => e.preventDefault());
+      campo.addEventListener("cut", e => e.preventDefault());
+      campo.addEventListener("drop", e => e.preventDefault());
+    });
 
-Tipo de solicitud: ${tipo}
+    const detalle = document.getElementById("detalle");
+    const pedido = document.getElementById("pedido");
+    const detalleCounter = document.getElementById("detalleCounter");
+    const pedidoCounter = document.getElementById("pedidoCounter");
+
+    detalle.addEventListener("input", () => {
+      detalleCounter.textContent = detalle.value.length + " / 1000";
+    });
+
+    pedido.addEventListener("input", () => {
+      pedidoCounter.textContent = pedido.value.length + " / 1000";
+    });
+
+    function actualizarDocumento(){
+      const tipo = document.getElementById("documentoTipo").value;
+      const documento = document.getElementById("documento");
+      const hint = document.getElementById("documentoHint");
+      const error = document.getElementById("documentoError");
+
+      documento.value = "";
+      error.style.display = "none";
+
+      if(tipo === "DNI"){
+        documento.maxLength = 8;
+        documento.placeholder = "Ingresa 8 dígitos";
+        hint.textContent = "DNI: debe contener exactamente 8 dígitos.";
+      } else if(tipo === "CE"){
+        documento.maxLength = 12;
+        documento.placeholder = "Ingresa hasta 12 caracteres";
+        hint.textContent = "Carné de extranjería: entre 9 y 12 caracteres.";
+      } else if(tipo === "PASAPORTE"){
+        documento.maxLength = 12;
+        documento.placeholder = "Ingresa hasta 12 caracteres";
+        hint.textContent = "Pasaporte: entre 6 y 12 caracteres.";
+      } else {
+        documento.maxLength = 12;
+        documento.placeholder = "Selecciona primero el tipo de documento";
+        hint.textContent = "DNI: 8 dígitos. CE/Pasaporte: hasta 12 caracteres.";
+      }
+    }
+
+    document.getElementById("documento").addEventListener("input", function(){
+      const tipo = document.getElementById("documentoTipo").value;
+
+      if(tipo === "DNI"){
+        this.value = this.value.replace(/\D/g, "").slice(0, 8);
+      } else {
+        this.value = this.value.replace(/[^a-zA-Z0-9]/g, "").toUpperCase().slice(0, 12);
+      }
+    });
+
+    function validarDocumento(){
+      const tipo = document.getElementById("documentoTipo").value;
+      const documento = document.getElementById("documento").value.trim();
+      const error = document.getElementById("documentoError");
+
+      let valido = false;
+
+      if(tipo === "DNI"){
+        valido = /^[0-9]{8}$/.test(documento);
+      }
+
+      if(tipo === "CE"){
+        valido = /^[A-Z0-9]{9,12}$/.test(documento);
+      }
+
+      if(tipo === "PASAPORTE"){
+        valido = /^[A-Z0-9]{6,12}$/.test(documento);
+      }
+
+      error.style.display = valido ? "none" : "block";
+      return valido;
+    }
+
+    function validarFormulario(){
+      const form = document.getElementById("reclamoForm");
+
+      if(!form.checkValidity()){
+        form.reportValidity();
+        return false;
+      }
+
+      if(!validarDocumento()){
+        document.getElementById("documento").focus();
+        return false;
+      }
+
+      if(detalle.value.trim().length < 20){
+        alert("El detalle debe tener al menos 20 caracteres.");
+        detalle.focus();
+        return false;
+      }
+
+      if(pedido.value.trim().length < 10){
+        alert("El pedido del consumidor debe tener al menos 10 caracteres.");
+        pedido.focus();
+        return false;
+      }
+
+      if(!document.getElementById("declaracion").checked){
+        alert("Debes confirmar que la información proporcionada es real y verídica.");
+        return false;
+      }
+
+      document.getElementById("status").style.display = "block";
+      return true;
+    }
+
+    function crearMensaje(){
+      const fecha = new Date().toLocaleString("es-PE");
+
+      return `LIBRO DE RECLAMACIONES - NETINHO XPERIENCE
+
+Fecha de registro: ${fecha}
+
+Tipo de solicitud: ${document.getElementById("tipo").value}
 
 DATOS DEL CONSUMIDOR
-Nombre: ${nombre}
-Documento: ${documento}
-Correo: ${correo}
-Teléfono: ${telefono}
+Nombre: ${document.getElementById("nombre").value}
+Tipo de documento: ${document.getElementById("documentoTipo").value}
+Documento: ${document.getElementById("documento").value}
+Correo: ${document.getElementById("correo").value}
+Teléfono: ${document.getElementById("telefono").value}
 
 SERVICIO RELACIONADO
-${servicio}
+${document.getElementById("servicio").value}
 
 DETALLE
-${detalle}
+${document.getElementById("detalle").value}
 
 PEDIDO DEL CONSUMIDOR
-${pedido}
+${document.getElementById("pedido").value}
 
-Declaro que la información proporcionada es correcta.`;
+DECLARACIÓN
+El consumidor declara que la información proporcionada es real y verídica.
 
+PLAZO DE ATENCIÓN
+Netinho Xperience dará respuesta en un plazo máximo de 15 días hábiles desde la recepción de esta solicitud.`;
+    }
+
+    function enviarWhatsApp(){
+      if(!validarFormulario()) return;
+
+      const mensaje = crearMensaje();
       const url = "https://wa.me/51973669004?text=" + encodeURIComponent(mensaje);
       window.open(url, "_blank");
     }
+
+    function enviarCorreo(){
+      if(!validarFormulario()) return;
+
+      const mensaje = crearMensaje();
+      const subject = encodeURIComponent("Libro de Reclamaciones - Netinho Xperience");
+      const body = encodeURIComponent(mensaje);
+      const url = "mailto:netinhoxperience@gmail.com?subject=" + subject + "&body=" + body;
+
+      window.location.href = url;
+    }
+
+    window.addEventListener("pagehide", () => {
+      document.getElementById("reclamoForm").reset();
+      detalleCounter.textContent = "0 / 1000";
+      pedidoCounter.textContent = "0 / 1000";
+      document.getElementById("status").style.display = "none";
+    });
   </script>
 
 </body>
