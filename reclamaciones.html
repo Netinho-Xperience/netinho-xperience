@@ -10,7 +10,6 @@
   <style>
     :root{
       --navy:#06182c;
-      --navy-2:#0b223c;
       --gold:#c9a24d;
       --white:#f7f4ed;
       --muted:#b8c0cc;
@@ -92,9 +91,9 @@
 
     .intro{
       color:var(--muted);
-      max-width:780px;
+      max-width:800px;
       font-size:1.05rem;
-      margin-bottom:42px;
+      margin-bottom:34px;
     }
 
     .notice{
@@ -102,7 +101,20 @@
       border:1px solid rgba(201,162,77,.30);
       border-radius:22px;
       padding:24px;
+      margin-bottom:24px;
+      color:var(--white);
+    }
+
+    .human-message{
+      background:rgba(255,255,255,.045);
+      border:1px solid var(--border);
+      border-radius:22px;
+      padding:24px;
       margin-bottom:32px;
+      color:var(--muted);
+    }
+
+    .human-message strong{
       color:var(--white);
     }
 
@@ -134,6 +146,27 @@
     ul{
       padding-left:20px;
       margin-top:12px;
+    }
+
+    .code-box{
+      display:none;
+      background:rgba(201,162,77,.10);
+      border:1px solid rgba(201,162,77,.35);
+      border-radius:18px;
+      padding:16px;
+      margin:18px 0;
+    }
+
+    .code-box small{
+      display:block;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+
+    .code-box strong{
+      color:var(--gold);
+      letter-spacing:.08em;
+      font-size:1.05rem;
     }
 
     .form{
@@ -184,6 +217,7 @@
       color:var(--muted);
       font-size:.82rem;
       margin-top:5px;
+      gap:14px;
     }
 
     .error{
@@ -274,6 +308,7 @@
     @media(max-width:850px){
       .grid{grid-template-columns:1fr}
       main{padding:58px 22px}
+      .counter{flex-direction:column}
     }
   </style>
 </head>
@@ -305,6 +340,11 @@
       <strong>Plazo de atención:</strong> Netinho Xperience dará respuesta a la queja o reclamo en un plazo máximo de 15 días hábiles desde su recepción.
     </div>
 
+    <div class="human-message">
+      <strong>Una queja o reclamo no tiene por qué convertirnos en partes enfrentadas.</strong><br>
+      Para Netinho Xperience, también es una oportunidad para entender mejor lo ocurrido, corregir lo necesario y buscar una solución con respeto, claridad y buena fe.
+    </div>
+
     <div class="grid">
       <section class="card">
         <h2>Registrar queja o reclamo</h2>
@@ -314,10 +354,16 @@
           Este formulario no almacena información en la web.
         </p>
 
+        <div id="codigoBox" class="code-box">
+          <small>Código único de registro</small>
+          <strong id="codigoRegistro">Pendiente</strong>
+          <p class="small">Este código se genera automáticamente y servirá para el seguimiento de la solicitud.</p>
+        </div>
+
         <form id="reclamoForm" class="form" autocomplete="off">
           <div>
             <label for="tipo">Tipo de solicitud</label>
-            <select id="tipo" required>
+            <select id="tipo" required onchange="generarCodigoRegistro()">
               <option value="">Selecciona una opción</option>
               <option value="Queja">Queja</option>
               <option value="Reclamo">Reclamo</option>
@@ -360,9 +406,9 @@
             <label for="servicio">Servicio relacionado</label>
             <select id="servicio" required>
               <option value="">Selecciona una opción</option>
-              <option value="Evaluación estratégica de vehículos">Evaluación estratégica de vehículos</option>
-              <option value="Evaluación estratégica de inmuebles">Evaluación estratégica de inmuebles</option>
-              <option value="Segunda opinión patrimonial">Segunda opinión patrimonial</option>
+              <option value="Evaluación de vehículos">Evaluación de vehículos</option>
+              <option value="Evaluación de inmuebles">Evaluación de inmuebles</option>
+              <option value="Segunda opinión estratégica">Segunda opinión estratégica</option>
               <option value="Otro">Otro</option>
             </select>
           </div>
@@ -378,10 +424,10 @@
 
           <div>
             <label for="pedido">Pedido del consumidor</label>
-            <textarea id="pedido" required maxlength="1000" placeholder="Indica qué solución solicitas. Máximo 1000 caracteres."></textarea>
+            <textarea id="pedido" required maxlength="500" placeholder="Indica la solución que esperas. Máximo 500 caracteres."></textarea>
             <div class="counter">
               <span>No se permite copiar ni pegar texto en este campo.</span>
-              <span id="pedidoCounter">0 / 1000</span>
+              <span id="pedidoCounter">0 / 500</span>
             </div>
           </div>
 
@@ -456,6 +502,8 @@
   </footer>
 
   <script>
+    let codigoActual = "";
+
     const camposBloqueados = ["nombre", "documento", "correo", "telefono", "detalle", "pedido"];
 
     camposBloqueados.forEach(id => {
@@ -477,8 +525,44 @@
     });
 
     pedido.addEventListener("input", () => {
-      pedidoCounter.textContent = pedido.value.length + " / 1000";
+      pedidoCounter.textContent = pedido.value.length + " / 500";
     });
+
+    function dosDigitos(numero){
+      return numero.toString().padStart(2, "0");
+    }
+
+    function crearFechaCodigo(){
+      const ahora = new Date();
+
+      const anio = ahora.getFullYear();
+      const mes = dosDigitos(ahora.getMonth() + 1);
+      const dia = dosDigitos(ahora.getDate());
+      const hora = dosDigitos(ahora.getHours());
+      const minuto = dosDigitos(ahora.getMinutes());
+      const segundo = dosDigitos(ahora.getSeconds());
+
+      return `${anio}${mes}${dia}-${hora}${minuto}${segundo}`;
+    }
+
+    function generarCodigoRegistro(){
+      const tipo = document.getElementById("tipo").value;
+      const codigoBox = document.getElementById("codigoBox");
+      const codigoRegistro = document.getElementById("codigoRegistro");
+
+      if(!tipo){
+        codigoActual = "";
+        codigoRegistro.textContent = "Pendiente";
+        codigoBox.style.display = "none";
+        return;
+      }
+
+      const prefijo = tipo === "Queja" ? "NX-Q" : "NX-R";
+      codigoActual = `${prefijo}-${crearFechaCodigo()}`;
+
+      codigoRegistro.textContent = codigoActual;
+      codigoBox.style.display = "block";
+    }
 
     function actualizarDocumento(){
       const tipo = document.getElementById("documentoTipo").value;
@@ -495,11 +579,11 @@
         hint.textContent = "DNI: debe contener exactamente 8 dígitos.";
       } else if(tipo === "CE"){
         documento.maxLength = 12;
-        documento.placeholder = "Ingresa hasta 12 caracteres";
+        documento.placeholder = "Ingresa entre 9 y 12 caracteres";
         hint.textContent = "Carné de extranjería: entre 9 y 12 caracteres.";
       } else if(tipo === "PASAPORTE"){
         documento.maxLength = 12;
-        documento.placeholder = "Ingresa hasta 12 caracteres";
+        documento.placeholder = "Ingresa entre 6 y 12 caracteres";
         hint.textContent = "Pasaporte: entre 6 y 12 caracteres.";
       } else {
         documento.maxLength = 12;
@@ -544,6 +628,10 @@
     function validarFormulario(){
       const form = document.getElementById("reclamoForm");
 
+      if(!codigoActual){
+        generarCodigoRegistro();
+      }
+
       if(!form.checkValidity()){
         form.reportValidity();
         return false;
@@ -580,6 +668,7 @@
 
       return `LIBRO DE RECLAMACIONES - NETINHO XPERIENCE
 
+Código único de registro: ${codigoActual}
 Fecha de registro: ${fecha}
 
 Tipo de solicitud: ${document.getElementById("tipo").value}
@@ -594,17 +683,20 @@ Teléfono: ${document.getElementById("telefono").value}
 SERVICIO RELACIONADO
 ${document.getElementById("servicio").value}
 
-DETALLE
+DETALLE DE LA QUEJA O RECLAMO
 ${document.getElementById("detalle").value}
 
 PEDIDO DEL CONSUMIDOR
 ${document.getElementById("pedido").value}
 
 DECLARACIÓN
-El consumidor declara que la información proporcionada es real y verídica.
+El consumidor declara que la información proporcionada es real, verídica y corresponde a los hechos descritos.
 
 PLAZO DE ATENCIÓN
-Netinho Xperience dará respuesta en un plazo máximo de 15 días hábiles desde la recepción de esta solicitud.`;
+Netinho Xperience dará respuesta en un plazo máximo de 15 días hábiles desde la recepción de esta solicitud.
+
+MENSAJE NX
+Una queja o reclamo no tiene por qué convertirnos en partes enfrentadas. Para Netinho Xperience, también es una oportunidad para entender mejor lo ocurrido, corregir lo necesario y buscar una solución con respeto, claridad y buena fe.`;
     }
 
     function enviarWhatsApp(){
@@ -619,7 +711,7 @@ Netinho Xperience dará respuesta en un plazo máximo de 15 días hábiles desde
       if(!validarFormulario()) return;
 
       const mensaje = crearMensaje();
-      const subject = encodeURIComponent("Libro de Reclamaciones - Netinho Xperience");
+      const subject = encodeURIComponent("Libro de Reclamaciones - " + codigoActual);
       const body = encodeURIComponent(mensaje);
       const url = "mailto:netinhoxperience@gmail.com?subject=" + subject + "&body=" + body;
 
@@ -628,8 +720,11 @@ Netinho Xperience dará respuesta en un plazo máximo de 15 días hábiles desde
 
     window.addEventListener("pagehide", () => {
       document.getElementById("reclamoForm").reset();
+      codigoActual = "";
+      document.getElementById("codigoRegistro").textContent = "Pendiente";
+      document.getElementById("codigoBox").style.display = "none";
       detalleCounter.textContent = "0 / 1000";
-      pedidoCounter.textContent = "0 / 1000";
+      pedidoCounter.textContent = "0 / 500";
       document.getElementById("status").style.display = "none";
     });
   </script>
