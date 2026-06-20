@@ -565,7 +565,7 @@
       
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
         
-        <a href="#ruta-vehiculos" onclick="alert('Ruta de Vehículos en preparación: Activando recopilación de chasis, kilometraje y SUNARP...')" style="display: block; padding: 30px 20px; background: #1a2333; border: 1px solid rgba(197, 168, 128, 0.2); border-radius: 8px; text-decoration: none; transition: all 0.3s ease; text-align: center;">
+        <a href="#ruta-vehiculos" style="display: block; padding: 30px 20px; background: #1a2333; border: 1px solid rgba(197, 168, 128, 0.2); border-radius: 8px; text-decoration: none; transition: all 0.3s ease; text-align: center;">round: #1a2333; border: 1px solid rgba(197, 168, 128, 0.2); border-radius: 8px; text-decoration: none; transition: all 0.3s ease; text-align: center;">
           <div style="font-size: 40px; margin-bottom: 15px;">🚗</div>
           <strong style="color: #ffffff; display: block; font-size: 18px; margin-bottom: 5px;">Vehículos</strong>
           <span style="color: #a0aec0; font-size: 12px; display: block;">Autos, Motos, Camiones</span>
@@ -593,6 +593,107 @@
     // Verificación inicial por si cargan la URL con el hash
     if (window.location.hash === '#selector-diagnostico') {
       document.getElementById('selector-diagnostico').style.display = 'flex';
+    }
+  </script>
+
+  <div id="ruta-vehiculos" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 15, 30, 0.97); z-index: 10000; align-items: center; justify-content: center; backdrop-filter: blur(8px); overflow-y: auto; padding: 20px 0;">
+    <div style="background: #121824; border: 1px solid #c5a880; padding: 40px; border-radius: 12px; max-width: 700px; width: 90%; text-align: left; box-shadow: 0 20px 40px rgba(0,0,0,0.5); margin: auto; position: relative;">
+      
+      <a href="#selector-diagnostico" style="position: absolute; top: 20px; left: 20px; color: #c5a880; text-decoration: none; font-size: 14px; font-weight: bold;">&larr; Volver</a>
+      
+      <div style="text-align: center; margin-bottom: 30px;">
+        <p style="color: #c5a880; text-transform: uppercase; letter-spacing: 2px; font-size: 11px; margin-bottom: 5px; font-weight: bold;">Ruta A: Vehículos</p>
+        <h2 style="color: #ffffff; font-size: 26px; font-weight: 600;">Datos y Evidencias de Alta Relevancia</h2>
+        <p style="color: #a0aec0; font-size: 14px;">El análisis se basa estrictamente en información oficial verificable para mitigar riesgos de estafa.</p>
+      </div>
+
+      <form id="form-vehiculos" onsubmit="event.preventDefault(); alert('Datos registrados con éxito. Abriendo pasarela segura de verificación...'); window.location.hash = '#pantalla-pago';">
+        
+        <h3 style="color: #ffffff; font-size: 16px; border-bottom: 1px solid rgba(197, 168, 128, 0.2); padding-bottom: 8px; margin-bottom: 15px; font-weight: 500;">1. Identificación del Solicitante</h3>
+        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 15px; margin-bottom: 25px;">
+          <div>
+            <label style="color: #a0aec0; font-size: 12px; display: block; margin-bottom: 5px;">Tipo de Documento</label>
+            <select required style="width: 100%; background: #1a2333; border: 1px solid rgba(197, 168, 128, 0.3); color: #fff; padding: 10px; border-radius: 6px;">
+              <option value="DNI">DNI (Perú)</option>
+              <option value="CE">Carnet de Extranjería</option>
+              <option value="Pasaporte">Pasaporte</option>
+            </select>
+          </div>
+          <div>
+            <label style="color: #a0aec0; font-size: 12px; display: block; margin-bottom: 5px;">Número de Documento</label>
+            <input type="text" required placeholder="Ingresa el número" style="width: 100%; background: #1a2333; border: 1px solid rgba(197, 168, 128, 0.3); color: #fff; padding: 10px; border-radius: 6px;">
+          </div>
+        </div>
+
+        <h3 style="color: #ffffff; font-size: 16px; border-bottom: 1px solid rgba(197, 168, 128, 0.2); padding-bottom: 8px; margin-bottom: 15px; font-weight: 500;">2. Datos Técnicos Básicos</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px;">
+          <div>
+            <label style="color: #a0aec0; font-size: 12px; display: block; margin-bottom: 5px;">Placa del Vehículo</label>
+            <input type="text" required placeholder="Ej: ABC-123" style="width: 100%; background: #1a2333; border: 1px solid rgba(197, 168, 128, 0.3); color: #fff; padding: 10px; border-radius: 6px; text-transform: uppercase;">
+          </div>
+          <div>
+            <label style="color: #a0aec0; font-size: 12px; display: block; margin-bottom: 5px;">Kilometraje Actual</label>
+            <input type="number" required placeholder="Ej: 45000" style="width: 100%; background: #1a2333; border: 1px solid rgba(197, 168, 128, 0.3); color: #fff; padding: 10px; border-radius: 6px;">
+          </div>
+        </div>
+
+        <h3 style="color: #ffffff; font-size: 16px; border-bottom: 1px solid rgba(197, 168, 128, 0.2); padding-bottom: 8px; margin-bottom: 5px; font-weight: 500;">3. Evidencias de Alta Relevancia</h3>
+        <p style="color: #a0aec0; font-size: 12px; margin-bottom: 15px;">Para protegerte, nuestro cerebro de IA cruzará visualmente los documentos con el estado físico.</p>
+        
+        <div style="margin-bottom: 20px; background: rgba(26, 35, 51, 0.5); padding: 15px; border-radius: 8px; border: 1px dashed rgba(197, 168, 128, 0.3);">
+          <label style="color: #ffffff; font-size: 13px; font-weight: bold; display: block; margin-bottom: 2px;">📄 Subir Boleta Informativa de SUNARP (PDF)</label>
+          <span style="color: #63b3ed; font-size: 11px; display: block; margin-bottom: 8px;">💡 Tip NX de Ahorro: No gastes S/.40 en un certificado completo. En la web de SUNARP solicita solo la "Boleta Informativa" por S/. 6.00. Contiene toda la data legal que nuestra IA necesita.</span>
+          <input type="file" accept=".pdf" required style="color: #a0aec0; font-size: 12px;">
+        </div>
+
+        <div style="margin-bottom: 20px; background: rgba(26, 35, 51, 0.5); padding: 15px; border-radius: 8px; border: 1px dashed rgba(197, 168, 128, 0.3);">
+          <label style="color: #ffffff; font-size: 13px; font-weight: bold; display: block; margin-bottom: 2px;">📸 Foto Frontal Diagonal (A 45 grados)</label>
+          <span style="color: #a0aec0; font-size: 11px; display: block; margin-bottom: 8px;">Toma la foto desde la esquina delantera apuntando hacia atrás. La IA analizará descuadres en la línea del chasis por choques ocultos.</span>
+          <input type="file" accept="image/*" required style="color: #a0aec0; font-size: 12px;">
+        </div>
+
+        <div style="margin-bottom: 25px; background: rgba(26, 35, 51, 0.5); padding: 15px; border-radius: 8px; border: 1px dashed rgba(197, 168, 128, 0.3);">
+          <label style="color: #ffffff; font-size: 13px; font-weight: bold; display: block; margin-bottom: 2px;">📸 Foto del Tablero Encendido</label>
+          <span style="color: #a0aec0; font-size: 11px; display: block; margin-bottom: 8px;">Con el motor encendido en neutro. La IA cruzará el desgaste físico general versus el kilometraje para detectar adulteraciones.</span>
+          <input type="file" accept="image/*" required style="color: #a0aec0; font-size: 12px;">
+        </div>
+
+        <div style="margin-bottom: 25px; background: rgba(197, 168, 128, 0.05); border: 1px solid rgba(197, 168, 128, 0.2); padding: 15px; border-radius: 6px;">
+          <label style="color: #fff; font-size: 12px; display: flex; items-top: flex-start; gap: 10px; cursor: pointer;">
+            <input type="checkbox" required style="margin-top: 3px;">
+            <span>Declaro bajo juramento que los documentos e imágenes adjuntados son verídicos. Autorizo a Netinho Xperience a procesar esta información de manera encriptada y privada únicamente para la emisión de mi diagnóstico, bajo el marco de la Ley N° 29733 (Ley de Protección de Datos Personales en Perú).</span>
+          </label>
+        </div>
+
+        <button type="submit" style="width: 100%; background: #c5a880; color: #121824; border: none; padding: 15px; border-radius: 6px; font-weight: bold; font-size: 16px; cursor: pointer; transition: background 0.3s ease;">
+          Continuar al Análisis Seguro
+        </button>
+      </form>
+
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('hashchange', function() {
+      var modalSelector = document.getElementById('selector-diagnostico');
+      var modalVehiculos = document.getElementById('ruta-vehiculos');
+      
+      // Control Ruta General
+      if (window.location.hash === '#selector-diagnostico') {
+        modalSelector.style.display = 'flex';
+        modalVehiculos.style.display = 'none';
+      } else if (window.location.hash === '#ruta-vehiculos') {
+        modalSelector.style.display = 'none';
+        modalVehiculos.style.display = 'flex';
+      } else {
+        modalSelector.style.display = 'none';
+        modalVehiculos.style.display = 'none';
+      }
+    });
+
+    // Control Inicial por si recargan
+    if (window.location.hash === '#ruta-vehiculos') {
+      document.getElementById('ruta-vehiculos').style.display = 'flex';
     }
   </script>
   
