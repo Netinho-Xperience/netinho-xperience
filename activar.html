@@ -1,1 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Asegura tu Inversión | Netinho Xperience</title>
+    <style>
+        body { font-family: sans-serif; background: #030b14; color: #f7f4ed; padding: 20px; display: flex; justify-content: center; }
+        .container { background: #0b223c; padding: 30px; border-radius: 12px; border: 1px solid #c9a24d; max-width: 500px; width: 100%; }
+        h2 { color: #c9a24d; }
+        input, select { width: 100%; padding: 12px; margin: 10px 0; border-radius: 6px; border: 1px solid #c9a24d; background: #121824; color: white; }
+        button { background: #c9a24d; color: #030b14; border: none; padding: 15px; width: 100%; font-weight: bold; cursor: pointer; border-radius: 6px; }
+        .info-box { background: #1a2a40; padding: 15px; border-left: 4px solid #c9a24d; margin-bottom: 20px; font-size: 0.9em; }
+    </style>
+</head>
+<body>
 
+<div class="container">
+    <h2>Asegura tu Inversión: Pago y Registro</h2>
+    <div class="info-box">
+        <p><strong>1. Pago:</strong> Realiza el depósito de S/. 49.00 a la cuenta [TU BANCO/YAPE] e indica tu número de operación.</p>
+    </div>
+    
+    <form id="activarForm">
+        <input type="text" placeholder="Número de Operación / Comprobante" required>
+        <select id="tipoActivo" required>
+            <option value="">¿Qué vas a auditar?</option>
+            <option value="vehiculo">Vehículo</option>
+            <option value="inmueble">Inmueble</option>
+        </select>
+        <input type="text" placeholder="DNI del Solicitante (8 dígitos)" pattern="\d{8}" maxlength="8" required>
+        <input type="file" required>
+        
+        <button type="submit">Enviar Solicitud de Auditoría</button>
+    </form>
+</div>
+
+</body>
+</html>
