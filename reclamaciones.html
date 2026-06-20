@@ -16,7 +16,7 @@
       --dark:#030b14;
       --card:rgba(255,255,255,.06);
       --border:rgba(255,255,255,.14);
-      --danger:#ff6b6b;
+      
       --ok:#75d99c;
     }
 
@@ -350,7 +350,7 @@
         <h2>Registrar queja o reclamo</h2>
 
         <p>
-          Completa la información y elige si deseas enviarla por WhatsApp Business o por correo electrónico.
+          Completa la información.
           Este formulario no almacena información en la web.
         </p>
 
@@ -360,7 +360,7 @@
           <p class="small">Este código se genera automáticamente y servirá para el seguimiento de la solicitud.</p>
         </div>
 
-        <form id="reclamoForm" class="form" autocomplete="off">
+        <form id="reclamoForm" class="form" autocomplete="off" onsubmit="event.preventDefault(); if(validarFormulario()){ alert('Solicitud registrada en el sistema. Redirigiendo a la pasarela de pago seguro...'); window.location.href='index.html'; }">
           <div>
             <label for="tipo">Tipo de solicitud</label>
             <select id="tipo" required onchange="generarCodigoRegistro()">
@@ -405,10 +405,9 @@
           <div>
             <label for="servicio">Servicio relacionado</label>
             <select id="servicio" required>
-              <option value="">Selecciona una opción</option>
-              <option value="Evaluación de vehículos">Evaluación de vehículos</option>
-              <option value="Evaluación de inmuebles">Evaluación de inmuebles</option>
-              <option value="Segunda opinión estratégica">Segunda opinión estratégica</option>
+              <option value="Análisis Vehicular por IA (S/. 49.00)">Análisis Vehicular por IA (S/. 49.00)</option>
+              <option value="Análisis Inmobiliario por IA (S/. 49.00)">Análisis Inmobiliario por IA (S/. 49.00)</option>
+              <option value="Segunda opinión estratégica (S/. 49.00)">Segunda opinión estratégica (S/. 49.00)</option>
               <option value="Otro">Otro</option>
             </select>
           </div>
@@ -440,8 +439,9 @@
           </label>
 
           <div class="actions">
-            <button class="btn" type="button" onclick="enviarWhatsApp()">Enviar por WhatsApp</button>
-            <button class="btn secondary" type="button" onclick="enviarCorreo()">Enviar por correo</button>
+            <button type="submit" style="width: 100%; background: var(--gold); color: var(--dark); border: none; padding: 14px; border-radius: 6px; font-weight: bold; font-size: 15px; cursor: pointer;">
+  Proceder al Pago y Análisis de Activos (S/. 49.00)
+</button>
           </div>
 
           <p id="status" class="status">Formulario validado correctamente.</p>
@@ -481,10 +481,7 @@
         <p><strong>Razón comercial:</strong><br>Netinho Xperience</p>
         <br>
         <p><strong>Correo:</strong><br>netinhoxperience@gmail.com</p>
-        <br>
-        <p><strong>WhatsApp Business:</strong><br>+51 973 669 004</p>
-        <br>
-        <p><strong>Ubicación referencial:</strong><br>Santiago de Surco, Lima, Perú</p>
+        
       </aside>
     </div>
   </main>
@@ -497,7 +494,6 @@
 
     <div>
       netinhoxperience@gmail.com<br>
-      +51 973 669 004
     </div>
   </footer>
 
@@ -698,27 +694,7 @@ Netinho Xperience dará respuesta en un plazo máximo de 15 días hábiles desde
 MENSAJE NX
 Una queja o reclamo no tiene por qué convertirnos en partes enfrentadas. Para Netinho Xperience, también es una oportunidad para entender mejor lo ocurrido, corregir lo necesario y buscar una solución con respeto, claridad y buena fe.`;
     }
-
-    function enviarWhatsApp(){
-      if(!validarFormulario()) return;
-
-      const mensaje = crearMensaje();
-      const url = "https://wa.me/51973669004?text=" + encodeURIComponent(mensaje);
-      window.open(url, "_blank");
-    }
-
-    function enviarCorreo(){
-      if(!validarFormulario()) return;
-
-      const mensaje = crearMensaje();
-      const subject = encodeURIComponent("Libro de Reclamaciones - " + codigoActual);
-      const body = encodeURIComponent(mensaje);
-      const url = "mailto:netinhoxperience@gmail.com?subject=" + subject + "&body=" + body;
-
-      window.location.href = url;
-    }
-
-    window.addEventListener("pagehide", () => {
+      window.addEventListener("pagehide", () => {
       document.getElementById("reclamoForm").reset();
       codigoActual = "";
       document.getElementById("codigoRegistro").textContent = "Pendiente";
