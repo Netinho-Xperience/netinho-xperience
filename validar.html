@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Validador Oficial | Netinho Xperience</title>
+    <style>
+        body { font-family: sans-serif; background: #030b14; color: #f7f4ed; display: flex; justify-content: center; padding: 40px 20px; }
+        .container { max-width: 500px; width: 100%; background: #0b223c; padding: 30px; border-radius: 12px; border: 1px solid #c9a24d; text-align: center; }
+        input { width: 100%; padding: 12px; margin: 20px 0; border-radius: 6px; border: 1px solid #c9a24d; background: #121824; color: white; }
+        button { background: #c9a24d; color: #030b14; border: none; padding: 12px 24px; border-radius: 6px; font-weight: bold; cursor: pointer; }
+        #resultado { margin-top: 20px; padding: 15px; border-radius: 6px; display: none; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Validador de Dictámenes NX</h2>
+    <p>Ingresa el código del reporte para verificar su vigencia.</p>
+    <input type="text" id="codigo" placeholder="Ej: NXP-2026-06-001">
+    <button onclick="validar()">Consultar Reporte</button>
+    <div id="resultado"></div>
+</div>
+
+<script>
+    // ESTA ES TU "BASE DE DATOS" DE GUERRILLA
+    // En el futuro, solo agregas una línea aquí por cada reporte generado.
+    const registros = {
+        "NXP-2026-06-001": { "fecha": "2026-06-15", "activo": "BMW X5", "estado": "VIGENTE" },
+        "NXP-2026-06-002": { "fecha": "2026-06-01", "activo": "Departamento Miraflores", "estado": "EXPIRADO" }
+    };
+
+    function validar() {
+        const codigo = document.getElementById('codigo').value.toUpperCase();
+        const resDiv = document.getElementById('resultado');
+        resDiv.style.display = 'block';
+
+        if (registros[codigo]) {
+            const data = registros[codigo];
+            const emision = new Date(data.fecha);
+            const hoy = new Date();
+            const diffDias = Math.floor((hoy - emision) / (1000 * 60 * 60 * 24));
+
+            if (diffDias <= 15) {
+                resDiv.style.background = "#2f855a";
+                resDiv.innerHTML = `✅ <strong>VÁLIDO</strong><br>Activo: ${data.activo}<br>Emitido hace ${diffDias} días.`;
+            } else {
+                resDiv.style.background = "#9b2c2c";
+                resDiv.innerHTML = `❌ <strong>DOCUMENTO EXPIRADO</strong><br>Este reporte superó los 15 días de validez.`;
+            }
+        } else {
+            resDiv.style.background = "#9b2c2c";
+            resDiv.innerHTML = "⚠️ <strong>NO ENCONTRADO</strong><br>El código no existe en nuestra base de datos. ¡Cuidado con posibles fraudes!";
+        }
+    }
+</script>
+</body>
+</html>
