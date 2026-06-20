@@ -16,7 +16,6 @@
       --dark:#030b14;
       --card:rgba(255,255,255,.06);
       --border:rgba(255,255,255,.14);
-      
       --ok:#75d99c;
     }
 
@@ -221,7 +220,7 @@
     }
 
     .error{
-      color:var(--danger);
+      color:#ff6b6b;
       font-size:.82rem;
       display:none;
       margin-top:5px;
@@ -264,12 +263,6 @@
 
     .btn:hover{
       transform:translateY(-2px);
-    }
-
-    .secondary{
-      background:transparent;
-      color:var(--white);
-      border:1px solid var(--border);
     }
 
     .actions{
@@ -360,7 +353,7 @@
           <p class="small">Este código se genera automáticamente y servirá para el seguimiento de la solicitud.</p>
         </div>
 
-        <form id="reclamoForm" class="form" autocomplete="off" onsubmit="event.preventDefault(); if(validarFormulario()){ alert('Solicitud registrada en el sistema. Redirigiendo a la pasarela de pago seguro...'); window.location.href='index.html'; }">
+        <form id="reclamoForm" class="form" autocomplete="off" onsubmit="event.preventDefault(); if(validarFormulario()){ alert('Su reclamación ha sido registrada con éxito en el sistema. Nos pondremos en contacto en el plazo establecido.'); window.location.href='index.html'; }">
           <div>
             <label for="tipo">Tipo de solicitud</label>
             <select id="tipo" required onchange="generarCodigoRegistro()">
@@ -398,16 +391,12 @@
           </div>
 
           <div>
-            <label for="telefono">Teléfono</label>
-            <input id="telefono" type="tel" required maxlength="18" placeholder="+51..." />
-          </div>
-
-          <div>
             <label for="servicio">Servicio relacionado</label>
             <select id="servicio" required>
-              <option value="Análisis Vehicular por IA (S/. 49.00)">Análisis Vehicular por IA (S/. 49.00)</option>
-              <option value="Análisis Inmobiliario por IA (S/. 49.00)">Análisis Inmobiliario por IA (S/. 49.00)</option>
-              <option value="Segunda opinión estratégica (S/. 49.00)">Segunda opinión estratégica (S/. 49.00)</option>
+              <option value="">Selecciona una opción</option>
+              <option value="Evaluación de vehículos">Evaluación de vehículos</option>
+              <option value="Evaluación de inmuebles">Evaluación de inmuebles</option>
+              <option value="Segunda opinión estratégica">Segunda opinión estratégica</option>
               <option value="Otro">Otro</option>
             </select>
           </div>
@@ -440,8 +429,8 @@
 
           <div class="actions">
             <button type="submit" style="width: 100%; background: var(--gold); color: var(--dark); border: none; padding: 14px; border-radius: 6px; font-weight: bold; font-size: 15px; cursor: pointer;">
-  Proceder al Pago y Análisis de Activos (S/. 49.00)
-</button>
+              Registrar Queja o Reclamo Oficial
+            </button>
           </div>
 
           <p id="status" class="status">Formulario validado correctamente.</p>
@@ -500,15 +489,16 @@
   <script>
     let codigoActual = "";
 
-    const camposBloqueados = ["nombre", "documento", "correo", "telefono", "detalle", "pedido"];
+    const camposBloqueados = ["nombre", "documento", "correo", "detalle", "pedido"];
 
     camposBloqueados.forEach(id => {
       const campo = document.getElementById(id);
-
-      campo.addEventListener("paste", e => e.preventDefault());
-      campo.addEventListener("copy", e => e.preventDefault());
-      campo.addEventListener("cut", e => e.preventDefault());
-      campo.addEventListener("drop", e => e.preventDefault());
+      if(campo) {
+        campo.addEventListener("paste", e => e.preventDefault());
+        campo.addEventListener("copy", e => e.preventDefault());
+        campo.addEventListener("cut", e => e.preventDefault());
+        campo.addEventListener("drop", e => e.preventDefault());
+      }
     });
 
     const detalle = document.getElementById("detalle");
@@ -566,7 +556,7 @@
       const hint = document.getElementById("documentoHint");
       const error = document.getElementById("documentoError");
 
-      documento.value = "";
+      document.value = "";
       error.style.display = "none";
 
       if(tipo === "DNI"){
@@ -659,42 +649,7 @@
       return true;
     }
 
-    function crearMensaje(){
-      const fecha = new Date().toLocaleString("es-PE");
-
-      return `LIBRO DE RECLAMACIONES - NETINHO XPERIENCE
-
-Código único de registro: ${codigoActual}
-Fecha de registro: ${fecha}
-
-Tipo de solicitud: ${document.getElementById("tipo").value}
-
-DATOS DEL CONSUMIDOR
-Nombre: ${document.getElementById("nombre").value}
-Tipo de documento: ${document.getElementById("documentoTipo").value}
-Documento: ${document.getElementById("documento").value}
-Correo: ${document.getElementById("correo").value}
-Teléfono: ${document.getElementById("telefono").value}
-
-SERVICIO RELACIONADO
-${document.getElementById("servicio").value}
-
-DETALLE DE LA QUEJA O RECLAMO
-${document.getElementById("detalle").value}
-
-PEDIDO DEL CONSUMIDOR
-${document.getElementById("pedido").value}
-
-DECLARACIÓN
-El consumidor declara que la información proporcionada es real, verídica y corresponde a los hechos descritos.
-
-PLAZO DE ATENCIÓN
-Netinho Xperience dará respuesta en un plazo máximo de 15 días hábiles desde la recepción de esta solicitud.
-
-MENSAJE NX
-Una queja o reclamo no tiene por qué convertirnos en partes enfrentadas. Para Netinho Xperience, también es una oportunidad para entender mejor lo ocurrido, corregir lo necesario y buscar una solución con respeto, claridad y buena fe.`;
-    }
-      window.addEventListener("pagehide", () => {
+    window.addEventListener("pagehide", () => {
       document.getElementById("reclamoForm").reset();
       codigoActual = "";
       document.getElementById("codigoRegistro").textContent = "Pendiente";
