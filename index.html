@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- SEO / SXO STRATEGIC METAS (Ecosistema Dual) -->
   <title>Netinho Xperience | Diagnóstico e Inspección de Activos con Inteligencia Artificial</title>
   <meta name="description" content="Evita fraudes y sobrecostos en Perú. Evaluamos el estado real y respaldo legal de vehículos e inmuebles cruzando evidencias e historiales oficiales por S/. 49.00." />
   <meta name="keywords" content="boleta informativa sunarp, partida registral inmueble, tasacion vehicular peru, verificacion de casas lima, validacion de placas, estafas inmobiliarias, netinho xperience" />
@@ -364,8 +365,9 @@
 
   <main>
 
+    <!-- HERO CON CONTENEDOR MULTI-FONDO AUTOMÁTICO REAJUSTADO -->
     <section class="hero">
-      <div class="hero-bg" id="heroDynamicBg"></div>
+      <div class="hero-bg" id="heroDynamicBg" style="background-image: url('hero0-nx.png');"></div>
       <div class="hero-overlay"></div>
       
       <div class="hero-content">
@@ -397,6 +399,7 @@
       </div>
     </section>
 
+    <!-- SECCIÓN: EL PROBLEMA CORPORATIVO -->
     <section id="problema" class="problem">
       <div class="container">
         <div class="section-title">
@@ -409,6 +412,7 @@
       </div>
     </section>
 
+    <!-- SECCIÓN: CAPAS ANALÍTICAS ADAPTADAS A AMBOS ACTIVOS -->
     <section id="solucion">
       <div class="container">
         <div class="section-title">
@@ -451,6 +455,7 @@
       </div>
     </section>
 
+    <!-- SECCIÓN: PROCESO UNIFICADO PMI -->
     <section id="proceso" class="process">
       <div class="container">
         <div class="section-title">
@@ -509,6 +514,9 @@
     </div>
   </footer>
 
+  <!-- ================= SISTEMA DE CAPTACIÓN DINÁMICO (MODALES MULTI-ACTIVO) ================= -->
+
+  <!-- MODAL DE SELECCIÓN DE ENTRADA -->
   <div id="selector-diagnostico" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 15, 30, 0.95); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(8px);">
     <div style="background: #121824; border: 1px solid #c5a880; padding: 40px; border-radius: 12px; max-width: 600px; width: 90%; text-align: center; position: relative;">
       <a href="#" style="position: absolute; top: 15px; right: 20px; color: #a0aec0; font-size: 24px;">&times;</a>
@@ -531,6 +539,7 @@
     </div>
   </div>
 
+  <!-- FORMULARIO RUTA VEHÍCULOS -->
   <div id="ruta-vehiculos" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 15, 30, 0.97); z-index: 10000; align-items: flex-start; justify-content: center; backdrop-filter: blur(8px); overflow-y: auto; padding: 40px 0;">
     <div style="background: #121824; border: 1px solid #c5a880; padding: 40px; border-radius: 12px; max-width: 700px; width: 90%; margin: auto; position: relative;">
       <a href="#selector-diagnostico" style="position: absolute; top: 20px; left: 20px; color: #c5a880; font-size: 13px; font-weight: bold;">&larr; Volver</a>
@@ -562,6 +571,7 @@
     </div>
   </div>
 
+  <!-- FORMULARIO RUTA INMUEBLES -->
   <div id="ruta-inmuebles" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 15, 30, 0.97); z-index: 10000; align-items: flex-start; justify-content: center; backdrop-filter: blur(8px); overflow-y: auto; padding: 40px 0;">
     <div style="background: #121824; border: 1px solid #c5a880; padding: 40px; border-radius: 12px; max-width: 700px; width: 90%; margin: auto; position: relative;">
       <a href="#selector-diagnostico" style="position: absolute; top: 20px; left: 20px; color: #c5a880; font-size: 13px; font-weight: bold;">&larr; Volver</a>
@@ -597,6 +607,7 @@
     </div>
   </div>
 
+  <!-- PANTALLA TRANSICIÓN DE PAGO -->
   <div id="pantalla-pago" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #030b14; z-index: 20000; align-items: center; justify-content: center; text-align: center; padding: 24px;">
     <div style="max-width: 420px; width: 100%; background: #0b223c; border: 1px solid rgba(197,168,128,0.25); border-radius: 16px; padding: 40px 30px;">
       <div style="font-size: 48px; margin-bottom: 20px; color: var(--gold);">🔒</div>
@@ -612,16 +623,21 @@
 
   <style>@keyframes spin { to { transform: rotate(360deg); } }</style>
 
+  <!-- CONTROL DE ENRUTAMIENTO Y CARRUSEL OPTIMIZADO PARA LA MATRIZ DE GITHUB -->
   <script>
-    // Arreglo optimizado apuntando directamente a tus archivos de GitHub (Ajustados a .jpg según capturas)
+    // Se mapea la matriz exacta del repositorio del 0 al 6 con extensión .png pura
     var backgrounds = [
-      'hero1-nx.jpg',
-      'hero2-nx.jpg',
-      'hero3-nx.jpg',
-      'hero4-nx.jpg',
-      'hero5-nx.jpg'
+      'hero0-nx.png',
+      'hero1-nx.png',
+      'hero2-nx.png',
+      'hero3-nx.png',
+      'hero4-nx.png',
+      'hero5-nx.png',
+      'hero6-nx.png'
     ];
-    var currentIndex = 0;
+    
+    // Iniciamos en 1 porque el fondo por defecto en el HTML ya renderiza de inmediato 'hero0-nx.png'
+    var currentIndex = 1;
     var bgElement = document.getElementById('heroDynamicBg');
 
     function changeHeroBackground() {
@@ -632,13 +648,17 @@
         bgElement.style.backgroundImage = "url('" + backgrounds[currentIndex] + "')";
         currentIndex = (currentIndex + 1) % backgrounds.length;
       };
+      
+      imgPreloader.onerror = function() {
+        console.warn("Fallo de renderizado en: " + backgrounds[currentIndex]);
+        currentIndex = (currentIndex + 1) % backgrounds.length;
+      };
     }
 
-    // Inicializamos la primera carga de inmediato y configuramos la rotación suave cada 7 segundos
-    changeHeroBackground();
+    // Intervalo de transición ultrasuave cada 7 segundos para retención UX
     setInterval(changeHeroBackground, 7000);
 
-    // Sistema de Modales y Rutas Nativo (Haines & PMI Gatekeeper)
+    // Sistema de Modales y Rutas Nativo
     function resetModales() {
       document.getElementById('selector-diagnostico').style.display = 'none';
       document.getElementById('ruta-vehiculos').style.display = 'none';
