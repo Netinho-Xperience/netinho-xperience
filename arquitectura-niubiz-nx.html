@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Arquitectura Niubiz NX®</title>
+<meta name="description" content="Arquitectura de pagos Niubiz para la plataforma Netinho Xperience.">
+
+<style>
+body{
+font-family:Arial,Helvetica,sans-serif;
+max-width:1100px;
+margin:auto;
+padding:40px 24px;
+line-height:1.7;
+background:#f7f4ed;
+color:#1f2933;
+}
+h1,h2,h3{color:#06182c}
+h2{
+margin-top:45px;
+padding-top:20px;
+border-top:1px solid #d7d2c4;
+}
+.box{
+background:#fff;
+border-left:5px solid #c9a24d;
+padding:20px;
+border-radius:12px;
+margin:20px 0;
+}
+.warning{
+background:#fff7e6;
+border-left:5px solid #c9a24d;
+padding:20px;
+border-radius:12px;
+margin:20px 0;
+}
+table{
+width:100%;
+border-collapse:collapse;
+background:#fff;
+margin-top:20px;
+}
+th,td{
+border:1px solid #ddd;
+padding:12px;
+vertical-align:top;
+}
+th{
+background:#06182c;
+color:#fff;
+}
+code,pre{
+background:#eef1f5;
+border-radius:6px;
+}
+code{
+padding:2px 6px;
+}
+pre{
+padding:18px;
+overflow-x:auto;
+}
+footer{
+margin-top:60px;
+border-top:1px solid #ccc;
+padding-top:30px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Arquitectura Niubiz NX®</h1>
+
+<p><strong>Versión:</strong> 1.0</p>
+<p><strong>Uso:</strong> Pagos, activación de expediente, trazabilidad y experiencia de usuario</p>
+
+<div class="box">
+Este documento define la arquitectura funcional y operativa para integrar Niubiz como pasarela de pago dentro de la plataforma Netinho Xperience.
+</div>
+
+<h2>1. Objetivo</h2>
+
+<p>
+Permitir que el usuario pague el servicio NX de forma segura, clara y trazable, activando automáticamente un expediente digital con plazo definido para cargar información.
+</p>
+
+<h2>2. Precio inicial del servicio</h2>
+
+<div class="box">
+<strong>S/ 49.00 por Informe de Decisión Patrimonial NX®.</strong>
+</div>
+
+<p>
+El precio podrá actualizarse según evolución del servicio, costos operativos, promociones o cambios del modelo comercial.
+</p>
+
+<h2>3. Principio UX antes del pago</h2>
+
+<p>
+Antes de redirigir al usuario a Niubiz, la plataforma deberá mostrar un modal de confirmación con:
+</p>
+
+<ul>
+<li>nombre del servicio;</li>
+<li>precio final;</li>
+<li>plazo para cargar información;</li>
+<li>plazo estimado de emisión;</li>
+<li>vigencia del informe;</li>
+<li>alcance del servicio;</li>
+<li>limitaciones principales;</li>
+<li>enlaces a términos, privacidad, descargos y reembolsos.</li>
+</ul>
+
+<div class="warning">
+<strong>Regla UX:</strong> el usuario debe entender qué está comprando antes de pagar.
+</div>
+
+<h2>4. Plazos operativos asociados al pago</h2>
+
+<table>
+<tr>
+<th>Elemento</th>
+<th>Plazo</th>
+</tr>
+
+<tr>
+<td>Acceso para cargar información</td>
+<td>48 horas desde validación del pago.</td>
+</tr>
+
+<tr>
+<td>Emisión del informe</td>
+<td>Hasta 48 horas desde recepción completa de evidencias.</td>
+</tr>
+
+<tr>
+<td>Vigencia del informe</td>
+<td>15 días calendario desde emisión.</td>
+</tr>
+
+<tr>
+<td>Conservación de evidencias</td>
+<td>90 días.</td>
+</tr>
+
+<tr>
+<td>Conservación del informe</td>
+<td>24 meses.</td>
+</tr>
+</table>
+
+<h2>5. Flujo funcional de pago</h2>
+
+<table>
+<tr>
+<th>Fase</th>
+<th>Descripción</th>
+</tr>
+
+<tr>
+<td>1. Usuario inicia evaluación</td>
+<td>Selecciona vehículo o inmueble.</td>
+</tr>
+
+<tr>
+<td>2. Modal previo al pago</td>
+<td>Se muestra precio, alcance, plazos y descargos principales.</td>
+</tr>
+
+<tr>
+<td>3. Aceptación</td>
+<td>Usuario acepta condiciones mínimas y continúa.</td>
+</tr>
+
+<tr>
+<td>4. Redirección a Niubiz</td>
+<td>Usuario realiza el pago en entorno seguro.</td>
+</tr>
+
+<tr>
+<td>5. Validación de pago</td>
+<td>Niubiz retorna resultado de operación.</td>
+</tr>
+
+<tr>
+<td>6. Creación de expediente</td>
+<td>Si el pago es aprobado, NX crea código único.</td>
+</tr>
+
+<tr>
+<td>7. Activación de acceso</td>
+<td>Se habilita carga por 48 horas.</td>
+</tr>
+
+<tr>
+<td>8. Notificación</td>
+<td>Se muestra mensaje de bienvenida y datos del expediente.</td>
+</tr>
+</table>
+
+<h2>6. Estados del pago</h2>
+
+<table>
+<tr>
+<th>Estado</th>
+<th>Significado</th>
+<th>Acción NX</th>
+</tr>
+
+<tr>
+<td>pendiente</td>
+<td>Pago iniciado, aún sin confirmación.</td>
+<td>No crear expediente activo.</td>
+</tr>
+
+<tr>
+<td>aprobado</td>
+<td>Pago validado correctamente.</td>
+<td>Crear expediente y habilitar carga.</td>
+</tr>
+
+<tr>
+<td>rechazado</td>
+<td>Pago no autorizado.</td>
+<td>Informar al usuario y permitir nuevo intento.</td>
+</tr>
+
+<tr>
+<td>error</td>
+<td>Falla técnica o respuesta incompleta.</td>
+<td>Registrar log y mostrar canal de soporte.</td>
+</tr>
+
+<tr>
+<td>reembolsado</td>
+<td>Pago revertido según política.</td>
+<td>Actualizar expediente y bloquear acceso si corresponde.</td>
+</tr>
+</table>
+
+<h2>7. Datos mínimos del pago</h2>
+
+<table>
+<tr>
+<th>Campo</th>
+<th>Uso</th>
+</tr>
+
+<tr>
+<td>id_pago</td>
+<td>Identificador interno.</td>
+</tr>
+
+<tr>
+<td>id_expediente</td>
+<td>Relación con expediente NX.</td>
+</tr>
+
+<tr>
+<td>monto</td>
+<td>Monto pagado.</td>
+</tr>
+
+<tr>
+<td>moneda</td>
+<td>PEN.</td>
+</tr>
+
+<tr>
+<td>estado_pago</td>
+<td>Pendiente, aprobado, rechazado, error o reembolsado.</td>
+</tr>
+
+<tr>
+<td>codigo_operacion</td>
+<td>Código de operación de pasarela.</td>
+</tr>
+
+<tr>
+<td>fecha_pago</td>
+<td>Fecha y hora del pago.</td>
+</tr>
+
+<tr>
+<td>pasarela</td>
+<td>Niubiz.</td>
+</tr>
+</table>
+
+<h2>8. Creación de expediente posterior al pago</h2>
+
+<p>
+Cuando el pago sea aprobado, la plataforma deberá generar un código único.
+</p>
+
+<div class="box">
+Formato sugerido:<br>
+<strong>NX-AAAAMMDD-HHMMSS-XXXX</strong>
+</div>
+
+<p>Ejemplo:</p>
+
+<div class="box">
+<strong>NX-20260623-224522-1937</strong>
+</div>
+
+<p>
+Este código deberá utilizarse para soporte, seguimiento, informe, validación pública y reclamos.
+</p>
+
+<h2>9. Mensaje de bienvenida post-pago</h2>
+
+<div class="box">
+<strong>Gracias por confiar en Netinho Xperience.</strong><br><br>
+Tu expediente ha sido creado correctamente.<br><br>
+Tendrás 48 horas para cargar la información solicitada. Te guiaremos paso a paso para que completes tu expediente con claridad y seguridad.
+</div>
+
+<h2>10. Temporizador visible</h2>
+
+<p>
+Después del pago, el usuario deberá ver un contador:
+</p>
+
+<div class="box">
+Acceso habilitado:<br>
+<strong>47h 59m restantes</strong>
+</div>
+
+<p>
+El contador reduce ansiedad, mejora la finalización del proceso y evita reclamos por vencimiento.
+</p>
+
+<h2>11. Manejo de errores</h2>
+
+<table>
+<tr>
+<th>Escenario</th>
+<th>Respuesta recomendada</th>
+</tr>
+
+<tr>
+<td>Pago rechazado</td>
+<td>Informar con claridad y permitir nuevo intento.</td>
+</tr>
+
+<tr>
+<td>Pago aprobado pero expediente no creado</td>
+<td>Registrar log, mostrar soporte y aplicar política de revisión.</td>
+</tr>
+
+<tr>
+<td>Usuario cierra la pantalla</td>
+<td>Enviar correo con enlace para continuar, si el pago fue aprobado.</td>
+</tr>
+
+<tr>
+<td>Pasarela no responde</td>
+<td>Estado pendiente, log y reintento de validación.</td>
+</tr>
+</table>
+
+<h2>12. Reglas de reembolso vinculadas a pago</h2>
+
+<p>
+El sistema deberá respetar la Política de Reembolsos NX.
+</p>
+
+<ul>
+<li>Si el pago fue validado y nunca se habilitó el acceso, podrá proceder reembolso.</li>
+<li>Si el usuario tuvo acceso y dejó vencer el plazo, no procede reembolso ordinario.</li>
+<li>Si el informe ya fue emitido, no procede reembolso ordinario.</li>
+<li>Si el resultado no coincide con expectativas del usuario, no procede reembolso.</li>
+</ul>
+
+<h2>13. Seguridad</h2>
+
+<ul>
+<li>No exponer claves privadas de Niubiz en frontend.</li>
+<li>Validar pagos desde servidor o función segura.</li>
+<li>Registrar logs de cada evento de pago.</li>
+<li>Evitar crear expedientes activos sin confirmación real de pago.</li>
+<li>Proteger contra doble activación por pago repetido.</li>
+<li>Guardar código de operación para trazabilidad.</li>
+</ul>
+
+<h2>14. Logs obligatorios</h2>
+
+<ul>
+<li>pago_iniciado;</li>
+<li>pago_aprobado;</li>
+<li>pago_rechazado;</li>
+<li>pago_error;</li>
+<li>expediente_creado;</li>
+<li>acceso_habilitado;</li>
+<li>reembolso_solicitado;</li>
+<li>reembolso_aprobado;</li>
+<li>reembolso_rechazado.</li>
+</ul>
+
+<h2>15. Texto recomendado antes del botón de pago</h2>
+
+<div class="box">
+Al continuar, aceptas que el pago habilitará un expediente digital NX por 48 horas para cargar información. El informe será emitido hasta 48 horas después de recibir las evidencias completas y tendrá una vigencia de 15 días calendario.
+</div>
+
+<h2>16. Enlaces obligatorios en pantalla de pago</h2>
+
+<ul>
+<li><a href="terminos.html">Términos y Condiciones</a></li>
+<li><a href="privacidad.html">Política de Privacidad</a></li>
+<li><a href="descargos.html">Descargos Legales</a></li>
+<li><a href="reembolsos.html">Política de Reembolsos</a></li>
+<li><a href="ayuda.html">Centro de Ayuda</a></li>
+<li><a href="reclamaciones.html">Libro de Reclamaciones</a></li>
+</ul>
+
+<h2>17. Recomendación MVP</h2>
+
+<div class="box">
+En la primera versión, el objetivo no debe ser construir una pasarela perfecta y compleja. El objetivo es asegurar un flujo claro, trazable y defendible: usuario informado, pago validado, expediente creado, temporizador visible, carga habilitada e informe emitido.
+</div>
+
+<footer>
+<strong>Netinho Xperience</strong><br>
+Plataforma de Inteligencia Patrimonial<br>
+Lima, Perú
+</footer>
+
+</body>
+</html>
