@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Arquitectura de Datos NX®</title>
+
+<style>
+
+body{
+font-family:Arial,Helvetica,sans-serif;
+max-width:1100px;
+margin:auto;
+padding:40px 24px;
+line-height:1.7;
+background:#f7f4ed;
+color:#1f2933;
+}
+
+h1,h2{
+color:#06182c;
+}
+
+h2{
+margin-top:45px;
+padding-top:20px;
+border-top:1px solid #d7d2c4;
+}
+
+.box{
+background:#fff;
+border-left:5px solid #c9a24d;
+padding:20px;
+border-radius:12px;
+margin:20px 0;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+background:#fff;
+margin-top:20px;
+}
+
+th,td{
+border:1px solid #ddd;
+padding:12px;
+vertical-align:top;
+}
+
+th{
+background:#06182c;
+color:#fff;
+}
+
+footer{
+margin-top:60px;
+border-top:1px solid #ccc;
+padding-top:30px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Arquitectura de Datos NX® (ADB-NX)</h1>
+
+<p><strong>Versión:</strong> 1.0</p>
+<p><strong>Uso:</strong> Desarrollo, Base de Datos y Operación</p>
+
+<div class="box">
+
+Este documento define las entidades de información que soportan la Plataforma de Inteligencia Patrimonial Netinho Xperience.
+
+</div>
+
+<h2>Principios</h2>
+
+<ul>
+
+<li>Minimización de datos.</li>
+<li>Trazabilidad.</li>
+<li>Seguridad.</li>
+<li>Escalabilidad.</li>
+<li>Integridad.</li>
+<li>Eliminación programada.</li>
+
+</ul>
+
+<h2>Tabla: Usuarios</h2>
+
+<table>
+
+<tr>
+<th>Campo</th>
+<th>Descripción</th>
+</tr>
+
+<tr>
+<td>id_usuario</td>
+<td>Identificador interno.</td>
+</tr>
+
+<tr>
+<td>nombres</td>
+<td>Nombres completos.</td>
+</tr>
+
+<tr>
+<td>apellidos</td>
+<td>Apellidos completos.</td>
+</tr>
+
+<tr>
+<td>tipo_documento</td>
+<td>DNI, CE, Pasaporte u otro.</td>
+</tr>
+
+<tr>
+<td>numero_documento</td>
+<td>Número de documento.</td>
+</tr>
+
+<tr>
+<td>correo</td>
+<td>Correo electrónico.</td>
+</tr>
+
+<tr>
+<td>fecha_registro</td>
+<td>Fecha de creación.</td>
+</tr>
+
+</table>
+
+<h2>Tabla: Expedientes</h2>
+
+<table>
+
+<tr>
+<th>Campo</th>
+<th>Descripción</th>
+</tr>
+
+<tr>
+<td>id_expediente</td>
+<td>Código único NX.</td>
+</tr>
+
+<tr>
+<td>id_usuario</td>
+<td>Relación con usuario.</td>
+</tr>
+
+<tr>
+<td>tipo_activo</td>
+<td>Vehículo o Inmueble.</td>
+</tr>
+
+<tr>
+<td>estado</td>
+<td>Abierto, en análisis, emitido, vencido.</td>
+</tr>
+
+<tr>
+<td>fecha_pago</td>
+<td>Fecha de pago.</td>
+</tr>
+
+<tr>
+<td>fecha_activacion</td>
+<td>Inicio del acceso.</td>
+</tr>
+
+<tr>
+<td>fecha_vencimiento_carga</td>
+<td>Fin de las 48 horas.</td>
+</tr>
+
+<tr>
+<td>fecha_emision</td>
+<td>Fecha del informe.</td>
+</tr>
+
+<tr>
+<td>fecha_vencimiento_informe</td>
+<td>15 días.</td>
+</tr>
+
+</table>
+
+<h2>Tabla: Pagos</h2>
+
+<table>
+
+<tr>
+<th>Campo</th>
+<th>Descripción</th>
+</tr>
+
+<tr>
+<td>id_pago</td>
+<td>Identificador.</td>
+</tr>
+
+<tr>
+<td>id_expediente</td>
+<td>Relación con expediente.</td>
+</tr>
+
+<tr>
+<td>monto</td>
+<td>S/49.00 u otro.</td>
+</tr>
+
+<tr>
+<td>estado_pago</td>
+<td>Pendiente, validado, rechazado.</td>
+</tr>
+
+<tr>
+<td>fecha_pago</td>
+<td>Timestamp.</td>
+</tr>
+
+<tr>
+<td>pasarela</td>
+<td>Niubiz.</td>
+</tr>
+
+</table>
+
+<h2>Tabla: Evidencias</h2>
+
+<table>
+
+<tr>
+<th>Campo</th>
+<th>Descripción</th>
+</tr>
+
+<tr>
+<td>id_evidencia</td>
+<td>Identificador.</td>
+</tr>
+
+<tr>
+<td>id_expediente</td>
+<td>Relación.</td>
+</tr>
+
+<tr>
+<td>tipo_archivo</td>
+<td>Foto, PDF, video.</td>
+</tr>
+
+<tr>
+<td>nombre_archivo</td>
+<td>Nombre original.</td>
+</tr>
+
+<tr>
+<td>fecha_carga</td>
+<td>Timestamp.</td>
+</tr>
+
+<tr>
+<td>estado_revision</td>
+<td>Recibido, procesado, rechazado.</td>
+</tr>
+
+</table>
+
+<h2>Tabla: Indicadores NX®</h2>
+
+<table>
+
+<tr>
+<th>Campo</th>
+<th>Descripción</th>
+</tr>
+
+<tr>
+<td>riesgo_nx</td>
+<td>0-100.</td>
+</tr>
+
+<tr>
+<td>incertidumbre_nx</td>
+<td>0-100.</td>
+</tr>
+
+<tr>
+<td>preparacion_nx</td>
+<td>0-100.</td>
+</tr>
+
+<tr>
+<td>calidad_expediente</td>
+<td>0-100.</td>
+</tr>
+
+<tr>
+<td>confianza_informe</td>
+<td>0-100.</td>
+</tr>
+
+</table>
+
+<h2>Tabla: Informes</h2>
+
+<table>
+
+<tr>
+<th>Campo</th>
+<th>Descripción</th>
+</tr>
+
+<tr>
+<td>id_informe</td>
+<td>Identificador.</td>
+</tr>
+
+<tr>
+<td>codigo_validacion</td>
+<td>Código único.</td>
+</tr>
+
+<tr>
+<td>url_pdf</td>
+<td>Ubicación segura.</td>
+</tr>
+
+<tr>
+<td>fecha_emision</td>
+<td>Timestamp.</td>
+</tr>
+
+<tr>
+<td>vigente</td>
+<td>Sí o No.</td>
+</tr>
+
+<tr>
+<td>version</td>
+<td>1.0, 2.0, etc.</td>
+</tr>
+
+</table>
+
+<h2>Tabla: Logs</h2>
+
+<table>
+
+<tr>
+<th>Campo</th>
+<th>Descripción</th>
+</tr>
+
+<tr>
+<td>id_log</td>
+<td>Identificador.</td>
+</tr>
+
+<tr>
+<td>id_expediente</td>
+<td>Relación.</td>
+</tr>
+
+<tr>
+<td>fecha</td>
+<td>Timestamp.</td>
+</tr>
+
+<tr>
+<td>evento</td>
+<td>Acción realizada.</td>
+</tr>
+
+<tr>
+<td>detalle</td>
+<td>Información adicional.</td>
+</tr>
+
+</table>
+
+<h2>Política de Conservación</h2>
+
+<table>
+
+<tr>
+<th>Información</th>
+<th>Plazo</th>
+</tr>
+
+<tr>
+<td>Evidencias</td>
+<td>90 días</td>
+</tr>
+
+<tr>
+<td>Informes</td>
+<td>24 meses</td>
+</tr>
+
+<tr>
+<td>Códigos de validación</td>
+<td>24 meses</td>
+</tr>
+
+<tr>
+<td>Logs</td>
+<td>24 meses</td>
+</tr>
+
+</table>
+
+<footer>
+
+<strong>Netinho Xperience</strong><br>
+Plataforma de Inteligencia Patrimonial<br>
+Lima, Perú
+
+</footer>
+
+</body>
+</html>
