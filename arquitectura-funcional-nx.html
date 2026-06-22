@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Arquitectura Funcional NX®</title>
+
+<style>
+
+body{
+font-family:Arial,Helvetica,sans-serif;
+max-width:1100px;
+margin:auto;
+padding:40px 24px;
+line-height:1.7;
+background:#f7f4ed;
+color:#1f2933;
+}
+
+h1,h2{
+color:#06182c;
+}
+
+h2{
+margin-top:45px;
+padding-top:20px;
+border-top:1px solid #d7d2c4;
+}
+
+.box{
+background:#fff;
+border-left:5px solid #c9a24d;
+padding:20px;
+border-radius:12px;
+margin:20px 0;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+background:#fff;
+}
+
+th,td{
+border:1px solid #ddd;
+padding:12px;
+vertical-align:top;
+}
+
+th{
+background:#06182c;
+color:#fff;
+}
+
+footer{
+margin-top:60px;
+border-top:1px solid #ccc;
+padding-top:30px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Arquitectura Funcional NX® (AF-NX)</h1>
+
+<p><strong>Versión:</strong> 1.0</p>
+
+<p><strong>Uso:</strong> Desarrollo y Operación</p>
+
+<div class="box">
+
+Este documento define la arquitectura funcional de la Plataforma de Inteligencia Patrimonial Netinho Xperience.
+
+</div>
+
+<h2>Objetivo General</h2>
+
+<p>
+
+Reducir incertidumbre antes de la compra, venta o evaluación de activos relevantes mediante un proceso automatizado, basado en información, evidencias y criterios objetivos.
+
+</p>
+
+<h2>Arquitectura General</h2>
+
+<div class="box">
+
+Landing Institucional
+
+↓
+
+Evaluación
+
+↓
+
+Pago
+
+↓
+
+Expediente
+
+↓
+
+Carga de Evidencias
+
+↓
+
+Procesamiento
+
+↓
+
+Informe
+
+↓
+
+Validación
+
+</div>
+
+<h2>Módulos Oficiales</h2>
+
+<table>
+
+<tr>
+
+<th>Módulo</th>
+<th>Propósito</th>
+
+</tr>
+
+<tr>
+
+<td>Landing</td>
+<td>Presentar la propuesta de valor y generar confianza.</td>
+
+</tr>
+
+<tr>
+
+<td>Evaluación</td>
+<td>Seleccionar vehículo o inmueble.</td>
+
+</tr>
+
+<tr>
+
+<td>Pago</td>
+<td>Validar la compra del servicio.</td>
+
+</tr>
+
+<tr>
+
+<td>Expediente</td>
+<td>Crear código único y habilitar acceso.</td>
+
+</tr>
+
+<tr>
+
+<td>Carga</td>
+<td>Recibir fotografías y documentos.</td>
+
+</tr>
+
+<tr>
+
+<td>Procesamiento</td>
+<td>Organizar y analizar información.</td>
+
+</tr>
+
+<tr>
+
+<td>Informe</td>
+<td>Emitir el Informe de Decisión Patrimonial NX®.</td>
+
+</tr>
+
+<tr>
+
+<td>Validación</td>
+<td>Verificar autenticidad del informe.</td>
+
+</tr>
+
+</table>
+
+<h2>Arquitectura Tecnológica Inicial</h2>
+
+<table>
+
+<tr>
+
+<th>Capa</th>
+<th>Tecnología</th>
+
+</tr>
+
+<tr>
+
+<td>Frontend</td>
+<td>Next.js + Tailwind CSS</td>
+
+</tr>
+
+<tr>
+
+<td>Hosting</td>
+<td>Vercel</td>
+
+</tr>
+
+<tr>
+
+<td>Base de Datos</td>
+<td>Supabase PostgreSQL</td>
+
+</tr>
+
+<tr>
+
+<td>Storage</td>
+<td>Supabase Storage</td>
+
+</tr>
+
+<tr>
+
+<td>Motor IA</td>
+<td>Gemini API</td>
+
+</tr>
+
+<tr>
+
+<td>Pagos</td>
+<td>Niubiz</td>
+
+</tr>
+
+</table>
+
+<h2>Estructura de Expediente</h2>
+
+<div class="box">
+
+Código:
+
+NX-AAAAMMDD-HHMMSS-XXXX
+
+</div>
+
+El expediente deberá almacenar:
+
+<ul>
+
+<li>Pago.</li>
+
+<li>Fecha de activación.</li>
+
+<li>Plazo de vencimiento.</li>
+
+<li>Documentos.</li>
+
+<li>Evidencias.</li>
+
+<li>Indicadores.</li>
+
+<li>Informe.</li>
+
+<li>Logs.</li>
+
+</ul>
+
+<h2>Plazos Operativos</h2>
+
+<table>
+
+<tr>
+
+<th>Actividad</th>
+<th>Plazo</th>
+
+</tr>
+
+<tr>
+
+<td>Carga de información</td>
+<td>48 horas</td>
+
+</tr>
+
+<tr>
+
+<td>Emisión de informe</td>
+<td>48 horas</td>
+
+</tr>
+
+<tr>
+
+<td>Vigencia del informe</td>
+<td>15 días calendario</td>
+
+</tr>
+
+<tr>
+
+<td>Conservación de documentos</td>
+<td>90 días</td>
+
+</tr>
+
+<tr>
+
+<td>Conservación de informes</td>
+<td>24 meses</td>
+
+</tr>
+
+</table>
+
+<h2>Canales Oficiales</h2>
+
+<p>
+
+Consultas:
+
+<strong>netinhoxperience@gmail.com</strong>
+
+</p>
+
+<h2>Principios de Arquitectura</h2>
+
+<ul>
+
+<li>Mobile First.</li>
+
+<li>SEO y SXO.</li>
+
+<li>Trazabilidad.</li>
+
+<li>Escalabilidad.</li>
+
+<li>Seguridad.</li>
+
+<li>Transparencia.</li>
+
+<li>Reducción de incertidumbre.</li>
+
+<li>Simplicidad.</li>
+
+</ul>
+
+<footer>
+
+<strong>Netinho Xperience</strong><br>
+Plataforma de Inteligencia Patrimonial<br>
+Lima, Perú
+
+</footer>
+
+</body>
+
+</html>
