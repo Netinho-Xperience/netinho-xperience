@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Arquitectura de Implementación NX®</title>
+<meta name="description" content="Arquitectura definitiva de implementación para la plataforma Netinho Xperience.">
+
+<style>
+body{
+font-family:Arial,Helvetica,sans-serif;
+max-width:1100px;
+margin:auto;
+padding:40px 24px;
+line-height:1.7;
+background:#f7f4ed;
+color:#1f2933;
+}
+h1,h2,h3{color:#06182c}
+h2{
+margin-top:45px;
+padding-top:20px;
+border-top:1px solid #d7d2c4;
+}
+.box{
+background:#fff;
+border-left:5px solid #c9a24d;
+padding:20px;
+border-radius:12px;
+margin:20px 0;
+}
+table{
+width:100%;
+border-collapse:collapse;
+background:#fff;
+margin-top:20px;
+}
+th,td{
+border:1px solid #ddd;
+padding:12px;
+vertical-align:top;
+}
+th{
+background:#06182c;
+color:#fff;
+}
+code{
+background:#eef1f5;
+padding:2px 6px;
+border-radius:5px;
+}
+footer{
+margin-top:60px;
+border-top:1px solid #ccc;
+padding-top:30px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Arquitectura de Implementación NX®</h1>
+
+<p><strong>Versión:</strong> 1.0</p>
+<p><strong>Uso:</strong> Desarrollo, despliegue, seguridad y operación técnica</p>
+
+<div class="box">
+Este documento define la arquitectura técnica recomendada para implementar la plataforma Netinho Xperience como producto digital escalable, mobile-first y orientado a decisiones patrimoniales.
+</div>
+
+<h2>1. Stack tecnológico recomendado</h2>
+
+<table>
+<tr>
+<th>Capa</th>
+<th>Herramienta recomendada</th>
+<th>Propósito</th>
+</tr>
+
+<tr>
+<td>Frontend</td>
+<td>Next.js + Tailwind CSS</td>
+<td>Interfaz rápida, responsive, SEO/SXO y experiencia mobile-first.</td>
+</tr>
+
+<tr>
+<td>Hosting</td>
+<td>Vercel</td>
+<td>Despliegue gratuito inicial, SSL, rendimiento y escalabilidad.</td>
+</tr>
+
+<tr>
+<td>Base de datos</td>
+<td>Supabase PostgreSQL</td>
+<td>Usuarios, expedientes, pagos, informes, logs e indicadores.</td>
+</tr>
+
+<tr>
+<td>Storage</td>
+<td>Supabase Storage</td>
+<td>Almacenamiento temporal de documentos, fotografías y PDFs.</td>
+</tr>
+
+<tr>
+<td>Autenticación</td>
+<td>Supabase Auth</td>
+<td>Acceso seguro de usuarios y recuperación de cuenta.</td>
+</tr>
+
+<tr>
+<td>IA</td>
+<td>Gemini API</td>
+<td>Lectura, análisis, clasificación y apoyo en generación del informe.</td>
+</tr>
+
+<tr>
+<td>Pagos</td>
+<td>Niubiz o pasarela equivalente</td>
+<td>Validación automática de pagos por servicio.</td>
+</tr>
+
+<tr>
+<td>PDF</td>
+<td>Generador de PDF server-side</td>
+<td>Emisión del Informe de Decisión Patrimonial NX®.</td>
+</tr>
+
+<tr>
+<td>Validación</td>
+<td>Página pública con código único</td>
+<td>Verificar autenticidad, vigencia y estado del informe.</td>
+</tr>
+</table>
+
+<h2>2. Repositorios recomendados</h2>
+
+<div class="box">
+<strong>Repositorio actual:</strong><br>
+Landing institucional y documentos maestros.
+</div>
+
+<div class="box">
+<strong>Repositorio futuro recomendado:</strong><br>
+<code>nx-decision-engine</code><br><br>
+Producto funcional con Next.js, Supabase, Niubiz y Gemini.
+</div>
+
+<h2>3. Estructura sugerida del proyecto</h2>
+
+<div class="box">
+<pre>
+nx-decision-engine/
+├── app/
+│   ├── page.tsx
+│   ├── evaluacion/
+│   ├── pago/
+│   ├── carga/
+│   ├── seguimiento/
+│   ├── informe/
+│   ├── validar/
+│   └── legal/
+│
+├── components/
+│   ├── Layout/
+│   ├── Forms/
+│   ├── Upload/
+│   ├── Payment/
+│   ├── Report/
+│   └── UI/
+│
+├── lib/
+│   ├── supabase.ts
+│   ├── gemini.ts
+│   ├── niubiz.ts
+│   ├── pdf.ts
+│   └── validators.ts
+│
+├── services/
+│   ├── expedienteService.ts
+│   ├── pagoService.ts
+│   ├── evidenciaService.ts
+│   ├── informeService.ts
+│   └── validacionService.ts
+│
+├── public/
+│   ├── assets/
+│   ├── ejemplos-fotos/
+│   └── logos/
+│
+├── docs/
+│   ├── manual-operativo.html
+│   ├── manual-idp-nx.html
+│   ├── matriz-riesgos-nx.html
+│   ├── manual-indicadores-nx.html
+│   └── arquitectura-datos-nx.html
+│
+├── .env.local
+└── README.md
+</pre>
+</div>
+
+<h2>4. Variables de entorno</h2>
+
+<table>
+<tr>
+<th>Variable</th>
+<th>Uso</th>
+</tr>
+
+<tr>
+<td>SUPABASE_URL</td>
+<td>Conexión al proyecto Supabase.</td>
+</tr>
+
+<tr>
+<td>SUPABASE_ANON_KEY</td>
+<td>Clave pública para operaciones permitidas.</td>
+</tr>
+
+<tr>
+<td>SUPABASE_SERVICE_ROLE_KEY</td>
+<td>Clave privada para operaciones internas. No debe exponerse al frontend.</td>
+</tr>
+
+<tr>
+<td>GEMINI_API_KEY</td>
+<td>Conexión al motor de IA.</td>
+</tr>
+
+<tr>
+<td>NIUBIZ_MERCHANT_ID</td>
+<td>Identificador de comercio.</td>
+</tr>
+
+<tr>
+<td>NIUBIZ_ACCESS_KEY</td>
+<td>Credencial de integración.</td>
+</tr>
+
+<tr>
+<td>NIUBIZ_SECRET_KEY</td>
+<td>Clave privada de integración.</td>
+</tr>
+
+<tr>
+<td>NEXT_PUBLIC_APP_URL</td>
+<td>URL pública de la aplicación.</td>
+</tr>
+</table>
+
+<h2>5. Flujo técnico principal</h2>
+
+<table>
+<tr>
+<th>Fase</th>
+<th>Acción técnica</th>
+</tr>
+
+<tr>
+<td>1. Usuario inicia evaluación</td>
+<td>Frontend captura tipo de activo y muestra modal previo al pago.</td>
+</tr>
+
+<tr>
+<td>2. Usuario acepta condiciones</td>
+<td>Se registra consentimiento previo.</td>
+</tr>
+
+<tr>
+<td>3. Pago</td>
+<td>Niubiz procesa el pago y retorna estado.</td>
+</tr>
+
+<tr>
+<td>4. Creación de expediente</td>
+<td>Supabase crea código único NX y estado inicial.</td>
+</tr>
+
+<tr>
+<td>5. Carga de evidencias</td>
+<td>Storage recibe archivos y los asocia al expediente.</td>
+</tr>
+
+<tr>
+<td>6. Validación de calidad</td>
+<td>Se verifica tipo, tamaño, legibilidad y completitud mínima.</td>
+</tr>
+
+<tr>
+<td>7. Procesamiento IA</td>
+<td>Gemini analiza información y genera hallazgos estructurados.</td>
+</tr>
+
+<tr>
+<td>8. Cálculo de indicadores</td>
+<td>Se calculan IR-NX, II-NX, IPD-NX, CE-NX y NCI-NX.</td>
+</tr>
+
+<tr>
+<td>9. Emisión de informe</td>
+<td>Se genera PDF con código único, marca de agua, vigencia y descargos.</td>
+</tr>
+
+<tr>
+<td>10. Validación pública</td>
+<td>La página validar permite verificar código, estado y vigencia.</td>
+</tr>
+</table>
+
+<h2>6. Estados del expediente</h2>
+
+<table>
+<tr>
+<th>Estado</th>
+<th>Significado</th>
+</tr>
+
+<tr>
+<td>pago_pendiente</td>
+<td>El usuario inició el proceso, pero el pago aún no fue validado.</td>
+</tr>
+
+<tr>
+<td>activo</td>
+<td>Pago validado y expediente habilitado.</td>
+</tr>
+
+<tr>
+<td>carga_pendiente</td>
+<td>Faltan evidencias o documentos.</td>
+</tr>
+
+<tr>
+<td>carga_completa</td>
+<td>El expediente alcanzó el mínimo necesario.</td>
+</tr>
+
+<tr>
+<td>en_analisis</td>
+<td>El expediente está siendo procesado.</td>
+</tr>
+
+<tr>
+<td>informe_emitido</td>
+<td>El informe fue generado.</td>
+</tr>
+
+<tr>
+<td>vencido</td>
+<td>El plazo de carga o vigencia del informe expiró.</td>
+</tr>
+
+<tr>
+<td>rechazado</td>
+<td>El expediente fue rechazado por causa técnica, legal o de integridad.</td>
+</tr>
+</table>
+
+<h2>7. Seguridad mínima obligatoria</h2>
+
+<ul>
+<li>HTTPS obligatorio.</li>
+<li>Claves privadas fuera del frontend.</li>
+<li>Control de acceso por usuario.</li>
+<li>URLs firmadas para documentos sensibles.</li>
+<li>Eliminación programada de evidencias.</li>
+<li>Logs de actividad.</li>
+<li>Validación de tamaño y tipo de archivo.</li>
+<li>Protección contra carga maliciosa.</li>
+<li>Política de privacidad visible.</li>
+</ul>
+
+<h2>8. Reglas de almacenamiento</h2>
+
+<table>
+<tr>
+<th>Elemento</th>
+<th>Tiempo recomendado</th>
+</tr>
+
+<tr>
+<td>Evidencias y documentos</td>
+<td>90 días.</td>
+</tr>
+
+<tr>
+<td>Informes emitidos</td>
+<td>24 meses.</td>
+</tr>
+
+<tr>
+<td>Códigos de validación</td>
+<td>24 meses.</td>
+</tr>
+
+<tr>
+<td>Logs de expediente</td>
+<td>24 meses.</td>
+</tr>
+</table>
+
+<h2>9. Integración con documentos legales</h2>
+
+<p>
+La plataforma debe enlazar siempre a:
+</p>
+
+<ul>
+<li>terminos.html</li>
+<li>privacidad.html</li>
+<li>descargos.html</li>
+<li>consentimiento.html</li>
+<li>cookies.html</li>
+<li>reembolsos.html</li>
+<li>reclamaciones.html</li>
+</ul>
+
+<h2>10. Principio de implementación MVP</h2>
+
+<div class="box">
+El MVP debe validar el flujo completo con la menor complejidad posible: pago, expediente, carga, informe y validación. Toda funcionalidad adicional debe incorporarse después de validar uso real y disposición de pago.
+</div>
+
+<h2>11. Riesgos técnicos principales</h2>
+
+<table>
+<tr>
+<th>Riesgo</th>
+<th>Mitigación</th>
+</tr>
+
+<tr>
+<td>Falla de pasarela de pago</td>
+<td>Logs, validación manual excepcional y política de reembolso.</td>
+</tr>
+
+<tr>
+<td>Archivos ilegibles</td>
+<td>Validación previa y solicitud de recarga.</td>
+</tr>
+
+<tr>
+<td>IA genera lectura insuficiente</td>
+<td>Indicadores de incertidumbre y descargos claros.</td>
+</tr>
+
+<tr>
+<td>Exposición de datos</td>
+<td>Seguridad, almacenamiento limitado y accesos restringidos.</td>
+</tr>
+
+<tr>
+<td>Escalamiento rápido</td>
+<td>Arquitectura desacoplada y monitoreo.</td>
+</tr>
+</table>
+
+<footer>
+<strong>Netinho Xperience</strong><br>
+Plataforma de Inteligencia Patrimonial<br>
+Lima, Perú
+</footer>
+
+</body>
+</html>
