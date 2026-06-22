@@ -4,10 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- SEO / SXO STRATEGIC METAS (Ecosistema Dual) -->
-  <title>Netinho Xperience | Diagnóstico e Inspección de Activos con Inteligencia Artificial</title>
-  <meta name="description" content="Evita fraudes y sobrecostos en Perú. Evaluamos el estado real y respaldo legal de vehículos e inmuebles cruzando evidencias e historiales oficiales por S/. 49.00." />
-  <meta name="keywords" content="boleta informativa sunarp, partida registral inmueble, tasacion vehicular peru, verificacion de casas lima, validacion de placas, estafas inmobiliarias, netinho xperience" />
+  <title>Netinho Xperience | Decisiones estratégicas sobre activos</title>
+  <meta name="description" content="Segunda opinión estratégica para comprar, vender o invertir en vehículos e inmuebles con más criterio, menos incertidumbre y mejor negociación." />
+  <meta name="keywords" content="segunda opinión vehículo Perú, evaluación inmueble Lima, decisión compra auto usado, asesoría compra inmueble, due diligence patrimonial, Netinho Xperience" />
+
+  <meta property="og:title" content="Netinho Xperience | Decisiones estratégicas sobre activos" />
+  <meta property="og:description" content="No vendemos activos. Ayudamos a tomar mejores decisiones sobre ellos." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="hero-nx.png" />
 
   <style>
     :root{
@@ -22,7 +26,9 @@
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
+
     html{scroll-behavior:smooth}
+
     body{
       font-family:Inter,Segoe UI,Arial,sans-serif;
       background:var(--dark);
@@ -37,7 +43,7 @@
       top:0;
       width:100%;
       z-index:100;
-      background:rgba(3,11,20,.72);
+      background:rgba(3,11,20,.76);
       backdrop-filter:blur(16px);
       border-bottom:1px solid var(--border);
     }
@@ -67,55 +73,27 @@
 
     .nav-links{
       display:flex;
-      gap:28px;
+      gap:26px;
       font-size:.9rem;
       color:var(--muted);
     }
 
     .nav-links a:hover{color:var(--gold)}
 
-    /* HERO CON TRANSICIÓN DINÁMICA DE FONDOS */
     .hero{
       min-height:100vh;
       padding:140px 24px 80px;
-      position: relative;
+      background:
+        linear-gradient(90deg, rgba(3,11,20,.98) 0%, rgba(6,24,44,.88) 45%, rgba(6,24,44,.45) 100%),
+        url("hero-nx.png") center right / cover no-repeat;
       display:flex;
       align-items:center;
-      overflow: hidden;
-      background: var(--navy);
-    }
-
-    /* Capa de imagen de fondo con desvanecimiento controlado por JS */
-    .hero-bg{
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-position: center right;
-      background-size: cover;
-      background-repeat: no-repeat;
-      z-index: 1;
-      transition: background-image 1.2s ease-in-out;
-    }
-
-    /* Capa de degradado corporativo superpuesta para asegurar legibilidad del texto */
-    .hero-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, rgba(3,11,20,0.98) 0%, rgba(6,24,44,0.88) 45%, rgba(6,24,44,0.4) 100%);
-      z-index: 2;
     }
 
     .hero-content{
       max-width:1180px;
       margin:auto;
       width:100%;
-      position: relative;
-      z-index: 3;
     }
 
     .eyebrow{
@@ -128,14 +106,14 @@
 
     h1{
       max-width:780px;
-      font-size:clamp(2.3rem,5vw,4.5rem);
-      line-height:1.05;
-      letter-spacing:-.04em;
+      font-size:clamp(2.4rem,5vw,4.8rem);
+      line-height:1.04;
+      letter-spacing:-.045em;
       margin-bottom:28px;
     }
 
     .hero-sub{
-      max-width:640px;
+      max-width:650px;
       color:var(--muted);
       font-size:1.15rem;
       margin-bottom:36px;
@@ -149,12 +127,12 @@
     }
 
     .btn{
-      padding:15px 28px;
+      padding:15px 26px;
       border-radius:999px;
-      font-weight:600;
+      font-weight:700;
       transition:.28s ease;
       border:1px solid var(--border);
-      cursor:pointer;
+      display:inline-block;
     }
 
     .btn-primary{
@@ -173,7 +151,7 @@
       display:grid;
       grid-template-columns:repeat(3,minmax(0,1fr));
       gap:14px;
-      max-width:820px;
+      max-width:840px;
     }
 
     .point{
@@ -191,13 +169,12 @@
       margin-bottom:8px;
     }
 
-    .point strong{font-size:.98rem}
-
     section{padding:96px 24px}
+
     .container{max-width:1180px;margin:auto}
 
     .section-title{
-      max-width:760px;
+      max-width:780px;
       margin-bottom:46px;
     }
 
@@ -209,8 +186,8 @@
     }
 
     .section-title h2{
-      font-size:clamp(2rem,4vw,3.2rem);
-      line-height:1.1;
+      font-size:clamp(2rem,4vw,3.4rem);
+      line-height:1.08;
       letter-spacing:-.04em;
       margin-top:14px;
     }
@@ -220,6 +197,8 @@
       margin-top:18px;
       font-size:1.05rem;
     }
+
+    .problem{background:linear-gradient(180deg,var(--dark),var(--navy))}
 
     .grid-3{
       display:grid;
@@ -232,10 +211,7 @@
       border:1px solid var(--border);
       border-radius:26px;
       padding:32px;
-      min-height:320px;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
+      min-height:260px;
       transition:.3s ease;
     }
 
@@ -245,447 +221,35 @@
     }
 
     .card h3{
-      margin-bottom:12px;
-      font-size:1.25rem;
-      color:#fff;
+      margin-bottom:14px;
+      font-size:1.28rem;
     }
 
-    .card-body{
-      font-size:.92rem;
+    .card p{
       color:var(--muted);
+      font-size:.98rem;
     }
 
-    .card-badge{
+    .badge{
       display:inline-block;
-      align-self:flex-start;
-      margin-top:16px;
-      background:rgba(201,162,77,.1);
+      margin-top:18px;
+      background:rgba(201,162,77,.10);
       color:var(--gold);
-      padding:4px 10px;
-      border-radius:6px;
-      font-size:11px;
-      font-weight:600;
+      padding:5px 10px;
+      border-radius:8px;
+      font-size:.72rem;
+      font-weight:700;
       text-transform:uppercase;
+      letter-spacing:.06em;
     }
 
-    .problem{background:linear-gradient(180deg,var(--dark),var(--navy))}
-    .process{background:var(--navy)}
-
-    .steps{
-      display:grid;
-      grid-template-columns:repeat(5,1fr);
-      gap:14px;
+    .decision-box{
+      background:
+        linear-gradient(135deg,rgba(201,162,77,.12),rgba(255,255,255,.03));
+      border:1px solid rgba(201,162,77,.25);
+      border-radius:30px;
+      padding:46px;
     }
 
-    .step{
-      border-top:1px solid var(--gold);
-      padding-top:18px;
-    }
-
-    .step span{
-      color:var(--gold);
-      font-size:.85rem;
-    }
-
-    .step h3{
-      margin:10px 0;
-      font-size:1rem;
-    }
-
-    .step p{
-      color:var(--muted);
-      font-size:.9rem;
-    }
-
-    .cta{
-      text-align:center;
-      background:linear-gradient(180deg,var(--navy),#02070d);
-    }
-
-    .cta h2{
-      font-size:clamp(2rem,4.5vw,3.5rem);
-      margin-bottom:22px;
-      letter-spacing:-.04em;
-    }
-
-    .cta p{
-      max-width:620px;
-      margin:0 auto 34px;
-      color:var(--muted);
-    }
-
-    footer{
-      padding:36px 24px;
-      border-top:1px solid var(--border);
-      color:var(--muted);
-      font-size:.9rem;
-    }
-
-    .footer-inner{
-      max-width:1180px;
-      margin:auto;
-      display:flex;
-      justify-content:space-between;
-      gap:24px;
-      flex-wrap:wrap;
-    }
-
-    @media(max-width:900px){
-      .nav-links{display:none}
-      .hero{
-        padding-top:130px;
-      }
-      .hero-bg {
-        background-position: center center;
-      }
-      .hero-overlay {
-        background: linear-gradient(180deg, rgba(3,11,20,0.96) 0%, rgba(6,24,44,0.85) 60%, rgba(6,24,44,0.95) 100%);
-      }
-      .hero-points, .grid-3, .steps{grid-template-columns:1fr}
-    }
-  </style>
-</head>
-
-<body>
-
-  <header class="navbar">
-    <div class="nav-inner">
-      <a class="brand" href="#">
-        <img src="nx-isotipo.png" alt="Netinho Xperience">
-        <span>Netinho Xperience</span>
-      </a>
-      <nav class="nav-links">
-        <a href="#problema">Asimetría de Datos</a>
-        <a href="#solucion">Capa Analítica</a>
-        <a href="#proceso">Proceso PMI</a>
-        <a href="reclamaciones.html">Libro de Reclamaciones</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-
-    <!-- HERO CON CONTENEDOR MULTI-FONDO AUTOMÁTICO REAJUSTADO -->
-    <section class="hero">
-      <div class="hero-bg" id="heroDynamicBg" style="background-image: url('hero0-nx.png');"></div>
-      <div class="hero-overlay"></div>
-      
-      <div class="hero-content">
-        <div class="eyebrow">Auditoría Digital de Activos de Alto Valor</div>
-        <h1>¿Inmuebles o Vehículos usados? Valida la verdad antes de pagar.</h1>
-        <p class="hero-sub">
-          Protegemos tu capital contra vicios ocultos y fraudes legales en el mercado peruano. Filtramos registros fotográficos técnicos y documentación registral oficial con IA por una tarifa plana.
-        </p>
-
-        <div class="actions">
-          <a class="btn btn-primary" href="#selector-diagnostico">Iniciar Inspección Digital (S/. 49.00)</a>
-          <a class="btn btn-secondary" href="#proceso">Ver alcance del control</a>
-        </div>
-
-        <div class="hero-points">
-          <div class="point">
-            <span>01</span>
-            <strong>Tarifa Única Horizontal</strong>
-          </div>
-          <div class="point">
-            <span>02</span>
-            <strong>Cifrado de Evidencias Físicas</strong>
-          </div>
-          <div class="point">
-            <span>03</span>
-            <strong>Blindaje Legal SUNARP</strong>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECCIÓN: EL PROBLEMA CORPORATIVO -->
-    <section id="problema" class="problem">
-      <div class="container">
-        <div class="section-title">
-          <small>Riesgo Estructural e Informativo</small>
-          <h2>El peligro real radica en lo que decide omitir el vendedor.</h2>
-          <p>
-            Ya sea un departamento con cargas técnicas en registros públicos o un automóvil con el odómetro manipulado y gravámenes vigentes, la falta de información simétrica destruye el patrimonio de los compradores en el Perú de forma diaria.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECCIÓN: CAPAS ANALÍTICAS ADAPTADAS A AMBOS ACTIVOS -->
-    <section id="solucion">
-      <div class="container">
-        <div class="section-title">
-          <small>El Producto Unificado NX · S/. 49.00</small>
-          <h2>Tres capas analíticas cruzadas por algoritmos avanzados.</h2>
-          <p>Estructuramos un reporte de ingeniería y cumplimiento legal objetivo, adaptado a la naturaleza de tu próximo activo patrimonial.</p>
-        </div>
-
-        <div class="grid-3">
-          <div class="card">
-            <div>
-              <h3>1. Reconocimiento Óptico de Conservación</h3>
-              <p class="card-body">
-                Nuestra IA evalúa asimetrías críticas: para autos, descuadres de chasis y desgaste interno; para inmuebles, patrones ópticos de microfisuras, humedades estructurales y nivelación visible de acabados.
-              </p>
-            </div>
-            <span class="card-badge">Análisis de Evidencia Física</span>
-          </div>
-
-          <div class="card">
-            <div>
-              <h3>2. Desglose del Historial Registral</h3>
-              <p class="card-body">
-                Auditoría algorítmica de documentos oficiales. Desglosamos la Boleta Informativa vehicular o la Partida Electrónica de la propiedad para identificar de inmediato prendas, cargas técnicas, embargos y tracto sucesivo defectuoso.
-              </p>
-            </div>
-            <span class="card-badge">Filtro Legal SUNARP</span>
-          </div>
-
-          <div class="card">
-            <div>
-              <h3>3. Ratio de Conveniencia de Compra</h3>
-              <p class="card-body">
-                Modelamos las variables de mercado en Perú. Contrastamos precio pactado frente al estado técnico tangible y depreciación proyectada para asignarte un nivel matemático de riesgo real.
-              </p>
-            </div>
-            <span class="card-badge">Algoritmo Financiero</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECCIÓN: PROCESO UNIFICADO PMI -->
-    <section id="proceso" class="process">
-      <div class="container">
-        <div class="section-title">
-          <small>Gobernanza de Datos</small>
-          <h2>Cinco fases automatizadas bajo estándares de control.</h2>
-          <p>Aplicamos rigurosidad de procesos PMI para procesar, auditar y emitir dictámenes limpios.</p>
-        </div>
-
-        <div class="steps">
-          <div class="step">
-            <span>01</span>
-            <h3>Identificación</h3>
-            <p>Ingreso de credenciales del activo (Placa o Partida).</p>
-          </div>
-          <div class="step">
-            <span>02</span>
-            <h3>Indexación</h3>
-            <p>Carga segura de evidencias y documentos SUNARP.</p>
-          </div>
-          <div class="step">
-            <span>03</span>
-            <h3>Escaneo IA</h3>
-            <p>Procesamiento analítico de metadatos, pixeles y textos.</p>
-          </div>
-          <div class="step">
-            <span>04</span>
-            <h3>Filtrado</h3>
-            <p>Aislamiento automático de inconsistencias legales o físicas.</p>
-          </div>
-          <div class="step">
-            <span>05</span>
-            <h3>Dictamen</h3>
-            <p>Despliegue del reporte integral NX en formato PDF cifrado.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="cta">
-      <div class="container">
-        <h2>Decisiones patrimoniales basadas en analítica.</h2>
-        <p>No asumas riesgos innecesarios. Blindamos tu compra ya sea sobre ruedas o sobre cimientos por la misma tarifa transparente.</p>
-        <a class="btn btn-primary" href="#selector-diagnostico">Iniciar Diagnóstico por S/. 49.00</a>
-      </div>
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-      <div>
-        <strong>Netinho Xperience</strong><br>
-        Gestión e Inspección Tecnológica de Activos de Alto Valor · Lima, Perú
-      </div>
-      <div>netinhoxperience@gmail.com</div>
-    </div>
-  </footer>
-
-  <!-- ================= SISTEMA DE CAPTACIÓN DINÁMICO (MODALES MULTI-ACTIVO) ================= -->
-
-  <!-- MODAL DE SELECCIÓN DE ENTRADA -->
-  <div id="selector-diagnostico" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 15, 30, 0.95); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(8px);">
-    <div style="background: #121824; border: 1px solid #c5a880; padding: 40px; border-radius: 12px; max-width: 600px; width: 90%; text-align: center; position: relative;">
-      <a href="#" style="position: absolute; top: 15px; right: 20px; color: #a0aec0; font-size: 24px;">&times;</a>
-      <p style="color: #c5a880; text-transform: uppercase; letter-spacing: 2px; font-size: 11px; margin-bottom: 10px; font-weight: bold;">Ecosistema NX</p>
-      <h2 style="color: #ffffff; font-size: 26px; margin-bottom: 10px; font-weight: 600;">¿Qué activo vas a validar hoy?</h2>
-      <p style="color: #a0aec0; font-size: 14px; margin-bottom: 30px;">Selecciona la categoría para desplegar la matriz de riesgos correspondiente.</p>
-      
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-        <a href="#ruta-vehiculos" style="display: block; padding: 25px 15px; background: #1a2333; border: 1px solid rgba(197, 168, 128, 0.4); border-radius: 8px; text-decoration: none;">
-          <div style="font-size: 36px; margin-bottom: 12px;">🚗</div>
-          <strong style="color: #ffffff; display: block; font-size: 16px; margin-bottom: 4px;">Vehículos</strong>
-          <span style="color: #c5a880; font-size: 11px; font-weight: bold;">S/. 49.00 · Activo</span>
-        </a>
-        <a href="#ruta-inmuebles" style="display: block; padding: 25px 15px; background: #1a2333; border: 1px solid rgba(197, 168, 128, 0.4); border-radius: 8px; text-decoration: none;">
-          <div style="font-size: 36px; margin-bottom: 12px;">🏢</div>
-          <strong style="color: #ffffff; display: block; font-size: 16px; margin-bottom: 4px;">Inmuebles</strong>
-          <span style="color: #c5a880; font-size: 11px; font-weight: bold;">S/. 49.00 · Activo</span>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- FORMULARIO RUTA VEHÍCULOS -->
-  <div id="ruta-vehiculos" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 15, 30, 0.97); z-index: 10000; align-items: flex-start; justify-content: center; backdrop-filter: blur(8px); overflow-y: auto; padding: 40px 0;">
-    <div style="background: #121824; border: 1px solid #c5a880; padding: 40px; border-radius: 12px; max-width: 700px; width: 90%; margin: auto; position: relative;">
-      <a href="#selector-diagnostico" style="position: absolute; top: 20px; left: 20px; color: #c5a880; font-size: 13px; font-weight: bold;">&larr; Volver</a>
-      
-      <div style="text-align: center; margin-bottom: 25px; padding-top: 15px;">
-        <h2 style="color: #ffffff; font-size: 24px; font-weight: 600;">Estructura de Datos Vehicular</h2>
-        <p style="color: #a0aec0; font-size: 13px;">Procesa las evidencias para calcular alertas de siniestros o fraudes registrales.</p>
-      </div>
-
-      <form onsubmit="event.preventDefault(); procesarFlujoPago();">
-        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 12px; margin-bottom: 20px;">
-          <select required style="background: #1a2333; border: 1px solid rgba(197, 168, 128, 0.3); color: #fff; padding: 10px; border-radius: 6px;"><option>DNI (Perú)</option><option>CE</option></select>
-          <input type="text" required placeholder="Número de documento" style="background: #1a2333; border: 1px solid rgba(197, 168, 128, 0.3); color: #fff; padding: 10px; border-radius: 6px;">
-        </div>
-        <div style="margin-bottom: 20px; background: rgba(26, 35, 51, 0.4); padding: 15px; border-radius: 6px; border: 1px dashed rgba(197, 168, 128, 0.3);">
-          <label style="color: #ffffff; font-size: 13px; font-weight: bold; display: block; margin-bottom: 4px;">📄 Boleta Informativa de SUNARP (PDF)</label>
-          <input type="file" accept=".pdf" required style="color: #a0aec0; font-size: 12px;">
-        </div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
-          <input type="text" required placeholder="Placa (Ej: ABC-123)" style="background: #1a2333; border: 1px solid rgba(197, 168, 128, 0.3); color: #fff; padding: 10px; border-radius: 6px; text-transform: uppercase;">
-          <input type="number" required placeholder="Kilometraje actual" style="background: #1a2333; border: 1px solid rgba(197, 168, 128, 0.3); color: #fff; padding: 10px; border-radius: 6px;">
-        </div>
-        <div style="margin-bottom: 20px;">
-          <label style="color: #a0aec0; font-size: 12px; display: block; margin-bottom: 4px;">📸 Carga de Evidencia Visual (Foto de Tablero e Instrumentos)</label>
-          <input type="file" accept="image/*" required style="color: #a0aec0; font-size: 12px;">
-        </div>
-        <button type="submit" style="width: 100%; background: #c5a880; color: #121824; border: none; padding: 14px; border-radius: 6px; font-weight: bold; cursor: pointer;">Proceder al Pago Seguro (S/. 49.00)</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- FORMULARIO RUTA INMUEBLES -->
-  <div id="ruta-inmuebles" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 15, 30, 0.97); z-index: 10000; align-items: flex-start; justify-content: center; backdrop-filter: blur(8px); overflow-y: auto; padding: 40px 0;">
-    <div style="background: #121824; border: 1px solid #c5a880; padding: 40px; border-radius: 12px; max-width: 700px; width: 90%; margin: auto; position: relative;">
-      <a href="#selector-diagnostico" style="position: absolute; top: 20px; left: 20px; color: #c5a880; font-size: 13px; font-weight: bold;">&larr; Volver</a>
-      
-      <div style="text-align: center; margin-bottom: 25px; padding-top: 15px;">
-        <h2 style="color: #ffffff; font-size: 24px; font-weight: 600;">Estructura de Datos Inmobiliaria</h2>
-        <p style="color: #a0aec0; font-size: 13px;">Indexación de registros prediales para mapear cargas técnicas o fallas estructurales.</p>
-      </div>
-
-      <form onsubmit="event.preventDefault(); procesarFlujoPago();">
-        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 12px; margin-bottom: 20px;">
-          <select required style="background: #1a2333; border: 1px solid rgba(197, 168, 128, 0.3); color: #fff; padding: 10px; border-radius: 6px;"><option>DNI (Perú)</option><option>RUC</option></select>
-          <input type="text" required placeholder="Número de identificación" style="background: #1a2333; border: 1px solid rgba(197, 168, 128, 0.3); color: #fff; padding: 10px; border-radius: 6px;">
-        </div>
-        <div style="margin-bottom: 20px; background: rgba(26, 35, 51, 0.4); padding: 15px; border-radius: 6px; border: 1px dashed rgba(197, 168, 128, 0.3);">
-          <label style="color: #ffffff; font-size: 13px; font-weight: bold; display: block; margin-bottom: 4px;">📄 Partida Electrónica Completa / Copia Literal (PDF)</label>
-          <input type="file" accept=".pdf" required style="color: #a0aec0; font-size: 12px;">
-        </div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
-          <input type="text" required placeholder="Número de Partida (Ej: 110234XX)" style="background: #1a2333; border: 1px solid rgba(197, 168, 128, 0.3); color: #fff; padding: 10px; border-radius: 6px;">
-          <select required style="background: #1a2333; border: 1px solid rgba(197, 168, 128, 0.3); color: #fff; padding: 10px; border-radius: 6px;">
-            <option>Zona Registral: Oficina Lima</option>
-            <option>Oficina Callao</option>
-            <option>Otras Regiones</option>
-          </select>
-        </div>
-        <div style="margin-bottom: 20px;">
-          <label style="color: #a0aec0; font-size: 12px; display: block; margin-bottom: 4px;">📸 Muestreo Óptico (Foto de muros principales, techos o zonas críticas de acabados)</label>
-          <input type="file" accept="image/*" required style="color: #a0aec0; font-size: 12px;">
-        </div>
-        <button type="submit" style="width: 100%; height: 50px; background: #c5a880; color: #121824; border: none; padding: 14px; border-radius: 6px; font-weight: bold; cursor: pointer;">Proceder al Pago Seguro (S/. 49.00)</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- PANTALLA TRANSICIÓN DE PAGO -->
-  <div id="pantalla-pago" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #030b14; z-index: 20000; align-items: center; justify-content: center; text-align: center; padding: 24px;">
-    <div style="max-width: 420px; width: 100%; background: #0b223c; border: 1px solid rgba(197,168,128,0.25); border-radius: 16px; padding: 40px 30px;">
-      <div style="font-size: 48px; margin-bottom: 20px; color: var(--gold);">🔒</div>
-      <h3 style="color: #ffffff; font-size: 20px; font-weight: 600; margin-bottom: 12px;">Entorno de Pago Cifrado</h3>
-      <p style="color: var(--muted); font-size: 14px; margin-bottom: 28px;">Estableciendo conexión privada SSL con la pasarela bancaria central homologada...</p>
-      <div style="background: rgba(3,11,20,0.5); border: 1px solid var(--border); padding: 16px; border-radius: 10px; margin-bottom: 30px;">
-        <span style="color: var(--muted); font-size: 12px; display: block; margin-bottom: 4px;">Monto Total de la Auditoría</span>
-        <strong style="color: var(--gold); font-size: 26px;">S/. 49.00</strong>
-      </div>
-      <div style="width: 28px; height: 28px; border: 3px solid rgba(197,168,128,0.2); border-top-color: var(--gold); border-radius: 50%; margin: 0 auto 16px; animation: spin 1s linear infinite;"></div>
-    </div>
-  </div>
-
-  <style>@keyframes spin { to { transform: rotate(360deg); } }</style>
-
-  <!-- CONTROL DE ENRUTAMIENTO Y CARRUSEL OPTIMIZADO PARA LA MATRIZ DE GITHUB -->
-  <script>
-    // Se mapea la matriz exacta del repositorio del 0 al 6 con extensión .png pura
-    var backgrounds = [
-      'hero0-nx.png',
-      'hero1-nx.png',
-      'hero2-nx.png',
-      'hero3-nx.png',
-      'hero4-nx.png',
-      'hero5-nx.png',
-      'hero6-nx.png'
-    ];
-    
-    // Iniciamos en 1 porque el fondo por defecto en el HTML ya renderiza de inmediato 'hero0-nx.png'
-    var currentIndex = 1;
-    var bgElement = document.getElementById('heroDynamicBg');
-
-    function changeHeroBackground() {
-      var imgPreloader = new Image();
-      imgPreloader.src = backgrounds[currentIndex];
-      
-      imgPreloader.onload = function() {
-        bgElement.style.backgroundImage = "url('" + backgrounds[currentIndex] + "')";
-        currentIndex = (currentIndex + 1) % backgrounds.length;
-      };
-      
-      imgPreloader.onerror = function() {
-        console.warn("Fallo de renderizado en: " + backgrounds[currentIndex]);
-        currentIndex = (currentIndex + 1) % backgrounds.length;
-      };
-    }
-
-    // Intervalo de transición ultrasuave cada 7 segundos para retención UX
-    setInterval(changeHeroBackground, 7000);
-
-    // Sistema de Modales y Rutas Nativo
-    function resetModales() {
-      document.getElementById('selector-diagnostico').style.display = 'none';
-      document.getElementById('ruta-vehiculos').style.display = 'none';
-      document.getElementById('ruta-inmuebles').style.display = 'none';
-      document.getElementById('pantalla-pago').style.display = 'none';
-    }
-
-    function router() {
-      resetModales();
-      var h = window.location.hash;
-      if(h === '#selector-diagnostico') document.getElementById('selector-diagnostico').style.display = 'flex';
-      else if(h === '#ruta-vehiculos') document.getElementById('ruta-vehiculos').style.display = 'flex';
-      else if(h === '#ruta-inmuebles') document.getElementById('ruta-inmuebles').style.display = 'flex';
-      else if(h === '#pantalla-pago') document.getElementById('pantalla-pago').style.display = 'flex';
-    }
-
-    function procesarFlujoPago() {
-      window.location.hash = '#pantalla-pago';
-      setTimeout(function() {
-        alert('Carga exitosa. Evidencias y documentos enlazados de forma correcta en el backlog diario de control.');
-        window.location.hash = '#';
-      }, 3500);
-    }
-
-    window.addEventListener('hashchange', router);
-    router();
-  </script>
-
-</body>
-</html>
+    .decision-box h2{
+      font-size:clamp(
