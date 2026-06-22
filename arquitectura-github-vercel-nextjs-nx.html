@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Arquitectura GitHub + Vercel + Next.js NX®</title>
+
+<style>
+body{font-family:Arial,Helvetica,sans-serif;max-width:1100px;margin:auto;padding:40px 24px;line-height:1.7;background:#f7f4ed;color:#1f2933}
+h1,h2,h3{color:#06182c}
+h2{margin-top:45px;padding-top:20px;border-top:1px solid #d7d2c4}
+.box{background:#fff;border-left:5px solid #c9a24d;padding:20px;border-radius:12px;margin:20px 0}
+table{width:100%;border-collapse:collapse;background:#fff;margin-top:20px}
+th,td{border:1px solid #ddd;padding:12px;vertical-align:top}
+th{background:#06182c;color:#fff}
+pre{background:#eef1f5;padding:18px;border-radius:8px;overflow-x:auto}
+footer{margin-top:60px;border-top:1px solid #ccc;padding-top:30px}
+</style>
+</head>
+
+<body>
+
+<h1>Arquitectura GitHub + Vercel + Next.js NX®</h1>
+
+<p><strong>Versión:</strong> 1.0</p>
+<p><strong>Uso:</strong> Desarrollo, despliegue, versionamiento y operación del MVP NX</p>
+
+<div class="box">
+Este documento define cómo se organizará el repositorio, despliegue y ciclo de desarrollo de NX Decision Engine®.
+</div>
+
+<h2>1. Repositorios</h2>
+
+<table>
+<tr><th>Repositorio</th><th>Uso</th></tr>
+<tr>
+<td>netinho-xperience</td>
+<td>Landing actual, documentación maestra, páginas legales y respaldo institucional.</td>
+</tr>
+<tr>
+<td>nx-decision-engine</td>
+<td>Aplicación MVP funcional con Next.js, Supabase, Niubiz, Gemini y generación de informes.</td>
+</tr>
+</table>
+
+<h2>2. Estrategia de ramas</h2>
+
+<table>
+<tr><th>Rama</th><th>Uso</th></tr>
+<tr><td>main</td><td>Producción estable.</td></tr>
+<tr><td>develop</td><td>Integración de nuevas funciones antes de pasar a producción.</td></tr>
+<tr><td>feature/*</td><td>Desarrollo de módulos específicos.</td></tr>
+<tr><td>hotfix/*</td><td>Correcciones urgentes sobre producción.</td></tr>
+</table>
+
+<h2>3. Estructura recomendada del proyecto</h2>
+
+<pre>
+nx-decision-engine/
+├── app/
+│   ├── page.tsx
+│   ├── evaluacion/
+│   ├── pago/
+│   ├── carga/
+│   ├── seguimiento/
+│   ├── informe/
+│   ├── validar/
+│   └── legal/
+│
+├── components/
+│   ├── layout/
+│   ├── ui/
+│   ├── forms/
+│   ├── upload/
+│   ├── payment/
+│   └── report/
+│
+├── lib/
+│   ├── supabase.ts
+│   ├── gemini.ts
+│   ├── niubiz.ts
+│   ├── pdf.ts
+│   └── validators.ts
+│
+├── services/
+│   ├── expedienteService.ts
+│   ├── pagoService.ts
+│   ├── evidenciaService.ts
+│   ├── indicadorService.ts
+│   ├── informeService.ts
+│   └── validacionService.ts
+│
+├── types/
+│   ├── expediente.ts
+│   ├── usuario.ts
+│   ├── pago.ts
+│   ├── evidencia.ts
+│   └── informe.ts
+│
+├── public/
+│   ├── assets/
+│   ├── logos/
+│   └── ejemplos/
+│
+├── docs/
+├── tests/
+├── .env.local
+├── README.md
+└── package.json
+</pre>
+
+<h2>4. Ambientes</h2>
+
+<table>
+<tr><th>Ambiente</th><th>Uso</th></tr>
+<tr><td>Local</td><td>Desarrollo en computadora.</td></tr>
+<tr><td>Development</td><td>Pruebas internas.</td></tr>
+<tr><td>Staging</td><td>Simulación previa a producción.</td></tr>
+<tr><td>Production</td><td>Versión pública operativa.</td></tr>
+</table>
+
+<h2>5. Despliegue</h2>
+
+<div class="box">
+GitHub → Vercel → Supabase → Producción
+</div>
+
+<p>
+Cada push a <strong>main</strong> deberá desplegar producción. Cada push a <strong>develop</strong> deberá desplegar un ambiente de prueba.
+</p>
+
+<h2>6. Variables de entorno</h2>
+
+<table>
+<tr><th>Variable</th><th>Uso</th></tr>
+<tr><td>NEXT_PUBLIC_SUPABASE_URL</td><td>URL pública de Supabase.</td></tr>
+<tr><td>NEXT_PUBLIC_SUPABASE_ANON_KEY</td><td>Clave pública Supabase.</td></tr>
+<tr><td>SUPABASE_SERVICE_ROLE_KEY</td><td>Clave privada del servidor. Nunca exponer en frontend.</td></tr>
+<tr><td>GEMINI_API_KEY</td><td>Clave de Gemini API.</td></tr>
+<tr><td>NIUBIZ_MERCHANT_ID</td><td>ID del comercio.</td></tr>
+<tr><td>NIUBIZ_ACCESS_KEY</td><td>Credencial Niubiz.</td></tr>
+<tr><td>NIUBIZ_SECRET_KEY</td><td>Clave privada Niubiz.</td></tr>
+<tr><td>NEXT_PUBLIC_APP_URL</td><td>URL pública de la aplicación.</td></tr>
+</table>
+
+<h2>7. Reglas de seguridad</h2>
+
+<ul>
+<li>No subir archivos .env a GitHub.</li>
+<li>No exponer claves privadas en componentes frontend.</li>
+<li>Usar variables de entorno en Vercel.</li>
+<li>Separar ambiente de pruebas y producción.</li>
+<li>Activar Row Level Security en Supabase.</li>
+<li>Usar buckets privados para evidencias e informes.</li>
+<li>Registrar logs de eventos críticos.</li>
+</ul>
+
+<h2>8. Estrategia de releases</h2>
+
+<table>
+<tr><th>Versión</th><th>Alcance</th></tr>
+<tr><td>v0.1</td><td>Landing MVP + selección de activo.</td></tr>
+<tr><td>v0.2</td><td>Pago + creación de expediente.</td></tr>
+<tr><td>v0.3</td><td>Carga de evidencias + seguimiento.</td></tr>
+<tr><td>v0.4</td><td>Generación inicial de informe.</td></tr>
+<tr><td>v0.5</td><td>Validación pública de código.</td></tr>
+<tr><td>v1.0</td><td>MVP operativo completo.</td></tr>
+</table>
+
+<h2>9. Backups</h2>
+
+<table>
+<tr><th>Elemento</th><th>Acción recomendada</th></tr>
+<tr><td>Código fuente</td><td>GitHub.</td></tr>
+<tr><td>Base de datos</td><td>Backups Supabase.</td></tr>
+<tr><td>Informes PDF</td><td>Storage privado + política de conservación.</td></tr>
+<tr><td>Documentación</td><td>Repositorio + copia Drive.</td></tr>
+<tr><td>Credenciales</td><td>Excel maestro privado + gestor seguro.</td></tr>
+</table>
+
+<h2>10. Checklist antes de producción</h2>
+
+<ul>
+<li>Landing responsive.</li>
+<li>Pago probado.</li>
+<li>Expediente creado correctamente.</li>
+<li>Temporizador funcional.</li>
+<li>Carga de evidencias funcional.</li>
+<li>Indicadores calculados.</li>
+<li>PDF generado con marca de agua.</li>
+<li>Código único validable.</li>
+<li>Libro de Reclamaciones operativo.</li>
+<li>Términos, privacidad, descargos y reembolsos visibles.</li>
+</ul>
+
+<h2>11. Regla final de implementación</h2>
+
+<div class="box">
+No se debe pasar a producción ningún módulo que no tenga estado, logs, manejo de error, texto claro para el usuario y enlace a soporte.
+</div>
+
+<footer>
+<strong>Netinho Xperience</strong><br>
+Plataforma de Inteligencia Patrimonial<br>
+Lima, Perú
+</footer>
+
+</body>
+</html>
