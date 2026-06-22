@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mapa de Estados y Flujos NX®</title>
+<meta name="description" content="Mapa de estados, flujos y contingencias de la plataforma Netinho Xperience.">
+
+<style>
+body{
+font-family:Arial,Helvetica,sans-serif;
+max-width:1150px;
+margin:auto;
+padding:40px 24px;
+line-height:1.7;
+background:#f7f4ed;
+color:#1f2933;
+}
+h1,h2,h3{color:#06182c}
+h2{
+margin-top:45px;
+padding-top:20px;
+border-top:1px solid #d7d2c4;
+}
+.box{
+background:#fff;
+border-left:5px solid #c9a24d;
+padding:20px;
+border-radius:12px;
+margin:20px 0;
+}
+.warning{
+background:#fff7e6;
+border-left:5px solid #c9a24d;
+padding:20px;
+border-radius:12px;
+margin:20px 0;
+}
+table{
+width:100%;
+border-collapse:collapse;
+background:#fff;
+margin-top:20px;
+font-size:14px;
+}
+th,td{
+border:1px solid #ddd;
+padding:10px;
+vertical-align:top;
+}
+th{
+background:#06182c;
+color:#fff;
+}
+code,pre{
+background:#eef1f5;
+border-radius:6px;
+}
+code{
+padding:2px 6px;
+}
+pre{
+padding:18px;
+overflow-x:auto;
+}
+footer{
+margin-top:60px;
+border-top:1px solid #ccc;
+padding-top:30px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Mapa de Estados y Flujos NX®</h1>
+
+<p><strong>Versión:</strong> 1.0</p>
+<p><strong>Uso:</strong> Desarrollo, operación, soporte, pruebas y trazabilidad</p>
+
+<div class="box">
+Este documento define los estados oficiales del expediente NX, los flujos principales, las excepciones operativas y las respuestas del sistema ante escenarios normales, incompletos, fallidos o contingentes.
+</div>
+
+<h2>1. Principio operativo</h2>
+
+<p>
+Todo expediente NX debe tener un estado claro, trazable y consultable. Ninguna evaluación debe quedar sin estado definido.
+</p>
+
+<div class="box">
+<strong>Regla PMO:</strong> cada cambio de estado debe generar un registro en logs_expediente.
+</div>
+
+<h2>2. Estados oficiales del expediente</h2>
+
+<table>
+<tr>
+<th>Estado</th>
+<th>Descripción</th>
+<th>Responsable del cambio</th>
+</tr>
+
+<tr>
+<td>pago_pendiente</td>
+<td>El usuario inició el flujo, pero el pago aún no fue validado.</td>
+<td>Sistema / Niubiz</td>
+</tr>
+
+<tr>
+<td>activo</td>
+<td>El pago fue aprobado y el expediente fue creado.</td>
+<td>Sistema</td>
+</tr>
+
+<tr>
+<td>carga_pendiente</td>
+<td>El expediente está habilitado, pero aún faltan evidencias o documentos.</td>
+<td>Usuario / Sistema</td>
+</tr>
+
+<tr>
+<td>carga_parcial</td>
+<td>El usuario cargó algunos elementos, pero no alcanzó el mínimo requerido.</td>
+<td>Sistema</td>
+</tr>
+
+<tr>
+<td>carga_completa</td>
+<td>El expediente alcanzó el mínimo operativo para análisis.</td>
+<td>Sistema</td>
+</tr>
+
+<tr>
+<td>en_analisis</td>
+<td>Las evidencias están siendo procesadas.</td>
+<td>Sistema / IA</td>
+</tr>
+
+<tr>
+<td>observado</td>
+<td>El expediente requiere corrección, recarga o información adicional.</td>
+<td>Sistema</td>
+</tr>
+
+<tr>
+<td>informe_generando</td>
+<td>El informe está siendo estructurado y convertido a PDF.</td>
+<td>Sistema</td>
+</tr>
+
+<tr>
+<td>informe_emitido</td>
+<td>El informe fue generado y está disponible.</td>
+<td>Sistema</td>
+</tr>
+
+<tr>
+<td>vencido_carga</td>
+<td>El usuario no completó la carga dentro del plazo habilitado.</td>
+<td>Sistema</td>
+</tr>
+
+<tr>
+<td>vencido_informe</td>
+<td>El informe superó su vigencia de 15 días calendario.</td>
+<td>Sistema</td>
+</tr>
+
+<tr>
+<td>rechazado</td>
+<td>El expediente fue rechazado por causa técnica, integridad, riesgo o uso indebido.</td>
+<td>Sistema / Administración</td>
+</tr>
+
+<tr>
+<td>anulado</td>
+<td>El expediente o informe fue anulado por error, reclamo, duplicidad o causa justificada.</td>
+<td>Administración</td>
+</tr>
+
+<tr>
+<td>reembolso_en_revision</td>
+<td>Existe una solicitud de reembolso pendiente de evaluación.</td>
+<td>Soporte</td>
+</tr>
+
+<tr>
+<td>reembolsado</td>
+<td>El pago fue revertido conforme a la política aplicable.</td>
+<td>Soporte / Pasarela</td>
+</tr>
+</table>
+
+<h2>3. Flujo principal ideal</h2>
+
+<div class="box">
+<pre>
+Inicio
+↓
+Selección de activo
+↓
+Modal previo al pago
+↓
+Pago aprobado
+↓
+Expediente activo
+↓
+Carga pendiente
+↓
+Carga completa
+↓
+En análisis
+↓
+Informe generando
+↓
+Informe emitido
+↓
+Validación pública
+</pre>
+</div>
+
+<h2>4. Flujo de pago aprobado</h2>
+
+<table>
+<tr>
+<th>Paso</th>
+<th>Evento</th>
+<th>Estado resultante</th>
+</tr>
+
+<tr>
+<td>1</td>
+<td>Usuario acepta condiciones y continúa al pago.</td>
+<td>pago_pendiente</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>Niubiz confirma pago aprobado.</td>
+<td>activo</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>Sistema crea código único NX.</td>
+<td>activo</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td>Sistema habilita 48 horas de carga.</td>
+<td>carga_pendiente</td>
+</tr>
+
+<tr>
+<td>5</td>
+<td>Usuario ve pantalla de bienvenida.</td>
+<td>carga_pendiente</td>
+</tr>
+</table>
+
+<h2>5. Flujo de pago rechazado</h2>
+
+<table>
+<tr>
+<th>Evento</th>
+<th>Respuesta del sistema</th>
+</tr>
+
+<tr>
+<td>Pago rechazado por pasarela.</td>
+<td>Mostrar mensaje claro y permitir nuevo intento.</td>
+</tr>
+
+<tr>
+<td>No existe confirmación de pago.</td>
+<td>No crear expediente activo.</td>
+</tr>
+
+<tr>
+<td>Usuario consulta soporte.</td>
+<td>Solicitar código de operación si lo tuviera.</td>
+</tr>
+</table>
+
+<h2>6. Flujo de pago aprobado pero expediente no creado</h2>
+
+<div class="warning">
+Este es un escenario crítico y debe estar cubierto por soporte y política de reembolso.
+</div>
+
+<table>
+<tr>
+<th>Acción</th>
+<th>Respuesta</th>
+</tr>
+
+<tr>
+<td>Pago aprobado sin expediente.</td>
+<td>Registrar incidente técnico.</td>
+</tr>
+
+<tr>
+<td>Usuario contacta soporte.</td>
+<td>Validar operación en pasarela.</td>
+</tr>
+
+<tr>
+<td>Pago confirmado.</td>
+<td>Crear expediente manual o automático tardío.</td>
+</tr>
+
+<tr>
+<td>No se puede habilitar servicio.</td>
+<td>Evaluar reembolso conforme a política.</td>
+</tr>
+</table>
+
+<h2>7. Flujo de carga incompleta</h2>
+
+<table>
+<tr>
+<th>Escenario</th>
+<th>Respuesta</th>
+</tr>
+
+<tr>
+<td>Usuario carga solo parte de los documentos.</td>
+<td>Estado: carga_parcial.</td>
+</tr>
+
+<tr>
+<td>Faltan elementos mínimos.</td>
+<td>Mostrar checklist y porcentaje de avance.</td>
+</tr>
+
+<tr>
+<td>Usuario decide continuar con lo disponible.</td>
+<td>Permitir solo si alcanza mínimo operativo.</td>
+</tr>
+
+<tr>
+<td>No alcanza mínimo operativo.</td>
+<td>No iniciar análisis. Solicitar información adicional.</td>
+</tr>
+</table>
+
+<h2>8. Flujo de evidencia insuficiente</h2>
+
+<table>
+<tr>
+<th>Escenario</th>
+<th>Respuesta</th>
+</tr>
+
+<tr>
+<td>Foto borrosa.</td>
+<td>Marcar como insuficiente y pedir nueva foto.</td>
+</tr>
+
+<tr>
+<td>PDF ilegible.</td>
+<td>Marcar como observado.</td>
+</tr>
+
+<tr>
+<td>Documento incompleto.</td>
+<td>Registrar información faltante.</td>
+</tr>
+
+<tr>
+<td>Archivo no permitido.</td>
+<td>Rechazar carga e indicar formato aceptado.</td>
+</tr>
+</table>
+
+<h2>9. Flujo de vencimiento de carga</h2>
+
+<table>
+<tr>
+<th>Condición</th>
+<th>Respuesta</th>
+</tr>
+
+<tr>
+<td>Transcurren 48 horas sin carga completa.</td>
+<td>Estado: vencido_carga.</td>
+</tr>
+
+<tr>
+<td>Usuario cargó parcialmente.</td>
+<td>El expediente queda cerrado o sujeto a revisión según reglas vigentes.</td>
+</tr>
+
+<tr>
+<td>Usuario solicita reactivación.</td>
+<td>Evaluar nueva activación o nuevo pago según política.</td>
+</tr>
+
+<tr>
+<td>Usuario reclama reembolso.</td>
+<td>Aplicar Política de Reembolsos.</td>
+</tr>
+</table>
+
+<h2>10. Flujo de análisis</h2>
+
+<table>
+<tr>
+<th>Paso</th>
+<th>Descripción</th>
+<th>Estado</th>
+</tr>
+
+<tr>
+<td>1</td>
+<td>Expediente alcanza mínimo operativo.</td>
+<td>carga_completa</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>Sistema inicia procesamiento.</td>
+<td>en_analisis</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>Gemini organiza hallazgos.</td>
+<td>en_analisis</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td>Sistema calcula indicadores.</td>
+<td>en_analisis</td>
+</tr>
+
+<tr>
+<td>5</td>
+<td>Sistema estructura informe.</td>
+<td>informe_generando</td>
+</tr>
+
+<tr>
+<td>6</td>
+<td>PDF se emite.</td>
+<td>informe_emitido</td>
+</tr>
+</table>
+
+<h2>11. Flujo de falla de IA</h2>
+
+<table>
+<tr>
+<th>Escenario</th>
+<th>Respuesta</th>
+</tr>
+
+<tr>
+<td>Gemini no responde.</td>
+<td>Reintentar procesamiento.</td>
+</tr>
+
+<tr>
+<td>Gemini devuelve análisis insuficiente.</td>
+<td>Registrar limitación y usar nivel de incertidumbre.</td>
+</tr>
+
+<tr>
+<td>Archivo no procesable.</td>
+<td>Marcar evidencia como observada.</td>
+</tr>
+
+<tr>
+<td>Falla persistente.</td>
+<td>Informar demora, registrar incidencia y activar contingencia.</td>
+</tr>
+</table>
+
+<h2>12. Flujo de informe emitido</h2>
+
+<table>
+<tr>
+<th>Evento</th>
+<th>Resultado</th>
+</tr>
+
+<tr>
+<td>PDF generado.</td>
+<td>Estado: informe_emitido.</td>
+</tr>
+
+<tr>
+<td>Código único creado.</td>
+<td>Validación pública habilitada.</td>
+</tr>
+
+<tr>
+<td>Fecha de vencimiento asignada.</td>
+<td>15 días calendario.</td>
+</tr>
+
+<tr>
+<td>Usuario descarga informe.</td>
+<td>Registrar log informe_descargado.</td>
+</tr>
+</table>
+
+<h2>13. Flujo de vencimiento del informe</h2>
+
+<table>
+<tr>
+<th>Condición</th>
+<th>Respuesta</th>
+</tr>
+
+<tr>
+<td>Transcurren 15 días desde emisión.</td>
+<td>Estado: vencido_informe.</td>
+</tr>
+
+<tr>
+<td>Usuario valida código vencido.</td>
+<td>Mostrar informe vencido.</td>
+</tr>
+
+<tr>
+<td>Usuario requiere actualización.</td>
+<td>Crear nuevo expediente o nueva evaluación.</td>
+</tr>
+</table>
+
+<h2>14. Flujo de validación pública</h2>
+
+<table>
+<tr>
+<th>Entrada</th>
+<th>Respuesta</th>
+</tr>
+
+<tr>
+<td>Código válido y vigente.</td>
+<td>Mostrar estado: informe auténtico y vigente.</td>
+</tr>
+
+<tr>
+<td>Código válido pero vencido.</td>
+<td>Mostrar estado: informe auténtico, pero vencido.</td>
+</tr>
+
+<tr>
+<td>Código inexistente.</td>
+<td>Mostrar estado: código no encontrado.</td>
+</tr>
+
+<tr>
+<td>Informe anulado.</td>
+<td>Mostrar estado: informe anulado.</td>
+</tr>
+</table>
+
+<h2>15. Flujo de reclamo</h2>
+
+<table>
+<tr>
+<th>Evento</th>
+<th>Respuesta</th>
+</tr>
+
+<tr>
+<td>Usuario registra reclamo.</td>
+<td>Generar código único de reclamo.</td>
+</tr>
+
+<tr>
+<td>Reclamo asociado a expediente.</td>
+<td>Registrar vínculo en logs.</td>
+</tr>
+
+<tr>
+<td>Reclamo por resultado no esperado.</td>
+<td>Responder con alcance del servicio, descargos y evidencia del proceso.</td>
+</tr>
+
+<tr>
+<td>Reclamo por falla técnica.</td>
+<td>Evaluar logs, pago, estado y posible reembolso.</td>
+</tr>
+</table>
+
+<h2>16. Flujo de reembolso</h2>
+
+<table>
+<tr>
+<th>Escenario</th>
+<th>Respuesta</th>
+</tr>
+
+<tr>
+<td>Pago validado pero acceso no habilitado.</td>
+<td>Puede proceder reembolso.</td>
+</tr>
+
+<tr>
+<td>Usuario tuvo acceso y dejó vencer plazo.</td>
+<td>No procede reembolso ordinario.</td>
+</tr>
+
+<tr>
+<td>Informe emitido.</td>
+<td>No procede reembolso ordinario.</td>
+</tr>
+
+<tr>
+<td>Falla técnica comprobable.</td>
+<td>Evaluar reembolso total o parcial.</td>
+</tr>
+</table>
+
+<h2>17. Eventos mínimos de log por transición</h2>
+
+<ul>
+<li>pago_iniciado</li>
+<li>pago_aprobado</li>
+<li>pago_rechazado</li>
+<li>expediente_creado</li>
+<li>acceso_habilitado</li>
+<li>archivo_cargado</li>
+<li>archivo_observado</li>
+<li>archivo_rechazado</li>
+<li>carga_parcial</li>
+<li>carga_completa</li>
+<li>analisis_iniciado</li>
+<li>analisis_fallido</li>
+<li>informe_generando</li>
+<li>informe_emitido</li>
+<li>informe_descargado</li>
+<li>informe_vencido</li>
+<li>reclamo_registrado</li>
+<li>reembolso_solicitado</li>
+<li>reembolso_resuelto</li>
+</ul>
+
+<h2>18. Reglas de comunicación al usuario</h2>
+
+<table>
+<tr>
+<th>Situación</th>
+<th>Mensaje recomendado</th>
+</tr>
+
+<tr>
+<td>Pago aprobado</td>
+<td>Gracias por confiar en NX. Tu expediente ha sido creado.</td>
+</tr>
+
+<tr>
+<td>Carga pendiente</td>
+<td>Aún faltan elementos para completar tu expediente.</td>
+</tr>
+
+<tr>
+<td>Evidencia insuficiente</td>
+<td>La evidencia cargada no permite un análisis suficiente. Sube una nueva versión siguiendo la guía.</td>
+</tr>
+
+<tr>
+<td>Expediente vencido</td>
+<td>El plazo de carga ha vencido. Puedes iniciar una nueva evaluación si deseas continuar.</td>
+</tr>
+
+<tr>
+<td>Informe emitido</td>
+<td>Tu Informe de Decisión Patrimonial NX® está listo.</td>
+</tr>
+
+<tr>
+<td>Informe vencido</td>
+<td>El informe fue emitido correctamente, pero su vigencia ha expirado.</td>
+</tr>
+</table>
+
+<h2>19. Regla final de control</h2>
+
+<div class="warning">
+Ningún expediente debe avanzar a informe_emitido sin código único, fecha de emisión, fecha de vencimiento, indicadores, descargos y registro de log.
+</div>
+
+<footer>
+<strong>Netinho Xperience</strong><br>
+Plataforma de Inteligencia Patrimonial<br>
+Lima, Perú
+</footer>
+
+</body>
+</html>
