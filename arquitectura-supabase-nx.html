@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Arquitectura Supabase NX®</title>
+<meta name="description" content="Arquitectura Supabase para la plataforma Netinho Xperience.">
+
+<style>
+body{
+font-family:Arial,Helvetica,sans-serif;
+max-width:1100px;
+margin:auto;
+padding:40px 24px;
+line-height:1.7;
+background:#f7f4ed;
+color:#1f2933;
+}
+h1,h2,h3{color:#06182c}
+h2{
+margin-top:45px;
+padding-top:20px;
+border-top:1px solid #d7d2c4;
+}
+.box{
+background:#fff;
+border-left:5px solid #c9a24d;
+padding:20px;
+border-radius:12px;
+margin:20px 0;
+}
+table{
+width:100%;
+border-collapse:collapse;
+background:#fff;
+margin-top:20px;
+}
+th,td{
+border:1px solid #ddd;
+padding:12px;
+vertical-align:top;
+}
+th{
+background:#06182c;
+color:#fff;
+}
+code,pre{
+background:#eef1f5;
+border-radius:6px;
+}
+code{
+padding:2px 6px;
+}
+pre{
+padding:18px;
+overflow-x:auto;
+}
+footer{
+margin-top:60px;
+border-top:1px solid #ccc;
+padding-top:30px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Arquitectura Supabase NX®</h1>
+
+<p><strong>Versión:</strong> 1.0</p>
+<p><strong>Uso:</strong> Base de datos, autenticación, almacenamiento, seguridad y operación</p>
+
+<div class="box">
+Este documento define la arquitectura recomendada de Supabase para soportar la plataforma Netinho Xperience: expedientes, usuarios, pagos, evidencias, indicadores, informes, validaciones y trazabilidad.
+</div>
+
+<h2>1. Objetivo</h2>
+
+<p>
+Supabase será utilizado como capa de datos, autenticación, almacenamiento de evidencias y soporte operativo de la plataforma NX Decision Engine®.
+</p>
+
+<h2>2. Módulos Supabase utilizados</h2>
+
+<table>
+<tr>
+<th>Módulo</th>
+<th>Uso en NX</th>
+</tr>
+
+<tr>
+<td>PostgreSQL</td>
+<td>Base de datos relacional para usuarios, expedientes, pagos, indicadores, informes y logs.</td>
+</tr>
+
+<tr>
+<td>Auth</td>
+<td>Registro, inicio de sesión, recuperación de cuenta y asociación de expedientes al usuario.</td>
+</tr>
+
+<tr>
+<td>Storage</td>
+<td>Almacenamiento temporal de documentos, fotografías, videos y PDFs cargados.</td>
+</tr>
+
+<tr>
+<td>Row Level Security</td>
+<td>Control de acceso para que cada usuario solo vea sus propios expedientes.</td>
+</tr>
+
+<tr>
+<td>Edge Functions</td>
+<td>Procesos server-side: creación de expediente, validación de pagos, procesamiento de informes y limpieza programada.</td>
+</tr>
+</table>
+
+<h2>3. Principios de datos</h2>
+
+<ul>
+<li>Minimización: pedir solo los datos necesarios.</li>
+<li>Finalidad: usar datos únicamente para el servicio contratado.</li>
+<li>Trazabilidad: registrar eventos relevantes del expediente.</li>
+<li>Seguridad: no exponer claves privadas en frontend.</li>
+<li>Temporalidad: eliminar evidencias conforme a la política de privacidad.</li>
+<li>Escalabilidad: separar usuarios, expedientes, pagos, evidencias e informes.</li>
+</ul>
+
+<h2>4. Tablas principales</h2>
+
+<table>
+<tr>
+<th>Tabla</th>
+<th>Propósito</th>
+</tr>
+
+<tr>
+<td>profiles</td>
+<td>Datos básicos del usuario asociado a Supabase Auth.</td>
+</tr>
+
+<tr>
+<td>expedientes</td>
+<td>Registro central de cada evaluación NX.</td>
+</tr>
+
+<tr>
+<td>pagos</td>
+<td>Control de pagos realizados mediante Niubiz u otra pasarela.</td>
+</tr>
+
+<tr>
+<td>evidencias</td>
+<td>Archivos cargados por el usuario: fotos, PDFs, videos y documentos.</td>
+</tr>
+
+<tr>
+<td>indicadores</td>
+<td>Resultados numéricos: riesgo, incertidumbre, preparación, calidad y confianza.</td>
+</tr>
+
+<tr>
+<td>informes</td>
+<td>PDF emitido, código de validación, vigencia y estado.</td>
+</tr>
+
+<tr>
+<td>logs_expediente</td>
+<td>Bitácora de eventos del expediente.</td>
+</tr>
+
+<tr>
+<td>reclamos_soporte</td>
+<td>Consultas o incidencias vinculadas a expedientes.</td>
+</tr>
+</table>
+
+<h2>5. Estados del expediente</h2>
+
+<table>
+<tr>
+<th>Estado</th>
+<th>Descripción</th>
+</tr>
+
+<tr>
+<td>pago_pendiente</td>
+<td>El usuario inició el flujo, pero el pago aún no fue validado.</td>
+</tr>
+
+<tr>
+<td>activo</td>
+<td>Pago validado y expediente creado.</td>
+</tr>
+
+<tr>
+<td>carga_pendiente</td>
+<td>Faltan evidencias o documentos requeridos.</td>
+</tr>
+
+<tr>
+<td>carga_completa</td>
+<td>El usuario cargó la información mínima necesaria.</td>
+</tr>
+
+<tr>
+<td>en_analisis</td>
+<td>La información está siendo procesada.</td>
+</tr>
+
+<tr>
+<td>informe_emitido</td>
+<td>Informe generado y disponible para descarga.</td>
+</tr>
+
+<tr>
+<td>vencido</td>
+<td>Expiró el plazo de carga o la vigencia del informe.</td>
+</tr>
+
+<tr>
+<td>rechazado</td>
+<td>Expediente rechazado por riesgo, integridad, fraude o imposibilidad técnica.</td>
+</tr>
+</table>
+
+<h2>6. Diseño SQL base sugerido</h2>
+
+<pre><code>create table profiles (
+  id uuid primary key references auth.users(id) on delete cascade,
+  nombres text,
+  apellidos text,
+  tipo_documento text,
+  numero_documento text,
+  correo text,
+  created_at timestamptz default now()
+);
+
+create table expedientes (
+  id uuid primary key default gen_random_uuid(),
+  codigo text unique not null,
+  user_id uuid references auth.users(id),
+  tipo_activo text not null,
+  estado text default 'pago_pendiente',
+  fecha_pago timestamptz,
+  fecha_activacion timestamptz,
+  fecha_vencimiento_carga timestamptz,
+  fecha_emision timestamptz,
+  fecha_vencimiento_informe timestamptz,
+  created_at timestamptz default now()
+);
+
+create table pagos (
+  id uuid primary key default gen_random_uuid(),
+  expediente_id uuid references expedientes(id) on delete cascade,
+  monto numeric(10,2) not null,
+  moneda text default 'PEN',
+  pasarela text default 'Niubiz',
+  estado_pago text default 'pendiente',
+  codigo_operacion text,
+  fecha_pago timestamptz,
+  created_at timestamptz default now()
+);
+
+create table evidencias (
+  id uuid primary key default gen_random_uuid(),
+  expediente_id uuid references expedientes(id) on delete cascade,
+  tipo_evidencia text not null,
+  tipo_archivo text,
+  nombre_archivo text,
+  storage_path text,
+  estado_revision text default 'recibido',
+  observacion text,
+  created_at timestamptz default now()
+);
+
+create table indicadores (
+  id uuid primary key default gen_random_uuid(),
+  expediente_id uuid references expedientes(id) on delete cascade,
+  riesgo_nx integer,
+  incertidumbre_nx integer,
+  preparacion_nx integer,
+  calidad_expediente integer,
+  confianza_informe integer,
+  created_at timestamptz default now()
+);
+
+create table informes (
+  id uuid primary key default gen_random_uuid(),
+  expediente_id uuid references expedientes(id) on delete cascade,
+  codigo_validacion text unique not null,
+  version text default '1.0',
+  url_pdf text,
+  estado text default 'vigente',
+  fecha_emision timestamptz default now(),
+  fecha_vencimiento timestamptz,
+  created_at timestamptz default now()
+);
+
+create table logs_expediente (
+  id uuid primary key default gen_random_uuid(),
+  expediente_id uuid references expedientes(id) on delete cascade,
+  evento text not null,
+  detalle text,
+  created_at timestamptz default now()
+);</code></pre>
+
+<h2>7. Buckets de Storage</h2>
+
+<table>
+<tr>
+<th>Bucket</th>
+<th>Uso</th>
+<th>Acceso recomendado</th>
+</tr>
+
+<tr>
+<td>evidencias</td>
+<td>Fotos, videos y documentos cargados por el usuario.</td>
+<td>Privado.</td>
+</tr>
+
+<tr>
+<td>informes</td>
+<td>PDF final emitido por NX.</td>
+<td>Privado con URL firmada.</td>
+</tr>
+
+<tr>
+<td>assets-publicos</td>
+<td>Logos, ejemplos de fotos y recursos públicos.</td>
+<td>Público.</td>
+</tr>
+</table>
+
+<h2>8. Reglas de seguridad</h2>
+
+<ul>
+<li>Activar Row Level Security en tablas sensibles.</li>
+<li>El usuario solo puede ver sus propios expedientes.</li>
+<li>Los archivos sensibles deben almacenarse en buckets privados.</li>
+<li>Las URLs de descarga deben ser temporales.</li>
+<li>Las claves service_role solo deben usarse en servidor.</li>
+<li>No mostrar documentos sensibles en páginas públicas.</li>
+</ul>
+
+<h2>9. RLS conceptual</h2>
+
+<pre><code>-- Ejemplo conceptual:
+-- El usuario solo puede leer expedientes donde user_id = auth.uid()
+
+create policy "Usuarios ven sus expedientes"
+on expedientes
+for select
+using (auth.uid() = user_id);</code></pre>
+
+<h2>10. Logs obligatorios</h2>
+
+<p>Cada expediente debe registrar como mínimo:</p>
+
+<ul>
+<li>pago iniciado;</li>
+<li>pago validado;</li>
+<li>expediente creado;</li>
+<li>archivo cargado;</li>
+<li>carga completa;</li>
+<li>análisis iniciado;</li>
+<li>informe emitido;</li>
+<li>informe descargado;</li>
+<li>expediente vencido;</li>
+<li>incidencia o reclamo.</li>
+</ul>
+
+<h2>11. Conservación y eliminación</h2>
+
+<table>
+<tr>
+<th>Elemento</th>
+<th>Plazo recomendado</th>
+<th>Acción posterior</th>
+</tr>
+
+<tr>
+<td>Evidencias</td>
+<td>90 días</td>
+<td>Eliminar o anonimizar.</td>
+</tr>
+
+<tr>
+<td>Informes</td>
+<td>24 meses</td>
+<td>Archivar o eliminar según política vigente.</td>
+</tr>
+
+<tr>
+<td>Códigos de validación</td>
+<td>24 meses</td>
+<td>Marcar como vencido o eliminar.</td>
+</tr>
+
+<tr>
+<td>Logs</td>
+<td>24 meses</td>
+<td>Archivar o depurar.</td>
+</tr>
+</table>
+
+<h2>12. Funciones Edge recomendadas</h2>
+
+<table>
+<tr>
+<th>Función</th>
+<th>Propósito</th>
+</tr>
+
+<tr>
+<td>crear-expediente</td>
+<td>Crear expediente luego del pago validado.</td>
+</tr>
+
+<tr>
+<td>validar-pago-niubiz</td>
+<td>Confirmar estado del pago y actualizar expediente.</td>
+</tr>
+
+<tr>
+<td>procesar-evidencias</td>
+<td>Enviar archivos al motor IA y registrar hallazgos.</td>
+</tr>
+
+<tr>
+<td>generar-informe</td>
+<td>Construir PDF final y guardarlo.</td>
+</tr>
+
+<tr>
+<td>validar-informe</td>
+<td>Responder estado público del código único.</td>
+</tr>
+
+<tr>
+<td>limpiar-evidencias</td>
+<td>Eliminar evidencias vencidas según política de privacidad.</td>
+</tr>
+</table>
+
+<h2>13. Validación pública</h2>
+
+<p>
+La página de validación pública no debe exponer datos sensibles. Solo debe mostrar:
+</p>
+
+<ul>
+<li>estado del informe;</li>
+<li>código;</li>
+<li>fecha de emisión;</li>
+<li>fecha de vencimiento;</li>
+<li>tipo de activo;</li>
+<li>solicitante parcialmente anonimizado;</li>
+<li>versión del informe.</li>
+</ul>
+
+<h2>14. Recomendación de implementación</h2>
+
+<div class="box">
+Construir primero el flujo mínimo: usuario, pago, expediente, carga de evidencias, informe manual-asistido, validación pública. Luego automatizar progresivamente el análisis, indicadores y generación avanzada del PDF.
+</div>
+
+<footer>
+<strong>Netinho Xperience</strong><br>
+Plataforma de Inteligencia Patrimonial<br>
+Lima, Perú
+</footer>
+
+</body>
+</html>
