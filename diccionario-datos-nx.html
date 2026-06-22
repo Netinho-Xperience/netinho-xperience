@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Diccionario de Datos NX®</title>
+<meta name="description" content="Diccionario de datos para la plataforma Netinho Xperience.">
+
+<style>
+body{
+font-family:Arial,Helvetica,sans-serif;
+max-width:1150px;
+margin:auto;
+padding:40px 24px;
+line-height:1.7;
+background:#f7f4ed;
+color:#1f2933;
+}
+h1,h2,h3{color:#06182c}
+h2{
+margin-top:45px;
+padding-top:20px;
+border-top:1px solid #d7d2c4;
+}
+.box{
+background:#fff;
+border-left:5px solid #c9a24d;
+padding:20px;
+border-radius:12px;
+margin:20px 0;
+}
+table{
+width:100%;
+border-collapse:collapse;
+background:#fff;
+margin-top:20px;
+font-size:14px;
+}
+th,td{
+border:1px solid #ddd;
+padding:10px;
+vertical-align:top;
+}
+th{
+background:#06182c;
+color:#fff;
+}
+code{
+background:#eef1f5;
+padding:2px 6px;
+border-radius:5px;
+}
+footer{
+margin-top:60px;
+border-top:1px solid #ccc;
+padding-top:30px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Diccionario de Datos NX®</h1>
+
+<p><strong>Versión:</strong> 1.0</p>
+<p><strong>Uso:</strong> Desarrollo, Supabase, formularios, validaciones, informes, pagos y trazabilidad</p>
+
+<div class="box">
+Este documento define los campos principales utilizados por Netinho Xperience para usuarios, expedientes, pagos, evidencias, indicadores, informes, validación pública y logs.
+</div>
+
+<h2>1. Principios del Diccionario de Datos</h2>
+
+<ul>
+<li>Usar nombres claros y consistentes.</li>
+<li>Evitar duplicidad innecesaria.</li>
+<li>Definir obligatoriedad de cada campo.</li>
+<li>Definir formato, longitud y validaciones.</li>
+<li>Reducir datos personales al mínimo necesario.</li>
+<li>Permitir trazabilidad completa del expediente.</li>
+<li>Facilitar automatización futura con Supabase, Gemini y Niubiz.</li>
+</ul>
+
+<h2>2. Convenciones generales</h2>
+
+<table>
+<tr>
+<th>Convención</th>
+<th>Descripción</th>
+</tr>
+<tr>
+<td><code>uuid</code></td>
+<td>Identificador único interno generado por base de datos.</td>
+</tr>
+<tr>
+<td><code>text</code></td>
+<td>Texto libre controlado por validaciones de frontend y backend.</td>
+</tr>
+<tr>
+<td><code>timestamptz</code></td>
+<td>Fecha y hora con zona horaria.</td>
+</tr>
+<tr>
+<td><code>numeric</code></td>
+<td>Valor numérico, usado especialmente para montos.</td>
+</tr>
+<tr>
+<td><code>integer</code></td>
+<td>Número entero, usado para indicadores de 0 a 100.</td>
+</tr>
+<tr>
+<td><code>boolean</code></td>
+<td>Valor verdadero/falso.</td>
+</tr>
+</table>
+
+<h2>3. Tabla: profiles</h2>
+
+<table>
+<tr>
+<th>Campo</th>
+<th>Tipo</th>
+<th>Obligatorio</th>
+<th>Descripción</th>
+<th>Validación</th>
+</tr>
+
+<tr>
+<td>id</td>
+<td>uuid</td>
+<td>Sí</td>
+<td>ID del usuario asociado a Supabase Auth.</td>
+<td>Autogenerado.</td>
+</tr>
+
+<tr>
+<td>nombres</td>
+<td>text</td>
+<td>Sí</td>
+<td>Nombres del solicitante.</td>
+<td>2 a 80 caracteres.</td>
+</tr>
+
+<tr>
+<td>apellidos</td>
+<td>text</td>
+<td>Sí</td>
+<td>Apellidos del solicitante.</td>
+<td>2 a 100 caracteres.</td>
+</tr>
+
+<tr>
+<td>tipo_documento</td>
+<td>text</td>
+<td>Sí</td>
+<td>DNI, CE, Pasaporte u otro.</td>
+<td>Lista cerrada.</td>
+</tr>
+
+<tr>
+<td>numero_documento</td>
+<td>text</td>
+<td>Sí</td>
+<td>Número de documento del solicitante.</td>
+<td>DNI: 8 dígitos. CE/Pasaporte: 6 a 12 caracteres.</td>
+</tr>
+
+<tr>
+<td>correo</td>
+<td>text</td>
+<td>Sí</td>
+<td>Correo de contacto del usuario.</td>
+<td>Formato email válido.</td>
+</tr>
+
+<tr>
+<td>created_at</td>
+<td>timestamptz</td>
+<td>Sí</td>
+<td>Fecha de creación del perfil.</td>
+<td>Autogenerado.</td>
+</tr>
+</table>
+
+<h2>4. Tabla: expedientes</h2>
+
+<table>
+<tr>
+<th>Campo</th>
+<th>Tipo</th>
+<th>Obligatorio</th>
+<th>Descripción</th>
+<th>Validación</th>
+</tr>
+
+<tr>
+<td>id</td>
+<td>uuid</td>
+<td>Sí</td>
+<td>Identificador interno del expediente.</td>
+<td>Autogenerado.</td>
+</tr>
+
+<tr>
+<td>codigo</td>
+<td>text</td>
+<td>Sí</td>
+<td>Código único NX del expediente.</td>
+<td>Formato: NX-AAAAMMDD-HHMMSS-XXXX.</td>
+</tr>
+
+<tr>
+<td>user_id</td>
+<td>uuid</td>
+<td>Sí</td>
+<td>Usuario propietario del expediente.</td>
+<td>Debe existir en auth.users.</td>
+</tr>
+
+<tr>
+<td>tipo_activo</td>
+<td>text</td>
+<td>Sí</td>
+<td>Vehículo o inmueble.</td>
+<td>Valores permitidos: vehiculo, inmueble.</td>
+</tr>
+
+<tr>
+<td>estado</td>
+<td>text</td>
+<td>Sí</td>
+<td>Estado operativo del expediente.</td>
+<td>Lista cerrada de estados NX.</td>
+</tr>
+
+<tr>
+<td>fecha_pago</td>
+<td>timestamptz</td>
+<td>No</td>
+<td>Fecha de pago aprobado.</td>
+<td>Se completa al validar pago.</td>
+</tr>
+
+<tr>
+<td>fecha_activacion</td>
+<td>timestamptz</td>
+<td>No</td>
+<td>Fecha de activación del expediente.</td>
+<td>Debe generarse después del pago aprobado.</td>
+</tr>
+
+<tr>
+<td>fecha_vencimiento_carga</td>
+<td>timestamptz</td>
+<td>No</td>
+<td>Fecha límite para cargar evidencias.</td>
+<td>48 horas desde activación.</td>
+</tr>
+
+<tr>
+<td>fecha_emision</td>
+<td>timestamptz</td>
+<td>No</td>
+<td>Fecha de emisión del informe.</td>
+<td>Se completa al emitir PDF.</td>
+</tr>
+
+<tr>
+<td>fecha_vencimiento_informe</td>
+<td>timestamptz</td>
+<td>No</td>
+<td>Fecha de vencimiento del informe.</td>
+<td>15 días calendario desde emisión.</td>
+</tr>
+</table>
+
+<h2>5. Estados permitidos del expediente</h2>
+
+<table>
+<tr>
+<th>Estado</th>
+<th>Significado</th>
+</tr>
+<tr>
+<td>pago_pendiente</td>
+<td>El pago fue iniciado, pero aún no fue aprobado.</td>
+</tr>
+<tr>
+<td>activo</td>
+<td>El pago fue aprobado y el expediente fue habilitado.</td>
+</tr>
+<tr>
+<td>carga_pendiente</td>
+<td>Faltan documentos o evidencias mínimas.</td>
+</tr>
+<tr>
+<td>carga_completa</td>
+<td>El expediente alcanzó el mínimo requerido.</td>
+</tr>
+<tr>
+<td>en_analisis</td>
+<td>El expediente está siendo procesado.</td>
+</tr>
+<tr>
+<td>informe_emitido</td>
+<td>El informe fue generado.</td>
+</tr>
+<tr>
+<td>vencido</td>
+<td>El plazo de carga o vigencia del informe expiró.</td>
+</tr>
+<tr>
+<td>rechazado</td>
+<td>El expediente fue rechazado por riesgo, integridad o imposibilidad técnica.</td>
+</tr>
+</table>
+
+<h2>6. Tabla: pagos</h2>
+
+<table>
+<tr>
+<th>Campo</th>
+<th>Tipo</th>
+<th>Obligatorio</th>
+<th>Descripción</th>
+<th>Validación</th>
+</tr>
+<tr>
+<td>id</td>
+<td>uuid</td>
+<td>Sí</td>
+<td>Identificador interno del pago.</td>
+<td>Autogenerado.</td>
+</tr>
+<tr>
+<td>expediente_id</td>
+<td>uuid</td>
+<td>Sí</td>
+<td>Expediente asociado al pago.</td>
+<td>Debe existir.</td>
+</tr>
+<tr>
+<td>monto</td>
+<td>numeric</td>
+<td>Sí</td>
+<td>Monto pagado.</td>
+<td>Inicialmente 49.00.</td>
+</tr>
+<tr>
+<td>moneda</td>
+<td>text</td>
+<td>Sí</td>
+<td>Moneda del pago.</td>
+<td>PEN.</td>
+</tr>
+<tr>
+<td>pasarela</td>
+<td>text</td>
+<td>Sí</td>
+<td>Pasarela utilizada.</td>
+<td>Niubiz u otra autorizada.</td>
+</tr>
+<tr>
+<td>estado_pago</td>
+<td>text</td>
+<td>Sí</td>
+<td>Estado del pago.</td>
+<td>pendiente, aprobado, rechazado, error, reembolsado.</td>
+</tr>
+<tr>
+<td>codigo_operacion</td>
+<td>text</td>
+<td>No</td>
+<td>Código de operación de la pasarela.</td>
+<td>Debe guardarse si existe.</td>
+</tr>
+<tr>
+<td>fecha_pago</td>
+<td>timestamptz</td>
+<td>No</td>
+<td>Fecha y hora del pago aprobado.</td>
+<td>Se completa al aprobar pago.</td>
+</tr>
+</table>
+
+<h2>7. Tabla: evidencias</h2>
+
+<table>
+<tr>
+<th>Campo</th>
+<th>Tipo</th>
+<th>Obligatorio</th>
+<th>Descripción</th>
+<th>Validación</th>
+</tr>
+<tr>
+<td>id</td>
+<td>uuid</td>
+<td>Sí</td>
+<td>Identificador interno de la evidencia.</td>
+<td>Autogenerado.</td>
+</tr>
+<tr>
+<td>expediente_id</td>
+<td>uuid</td>
+<td>Sí</td>
+<td>Expediente asociado.</td>
+<td>Debe existir.</td>
+</tr>
+<tr>
+<td>tipo_evidencia</td>
+<td>text</td>
+<td>Sí</td>
+<td>Ejemplo: fachada, tablero, odómetro, copia literal, boleta informativa.</td>
+<td>Lista según tipo de activo.</td>
+</tr>
+<tr>
+<td>tipo_archivo</td>
+<td>text</td>
+<td>Sí</td>
+<td>Foto, PDF, video u otro.</td>
+<td>Valores controlados.</td>
+</tr>
+<tr>
+<td>nombre_archivo</td>
+<td>text</td>
+<td>Sí</td>
+<td>Nombre original del archivo.</td>
+<td>Registrar para trazabilidad.</td>
+</tr>
+<tr>
+<td>storage_path</td>
+<td>text</td>
+<td>Sí</td>
+<td>Ruta en Supabase Storage.</td>
+<td>Bucket privado.</td>
+</tr>
+<tr>
+<td>estado_revision</td>
+<td>text</td>
+<td>Sí</td>
+<td>Estado de revisión de la evidencia.</td>
+<td>recibido, procesado, rechazado, insuficiente.</td>
+</tr>
+<tr>
+<td>observacion</td>
+<td>text</td>
+<td>No</td>
+<td>Comentario sobre calidad o problema detectado.</td>
+<td>Máximo recomendado: 500 caracteres.</td>
+</tr>
+</table>
+
+<h2>8. Tabla: indicadores</h2>
+
+<table>
+<tr>
+<th>Campo</th>
+<th>Tipo</th>
+<th>Obligatorio</th>
+<th>Descripción</th>
+<th>Validación</th>
+</tr>
+<tr>
+<td>riesgo_nx</td>
+<td>integer</td>
+<td>Sí</td>
+<td>Índice de Riesgo NX®.</td>
+<td>0 a 100.</td>
+</tr>
+<tr>
+<td>incertidumbre_nx</td>
+<td>integer</td>
+<td>Sí</td>
+<td>Índice de Incertidumbre NX®.</td>
+<td>0 a 100.</td>
+</tr>
+<tr>
+<td>preparacion_nx</td>
+<td>integer</td>
+<td>Sí</td>
+<td>Índice de Preparación para Decidir NX®.</td>
+<td>0 a 100.</td>
+</tr>
+<tr>
+<td>calidad_expediente</td>
+<td>integer</td>
+<td>Sí</td>
+<td>Calidad del Expediente NX®.</td>
+<td>0 a 100.</td>
+</tr>
+<tr>
+<td>confianza_informe</td>
+<td>integer</td>
+<td>Sí</td>
+<td>Nivel de Confianza del Informe NX®.</td>
+<td>0 a 100.</td>
+</tr>
+</table>
+
+<h2>9. Tabla: informes</h2>
+
+<table>
+<tr>
+<th>Campo</th>
+<th>Tipo</th>
+<th>Obligatorio</th>
+<th>Descripción</th>
+<th>Validación</th>
+</tr>
+<tr>
+<td>id</td>
+<td>uuid</td>
+<td>Sí</td>
+<td>Identificador interno del informe.</td>
+<td>Autogenerado.</td>
+</tr>
+<tr>
+<td>expediente_id</td>
+<td>uuid</td>
+<td>Sí</td>
+<td>Expediente asociado.</td>
+<td>Debe existir.</td>
+</tr>
+<tr>
+<td>codigo_validacion</td>
+<td>text</td>
+<td>Sí</td>
+<td>Código único de validación pública.</td>
+<td>Único.</td>
+</tr>
+<tr>
+<td>version</td>
+<td>text</td>
+<td>Sí</td>
+<td>Versión del informe.</td>
+<td>Ejemplo: 1.0.</td>
+</tr>
+<tr>
+<td>url_pdf</td>
+<td>text</td>
+<td>Sí</td>
+<td>Ruta segura del PDF.</td>
+<td>Bucket privado con URL firmada.</td>
+</tr>
+<tr>
+<td>estado</td>
+<td>text</td>
+<td>Sí</td>
+<td>Estado del informe.</td>
+<td>vigente, vencido, anulado.</td>
+</tr>
+<tr>
+<td>fecha_emision</td>
+<td>timestamptz</td>
+<td>Sí</td>
+<td>Fecha de emisión.</td>
+<td>Autogenerada al emitir.</td>
+</tr>
+<tr>
+<td>fecha_vencimiento</td>
+<td>timestamptz</td>
+<td>Sí</td>
+<td>Fecha de vencimiento.</td>
+<td>15 días calendario.</td>
+</tr>
+</table>
+
+<h2>10. Tabla: logs_expediente</h2>
+
+<table>
+<tr>
+<th>Campo</th>
+<th>Tipo</th>
+<th>Obligatorio</th>
+<th>Descripción</th>
+<th>Validación</th>
+</tr>
+<tr>
+<td>id</td>
+<td>uuid</td>
+<td>Sí</td>
+<td>Identificador del log.</td>
+<td>Autogenerado.</td>
+</tr>
+<tr>
+<td>expediente_id</td>
+<td>uuid</td>
+<td>Sí</td>
+<td>Expediente asociado.</td>
+<td>Debe existir.</td>
+</tr>
+<tr>
+<td>evento</td>
+<td>text</td>
+<td>Sí</td>
+<td>Acción registrada.</td>
+<td>Lista controlada de eventos.</td>
+</tr>
+<tr>
+<td>detalle</td>
+<td>text</td>
+<td>No</td>
+<td>Detalle del evento.</td>
+<td>Máximo recomendado: 1000 caracteres.</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>timestamptz</td>
+<td>Sí</td>
+<td>Fecha y hora del evento.</td>
+<td>Autogenerado.</td>
+</tr>
+</table>
+
+<h2>11. Eventos mínimos de log</h2>
+
+<ul>
+<li>pago_iniciado</li>
+<li>pago_aprobado</li>
+<li>pago_rechazado</li>
+<li>expediente_creado</li>
+<li>acceso_habilitado</li>
+<li>archivo_cargado</li>
+<li>archivo_rechazado</li>
+<li>carga_completa</li>
+<li>analisis_iniciado</li>
+<li>informe_emitido</li>
+<li>informe_descargado</li>
+<li>informe_vencido</li>
+<li>reclamo_registrado</li>
+</ul>
+
+<h2>12. Reglas generales de validación</h2>
+
+<table>
+<tr>
+<th>Elemento</th>
+<th>Regla</th>
+</tr>
+<tr>
+<td>DNI</td>
+<td>8 dígitos.</td>
+</tr>
+<tr>
+<td>Correo</td>
+<td>Formato email válido.</td>
+</tr>
+<tr>
+<td>Indicadores</td>
+<td>Solo enteros de 0 a 100.</td>
+</tr>
+<tr>
+<td>Código NX</td>
+<td>Debe ser único.</td>
+</tr>
+<tr>
+<td>Estado</td>
+<td>Debe pertenecer a lista cerrada.</td>
+</tr>
+<tr>
+<td>Archivo</td>
+<td>Debe cumplir tipo, peso y formato permitido.</td>
+</tr>
+</table>
+
+<h2>13. Datos no recomendados para mostrar públicamente</h2>
+
+<ul>
+<li>Número completo de DNI.</li>
+<li>Documentos cargados.</li>
+<li>Fotos originales.</li>
+<li>Dirección exacta del inmueble.</li>
+<li>Datos completos del solicitante.</li>
+<li>Información sensible del expediente.</li>
+</ul>
+
+<h2>14. Datos permitidos en validación pública</h2>
+
+<ul>
+<li>Código del informe.</li>
+<li>Estado: vigente, vencido o no encontrado.</li>
+<li>Fecha de emisión.</li>
+<li>Fecha de vencimiento.</li>
+<li>Tipo de activo.</li>
+<li>Nombre parcialmente anonimizado.</li>
+<li>Versión del informe.</li>
+</ul>
+
+<h2>15. Conservación de datos</h2>
+
+<table>
+<tr>
+<th>Tipo de dato</th>
+<th>Plazo</th>
+</tr>
+<tr>
+<td>Evidencias y documentos</td>
+<td>90 días.</td>
+</tr>
+<tr>
+<td>Informes</td>
+<td>24 meses.</td>
+</tr>
+<tr>
+<td>Códigos de validación</td>
+<td>24 meses.</td>
+</tr>
+<tr>
+<td>Logs</td>
+<td>24 meses.</td>
+</tr>
+</table>
+
+<footer>
+<strong>Netinho Xperience</strong><br>
+Plataforma de Inteligencia Patrimonial<br>
+Lima, Perú
+</footer>
+
+</body>
+</html>
